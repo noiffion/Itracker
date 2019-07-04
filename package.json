@@ -1,0 +1,9 @@
+{
+  "name": "Itracker",
+  "version": "1.0.0",
+  "description": "Issue tracker app",
+  "main": "Itracker.js",
+  "repository": "https://github.com/noiffion/Itracker.git",
+  "author": "David Kerekes",
+  "license": "MIT"
+}
