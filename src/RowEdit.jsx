@@ -15,16 +15,6 @@ export const RowEdit = props => {
     setState({ issue });
   }
 
-  onDeleteClick() {
-    setState({deleteSelect: true});
-    props.onEditChange('delete', props.issue._id);
-  }
-
-  onUndeleteClick() {
-    setState({deleteSelect: false});
-    props.onEditChange('undelete', props.issue._id);
-  }
-
   onValidityChange(event, valid) {
     const invalidFields = Object.assign({}, state.invalidFields);
     if (!valid) {
@@ -34,23 +24,27 @@ export const RowEdit = props => {
     }
     setState({ invalidFields });
   }
-*/
-/*
+
   const noInvalidFields = Object.keys(state.invalidFields).length === 0;
   const msg = (<div className="error">Please correct invalid fields before submitting.</div>);
   const validationMessage =  noInvalidFields ?  null : msg;
 */
-
   const del = props.issue.selected === 'delete';
 
   const beingEdited = (
-    <BeingEdited iss={props.issue} deleteSingleRow={props.deleteSingleRow} 
-                 cancelSingleRow={props.cancelSingleRow}/>
+    <BeingEdited
+      iss={props.issue}
+      deleteSingleRow={props.deleteSingleRow}
+      cancelSingleRow={props.cancelSingleRow}
+    />
   );
 
   const beingDeleted = (
-    <BeingDeleted iss={props.issue} unDeleteSingleRow={props.selectSingleRow}
-                  cancelSingleRow={props.cancelSingleRow}/>
+    <BeingDeleted 
+      iss={props.issue}
+      cancelDelete={props.selectSingleRow}
+      cancelSingleRow={props.cancelSingleRow}
+    />
   );
 
   return del ? beingDeleted : beingEdited;

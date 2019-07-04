@@ -7,20 +7,21 @@ import { RowEdit } from './RowEdit.jsx';
 
 
 export const Row = props => {
-  //TODO const selected = 
   const selected = props.issue.selected;
 
   const rowNormal = (
-    <RowNormal issue={props.issue} 
-               selectSingleRow={props.selectSingleRow} 
+    <RowNormal 
+      issue={props.issue} 
+      selectSingleRow={props.selectSingleRow} 
     /> 
   );
 
   const rowEdit = (
-    <RowEdit issue={props.issue} 
-             cancelSingleRow={props.cancelSingleRow}
-             deleteSingleRow={props.deleteSingleRow}
-             selectSingleRow={props.selectSingleRow}
+    <RowEdit 
+      issue={props.issue} 
+      cancelSingleRow={props.cancelSingleRow}
+      deleteSingleRow={props.deleteSingleRow}
+      selectSingleRow={props.selectSingleRow}
     />
   );
 

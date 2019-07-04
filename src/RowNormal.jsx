@@ -19,8 +19,9 @@ export const RowNormal = props => {
       </td>
       <td id="issueDescription">{iss.description}</td>
       <td className="cornerButtons">
-        <Button title="Edit row" variant="warning" size="sm" 
-                onClick={() => props.selectSingleRow(iss._id)}>
+        <Button 
+          title="Edit row" variant="warning" size="sm" 
+          onClick={() => props.selectSingleRow(iss._id)}>
           <i className="far fa-edit"></i>
         </Button>
       </td>

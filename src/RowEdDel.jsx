@@ -77,7 +77,7 @@ export const BeingDeleted = props => (
     <td className="cornerButtons">
       <ButtonToolbar>
         <Button title="Cancel delete" variant="danger" size="sm"
-                onClick={() => props.undeleteSingleRow(props.iss._id)}>
+                onClick={() => props.cancelDelete(props.iss._id)}>
           <i className="far fa-trash-alt"></i>
         </Button>&nbsp;&nbsp;&nbsp;&nbsp;
         <Button title="Cancel edit" variant="secondary" size="sm"
