@@ -678,9 +678,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
-/* harmony import */ var _Header_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Header.jsx */ "./src/Header.jsx");
-/* harmony import */ var _Filter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Filter.jsx */ "./src/Filter.jsx");
-/* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
+/* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
+/* harmony import */ var _Header_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Header.jsx */ "./src/Header.jsx");
+/* harmony import */ var _Filter_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Filter.jsx */ "./src/Filter.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -728,11 +728,11 @@ function (_React$Component) {
     _this.refreshPage = _this.refreshPage.bind(_assertThisInitialized(_this));
     _this.iFilter = _this.iFilter.bind(_assertThisInitialized(_this));
     _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
-    _this.selectSingleRow = _this.selectSingleRow.bind(_assertThisInitialized(_this));
-    _this.selectToDeleteAll = _this.selectToDeleteAll.bind(_assertThisInitialized(_this));
-    _this.deleteSingleRow = _this.deleteSingleRow.bind(_assertThisInitialized(_this));
-    _this.cancelSelectToDeleteAll = _this.cancelSelectToDeleteAll.bind(_assertThisInitialized(_this));
+    _this.selectDelAll = _this.selectDelAll.bind(_assertThisInitialized(_this));
+    _this.unSelectDelAll = _this.unSelectDelAll.bind(_assertThisInitialized(_this));
     _this.cancelAll = _this.cancelAll.bind(_assertThisInitialized(_this));
+    _this.selectSingleRow = _this.selectSingleRow.bind(_assertThisInitialized(_this));
+    _this.deleteSingleRow = _this.deleteSingleRow.bind(_assertThisInitialized(_this));
     _this.cancelSingleRow = _this.cancelSingleRow.bind(_assertThisInitialized(_this));
     _this.onEditChange = _this.onEditChange.bind(_assertThisInitialized(_this));
     _this.deleteIssues = _this.deleteIssues.bind(_assertThisInitialized(_this));
@@ -813,6 +813,39 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "selectDelAll",
+    value: function selectDelAll() {
+      var issues = this.state.issues;
+      issues.forEach(function (issue) {
+        if (issue.selected === 'edit') return issue.selected = 'delete';
+      });
+      this.setState({
+        issues: issues
+      });
+    }
+  }, {
+    key: "unSelectDelAll",
+    value: function unSelectDelAll() {
+      var issues = this.state.issues;
+      issues.forEach(function (issue) {
+        if (issue.selected === 'delete') return issue.selected = 'edit';
+      });
+      this.setState({
+        issues: issues
+      });
+    }
+  }, {
+    key: "cancelAll",
+    value: function cancelAll() {
+      var issues = this.state.issues;
+      issues.forEach(function (issue) {
+        if (issue.selected) return issue.selected = '';
+      });
+      this.setState({
+        issues: issues
+      });
+    }
+  }, {
     key: "selectSingleRow",
     value: function selectSingleRow(id) {
       var issues = this.state.issues;
@@ -824,38 +857,11 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "selectToDeleteAll",
-    value: function selectToDeleteAll() {
-      var issues = this.state.issues;
-      issues.forEach(function (issue) {
-        return issue.selected = 'delete';
-      });
-      this.setState({
-        issues: issues
-      });
-    }
-  }, {
     key: "deleteSingleRow",
     value: function deleteSingleRow(id) {
       var issues = this.state.issues;
-      issues.forEach(function (iss) {
-        if (iss._id === id) return iss.selected = 'delete';
-      });
-      this.setState({
-        issues: issues
-      });
-    }
-  }, {
-    key: "cancelSelectToDeleteAll",
-    value: function cancelSelectToDeleteAll() {
-      this.selectAll();
-    }
-  }, {
-    key: "cancelAll",
-    value: function cancelAll() {
-      var issues = this.state.issues;
       issues.forEach(function (issue) {
-        return issue.selected = '';
+        if (issue._id === id) return issue.selected = 'delete';
       });
       this.setState({
         issues: issues
@@ -984,12 +990,12 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_7__["Header"], {
+      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_8__["Header"], {
         refreshPage: this.refreshPage
-      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
         iFilter: this.iFilter,
         query: this.props.location.search
-      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_9__["TableOfIssues"], {
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_7__["TableOfIssues"], {
         issues: this.state.issues,
         refreshPage: this.refreshPage,
         submitChanges: this.submitChanges,
@@ -997,8 +1003,8 @@ function (_React$Component) {
         cancelSingleRow: this.cancelSingleRow,
         deleteSingleRow: this.deleteSingleRow,
         selectAll: this.selectAll,
-        selectToDelete: this.selectToDelete,
-        cancelSelectToDelete: this.cancelSelectToDelete,
+        selectDelAll: this.selectDelAll,
+        unSelectDelAll: this.unSelectDelAll,
         cancelAll: this.cancelAll
       }));
     }
@@ -1063,7 +1069,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Row = function Row(props) {
-  //TODO const selected = 
   var selected = props.issue.selected;
   var rowNormal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowNormal_jsx__WEBPACK_IMPORTED_MODULE_2__["RowNormal"], {
     issue: props.issue,
@@ -1230,7 +1235,7 @@ var BeingDeleted = function BeingDeleted(props) {
     variant: "danger",
     size: "sm",
     onClick: function onClick() {
-      return props.undeleteSingleRow(props.iss._id);
+      return props.cancelDelete(props.iss._id);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
@@ -1281,16 +1286,6 @@ var RowEdit = function RowEdit(props) {
       setState({ issue });
     }
   
-    onDeleteClick() {
-      setState({deleteSelect: true});
-      props.onEditChange('delete', props.issue._id);
-    }
-  
-    onUndeleteClick() {
-      setState({deleteSelect: false});
-      props.onEditChange('undelete', props.issue._id);
-    }
-  
     onValidityChange(event, valid) {
       const invalidFields = Object.assign({}, state.invalidFields);
       if (!valid) {
@@ -1300,9 +1295,7 @@ var RowEdit = function RowEdit(props) {
       }
       setState({ invalidFields });
     }
-  */
-
-  /*
+  
     const noInvalidFields = Object.keys(state.invalidFields).length === 0;
     const msg = (<div className="error">Please correct invalid fields before submitting.</div>);
     const validationMessage =  noInvalidFields ?  null : msg;
@@ -1315,7 +1308,7 @@ var RowEdit = function RowEdit(props) {
   });
   var beingDeleted = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowEdDel_jsx__WEBPACK_IMPORTED_MODULE_3__["BeingDeleted"], {
     iss: props.issue,
-    unDeleteSingleRow: props.selectSingleRow,
+    cancelDelete: props.selectSingleRow,
     cancelSingleRow: props.cancelSingleRow
   });
   return del ? beingDeleted : beingEdited;
@@ -1420,10 +1413,11 @@ var TableOfIssues = function TableOfIssues(props) {
     });
   });
   var ids = Object.keys(props.issues);
-  var anyEdit = ids.every(function (id) {
+  var anyEdit = ids.some(function (id) {
     return props.issues[id].selected !== '';
   });
-  var tButts = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(props.selectAll, props.selectToDelete, props.cancelSelectToDelete, props.issues, props.cancelAll);
+  var p = props;
+  var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
     name: "tableForm",
     onSubmit: props.submitChanges
@@ -1436,7 +1430,7 @@ var TableOfIssues = function TableOfIssues(props) {
     responsive: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Owner"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Created on"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Effort"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Completed on"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "cornerButtons"
-  }, anyEdit ? tButts.editTable : tButts.displayTable))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, issueRows)));
+  }, anyEdit ? tB.editTable : tB.displayTable))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, issueRows)));
 };
 TableOfIssues.propTypes = {
   issues: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
@@ -1677,7 +1671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 
 
-function tableButtons(selectAll, selectToDeleteAll, cancelSelectToDeleteAll, issues, cancelAll) {
+function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll) {
   var displayTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     title: "Edit all rows",
     onClick: selectAll,
@@ -1688,7 +1682,7 @@ function tableButtons(selectAll, selectToDeleteAll, cancelSelectToDeleteAll, iss
   }));
   var selectDel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     title: "Mark selected for deletion",
-    onClick: selectToDeleteAll,
+    onClick: selectDelAll,
     variant: "light",
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1696,25 +1690,28 @@ function tableButtons(selectAll, selectToDeleteAll, cancelSelectToDeleteAll, iss
   }));
   var cancelDel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     title: "Cancel deletion of selected",
-    onClick: cancelSelectToDeleteAll,
+    onClick: unSelectDelAll,
     variant: "danger",
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
   }));
   var ids = Object.keys(issues);
-  var allSelectedDelete = ids.every(function (id) {
-    return issues[id].selected !== 'delete';
+  var selected = ids.filter(function (id) {
+    return issues[id].selected;
+  });
+  var allSelectedDelete = selected.every(function (id) {
+    return issues[id].selected === 'delete';
   });
   var editTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["ButtonToolbar"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     type: "submit",
-    title: "Save & submit changes",
-    variant: "success",
+    title: "Submit",
+    variant: "primary",
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-save"
   })), "\xA0\xA0", allSelectedDelete ? cancelDel : selectDel, "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    title: "Cancel all selected",
+    title: "Cancel all",
     onClick: cancelAll,
     variant: "secondary",
     size: "sm"

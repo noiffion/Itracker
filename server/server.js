@@ -112,7 +112,7 @@ app.get('*', (req, res) => {
 
 MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })
 .then((client) => {
-  issueTracker = client.db('issuetracker');
+  issueTracker = client.db('Itracker');
   app.listen(3000, () => console.log('App started on port 3000'))
 })
 .catch(error => console.log('ERROR:', error));

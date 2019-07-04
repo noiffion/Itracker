@@ -10,7 +10,7 @@ function fillDb(n) {
   const owners = ['Eric', 'Susan', 'Jamal', 'Liu', 'Ravan', 'Walda'];
 
   const startDate = () => {
-    let month = Math.ceil(Math.random() * 3);
+    let month = Math.ceil(Math.random() * 12);
     let day;
   
     switch (month) {
@@ -46,9 +46,10 @@ function fillDb(n) {
   }
 
   // in a scale of 1-10 
-  const effortFunc = () => Math.ceil(Math.random() * 10); 
+  const effortFunc = () => Math.ceil(Math.random() * 10);
 
   const endDate = (creationDate, effort, state) => {
+
     let beginDate = new Date(creationDate);
     // const mSecsPerDay = 86400000  // 24hour*60min*60sec*1000msec -> 86,400,000
     beginDate = beginDate.valueOf();  // in millisecs since 1970-01-01
