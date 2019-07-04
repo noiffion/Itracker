@@ -30,8 +30,6 @@ class Main extends React.Component {
     this.deleteSingleRow = this.deleteSingleRow.bind(this);
     this.cancelSingleRow = this.cancelSingleRow.bind(this);
 
-    this.onEditChange = this.onEditChange.bind(this);
-
     this.deleteIssues = this.deleteIssues.bind(this);
     this.updateIssues = this.updateIssues.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
@@ -127,24 +125,6 @@ class Main extends React.Component {
     this.setState({ issues: issues });
   }
 
-  onEditChange(editChange, id) {
-    const issues = this.state.issues;
-    issue = issues.map(issue => { if (issue._id === id) return issue; });
-    if ((editChange === 'edit') || (editChange === 'undelete')) {
-        issues.forEach(issue => { if (issue._id === id) return issue.selected = 'edit'; });
-        issues[id] = 'edit';
-        this.setState({ issues: issues });
-    } else if (editChange === 'delete') {
-        issues.forEach(issue => { if (issue._id === id) return issue.selected = 'delete'; });
-        issues[id] = 'delete';
-        this.setState({ issues: issues });
-    } else if (editChange === 'cancel') {
-        issues.forEach(issue => { if (issue._id === id) return issue.selected = ''; });
-        delete issues[id] ;
-        this.setState({ issues: issues });
-    }
-  }
-
   deleteIssues(issues) {
     const rowsToDelete = issues.filter(issue => issue.selected === 'delete');
 
@@ -169,12 +149,12 @@ class Main extends React.Component {
       const properties = ['state', 'owner', 'creation', 'effort', 'completion', 'description'];
 
       properties.forEach((property) => {
-        const input = document.forms.tableForm[`${id+property}`];
+        const input = document.forms.tableForm[`${row._id+property}`];
         input.value ? issue[property] = input.value : issue[property] = input.placeholder;
         if (property === 'creation' || property === 'completion') {
           let date = Date.parse(issue[property]);
-          date = new Date(date);
-          issue[property] = date.toISOString();
+          date ? date = (new Date(date)).toISOString() : date = null;
+          issue[property] = date;
         } 
       });
 
@@ -200,9 +180,11 @@ class Main extends React.Component {
   submitChanges(event) {
     event.preventDefault();
 
+    /*
     if (Object.keys(this.state.invalidFields).length !== 0) {
       return;
     }
+    */
 
     const issues = this.state.issues;
 
@@ -249,10 +231,12 @@ const RoutedApp = () => (
               <Route path="*" component={NoMatch} />
             </Switch>
           </div>
-          <div className="footer">
-            Full source code available at: <a href="https://github.com/vasansr/pro-mern-stack">
-            GitHub repository</a>.
-          </div>
+          <footer>
+            <span> Source: </span>
+            <a href="https://github.com/noiffion/Itracker.git" target="_blank">
+               <i className="fab fa-github" style={{fontSize: '24px'}}></i>
+            </a>
+          </footer>
         </Fragment>
       )
     }} />
