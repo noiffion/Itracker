@@ -131,7 +131,7 @@ function fillDb(n) {
 MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })
 .then((client) => { 
 
-  const numberOfEntries = 50;
+  const numberOfEntries = 20;
   const entries = fillDb(numberOfEntries);
 
   const dBase = client.db('Itracker');
