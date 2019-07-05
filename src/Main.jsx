@@ -1,7 +1,6 @@
 // Main.jsx
 
 import 'whatwg-fetch';
-import '@babel/polyfill';
 import React, { Fragment } from 'react';
 import ReactDOM            from 'react-dom';
 import PropTypes           from 'prop-types';
@@ -17,13 +16,22 @@ import Button              from 'react-bootstrap/Button';
 import Table               from 'react-bootstrap/Table';
 import { TableOfIssues }   from './TableOfIssues.jsx';
 import { Header }          from './Header.jsx';
-import Filter              from './Filter.jsx';
+import { 
+  OffCanvas, 
+  OffCanvasMenu, 
+  OffCanvasBody
+}                          from "react-offcanvas";
 
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { issues: [] };
+    this.state = { 
+      issues: [],  
+      isMenuOpened: false,
+    };
+
+    this.canvasToggle = this.canvasToggle.bind(this);
 
     this.refreshPage = this.refreshPage.bind(this);
     this.iFilter = this.iFilter.bind(this);
@@ -44,6 +52,11 @@ class Main extends React.Component {
 
   componentDidMount() {
     this.loadData();
+  }
+
+ 
+  canvasToggle() {
+    this.setState({ isMenuOpened: !this.state.isMenuOpened });
   }
 
   loadData() {
@@ -203,24 +216,39 @@ class Main extends React.Component {
 
   render() {
     return (
-      <Fragment>
-        <Header refreshPage={this.refreshPage}/>
-        <section id="filterBox">
-          <Filter iFilter={this.iFilter} query={this.props.location.search} />
-        </section>
-        <TableOfIssues 
-          issues={this.state.issues} 
-          refreshPage={this.refreshPage}
-          submitChanges={this.submitChanges}
-          selectSingleRow={this.selectSingleRow} 
-          cancelSingleRow={this.cancelSingleRow}
-          deleteSingleRow={this.deleteSingleRow}
-          selectAll={this.selectAll} 
-          selectDelAll={this.selectDelAll}
-          unSelectDelAll={this.unSelectDelAll}
-          cancelAll={this.cancelAll}
-        />
-      </Fragment>
+      <OffCanvas
+        width={300}
+        transitionDuration={300}
+        effect={"parallax"}
+        isMenuOpened={this.state.isMenuOpened}
+        position={"left"}
+            
+      >
+        <OffCanvasBody>
+          <Header 
+            iFilter={this.iFilter}
+            query={this.props.location.search} 
+            refreshPage={this.refreshPage}
+            canvasToggle={this.canvasToggle}
+          />
+          <TableOfIssues 
+            issues={this.state.issues} 
+            refreshPage={this.refreshPage}
+            submitChanges={this.submitChanges}
+            selectSingleRow={this.selectSingleRow} 
+            cancelSingleRow={this.cancelSingleRow}
+            deleteSingleRow={this.deleteSingleRow}
+            selectAll={this.selectAll} 
+            selectDelAll={this.selectDelAll}
+            unSelectDelAll={this.unSelectDelAll}
+            cancelAll={this.cancelAll}
+          />
+        </OffCanvasBody>
+        <OffCanvasMenu>
+          <p> Placeholder content </p>
+          <a href="#" onClick={this.canvasToggle}>Click to close</a>
+        </OffCanvasMenu>
+      </OffCanvas>
     );
   }
 }

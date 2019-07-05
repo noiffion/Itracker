@@ -3,7 +3,7 @@
 import React        from 'react';
 import PropTypes    from 'prop-types';
 import Table        from 'react-bootstrap/Table';
-import Form         from 'react-bootstrap/From';
+import Form         from 'react-bootstrap/Form';
 import { Row }      from './Row.jsx';
 import Bubble       from './Bubble.jsx';
 import tableButtons from './tableButtons.jsx';

@@ -8,6 +8,13 @@ import Nav            from 'react-bootstrap/Nav'
 import Dropdown       from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Add            from './Add.jsx';
+//import Filter         from './Filter.jsx';
+import { 
+  OffCanvas, 
+  OffCanvasMenu, 
+  OffCanvasBody
+}                          from "react-offcanvas";
+
 
 
 class CustomToggle extends React.Component {
@@ -17,9 +24,9 @@ class CustomToggle extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    e.preventDefault();
-    this.props.onClick(e);
+  handleClick(event) {
+    event.preventDefault();
+    this.props.onClick(event);
   }
 
   render() {
@@ -37,6 +44,10 @@ export const Header = props => {
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
       <Nav className="justify-content-between">
+        <a href="#" onClick={props.canvasToggle}>
+          Click to open
+        </a>
+          {/*<Filt iFilter={props.iFilter} query={props.query}/>*/}
         <Add refreshPage={props.refreshPage}/>
         <Dropdown id="user-dropdown" navbar={true} drop="left">
           <Dropdown.Toggle as={CustomToggle}>
