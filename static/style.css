@@ -10,7 +10,16 @@ body {
 }
 
 #filterCard {
-  width: 50%;
+  width: 40%;
+}
+
+#filteReset {
+  display: flex;
+  justify-content: space-between;
+}
+
+#applyClear {
+  width: 100%;
 }
 
 #createIssueModal {
@@ -62,6 +71,8 @@ body {
   color: red;
   text-decoration: line-through solid black;
 }
+
+
 
 footer {
   color: gray;
