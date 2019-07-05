@@ -1,8 +1,8 @@
 // RowEdit.jsx
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { NumInput, DateInput } from './ValidInput.jsx';
+import React                         from 'react';
+import PropTypes                     from 'prop-types';
+import { NumInput, DateInput }       from './ValidInput.jsx';
 import { BeingEdited, BeingDeleted } from './RowEdDel.jsx';
 
 

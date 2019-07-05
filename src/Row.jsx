@@ -1,9 +1,9 @@
 // Row.jsx
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React         from 'react';
+import PropTypes     from 'prop-types';
 import { RowNormal } from './RowNormal.jsx';
-import { RowEdit } from './RowEdit.jsx';
+import { RowEdit }   from './RowEdit.jsx';
 
 
 export const Row = props => {

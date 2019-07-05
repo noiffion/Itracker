@@ -1,10 +1,11 @@
 // TableOfIssues.jsx
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Table, Form } from 'react-bootstrap';
-import { Row } from './Row.jsx';
-import Bubble from './Bubble.jsx';
+import React        from 'react';
+import PropTypes    from 'prop-types';
+import Table        from 'react-bootstrap/Table';
+import Form         from 'react-bootstrap/From';
+import { Row }      from './Row.jsx';
+import Bubble       from './Bubble.jsx';
 import tableButtons from './tableButtons.jsx';
 
 

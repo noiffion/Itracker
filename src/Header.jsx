@@ -1,9 +1,13 @@
 // Header.jsx
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, Navbar, Nav, Dropdown, DropdownButton } from 'react-bootstrap';
-import Add from './Add.jsx';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import Button         from 'react-bootstrap/Button'
+import Navbar         from 'react-bootstrap/Navbar'
+import Nav            from 'react-bootstrap/Nav'
+import Dropdown       from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Add            from './Add.jsx';
 
 
 class CustomToggle extends React.Component {

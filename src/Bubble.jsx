@@ -1,8 +1,9 @@
 // Bubble.jsx
 
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Alert, Collapse } from 'react-bootstrap';
+import Alert                          from 'react-bootstrap/Alert';
+import Collapse                       from 'react-bootstrap/Collapse';
+import PropTypes                      from 'prop-types';
 
 //TODO: useState, useEffect
 

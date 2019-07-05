@@ -1,12 +1,21 @@
 // Filter.jsx
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, ButtonGroup, Collapse, Card, Dropdown, 
-        DropdownButton, Form, Row, Col, InputGroup } from 'react-bootstrap';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import Row            from 'react-bootstrap/Row';
+import Col            from 'react-bootstrap/Col';
+import Card           from 'react-bootstrap/Card';
+import Form           from 'react-bootstrap/Form';
+import Button         from 'react-bootstrap/Button';
+import Collapse       from 'react-bootstrap/Collapse';
+import Dropdown       from 'react-bootstrap/Dropdown';
+import InputGroup     from 'react-bootstrap/InputGroup';
+import ButtonGroup    from 'react-bootstrap/ButtonGroup';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
-export default class Filter extends React.Component {
+const Filter = props => {
+  const 
   constructor(props) {
     super(props);
     this.state = {
@@ -49,11 +58,11 @@ export default class Filter extends React.Component {
     this.props.iFilter(newFilter);
   }
  
-  clearFilter() {
+  resetFilter() {
     this.props.iFilter({});
   }
  
-  resetFilter() {
+  clearFilter() {
     this.setState({
       sts: this.props.query.sts || '',
       effort_gte: this.props.query.effort_gte || '',
@@ -64,12 +73,12 @@ export default class Filter extends React.Component {
   render() {
     return (
       <Card id="filterCard">
-        <Card.Header>
+        <Card.Header id="filteReset">
           <Button onClick={() => this.setState({ opened: !(this.state.opened) })} 
                   aria-controls="filter-collapse" aria-expanded={this.state.opened}>
             Filter 
           </Button>&nbsp;&nbsp;
-          <Button variant="info" onClick={this.clearFilter}
+          <Button variant="info" onClick={this.resetFilter}
                   disabled={this.props.query === ''}>
             Reset
           </Button>
@@ -107,12 +116,11 @@ export default class Filter extends React.Component {
                   </Col>
               </Form.Group>
               <Form.Group>
-                <ButtonGroup size="sm" aria-label="Filter_buttons">
+                <ButtonGroup size="sm" aria-label="Filter_buttons" id="applyClear">
                   <Button onClick={this.applyFilter}>
                     Apply
                   </Button>&nbsp;
-                  <Button variant="info" onClick={this.resetFilter} 
-                          disabled={!this.state.changed}>
+                  <Button variant="info" onClick={this.clearFilter}>
                     Clear 
                   </Button>
                 </ButtonGroup>
@@ -124,6 +132,9 @@ export default class Filter extends React.Component {
     );
   }
 }
+
+
+export default withrouter(Filter);
 
 Filter.propTypes = {
   iFilter: PropTypes.func.isRequired,

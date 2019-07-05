@@ -3,14 +3,21 @@
 import 'whatwg-fetch';
 import '@babel/polyfill';
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Switch, Route, Redirect,
-        Link, withRouter } from 'react-router-dom';
-import { Button, Table } from 'react-bootstrap';
-import { TableOfIssues } from './TableOfIssues.jsx';
-import { Header } from './Header.jsx';
-import Filter from './Filter.jsx';
+import ReactDOM            from 'react-dom';
+import PropTypes           from 'prop-types';
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route, 
+  Redirect,
+  Link, 
+  withRouter 
+}                          from 'react-router-dom';
+import Button              from 'react-bootstrap/Button';
+import Table               from 'react-bootstrap/Table';
+import { TableOfIssues }   from './TableOfIssues.jsx';
+import { Header }          from './Header.jsx';
+import Filter              from './Filter.jsx';
 
 
 class Main extends React.Component {
@@ -198,7 +205,9 @@ class Main extends React.Component {
     return (
       <Fragment>
         <Header refreshPage={this.refreshPage}/>
-        <Filter iFilter={this.iFilter} query={this.props.location.search} />
+        <section id="filterBox">
+          <Filter iFilter={this.iFilter} query={this.props.location.search} />
+        </section>
         <TableOfIssues 
           issues={this.state.issues} 
           refreshPage={this.refreshPage}

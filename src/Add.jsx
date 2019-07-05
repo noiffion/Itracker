@@ -1,9 +1,12 @@
 // Add.jsx
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
-import { Nav, Button, ButtonToolbar, Form, Modal } from 'react-bootstrap';
+import PropTypes           from 'prop-types';
+import { withRouter }      from 'react-router';
+import Nav                 from 'react-bootstrap/Nav';
+import Button              from 'react-bootstrap/Button';
+import Form                from 'react-bootstrap/Form';
+import Modal               from 'react-bootstrap/Modal';
 
 
 const Add = props => {

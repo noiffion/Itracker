@@ -1,8 +1,10 @@
 // RowEdDel.jsx
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, ButtonToolbar, Form } from 'react-bootstrap';
+import React         from 'react';
+import PropTypes     from 'prop-types';
+import Button        from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Form          from 'react-bootstrap/Form';
 
 
 export const BeingEdited = props => (
