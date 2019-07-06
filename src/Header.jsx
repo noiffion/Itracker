@@ -8,7 +8,6 @@ import Nav            from 'react-bootstrap/Nav'
 import Dropdown       from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Add            from './Add.jsx';
-//import Filter         from './Filter.jsx';
 import { 
   OffCanvas, 
   OffCanvasMenu, 
@@ -44,10 +43,14 @@ export const Header = props => {
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
       <Nav className="justify-content-between">
-        <a href="#" onClick={props.canvasToggle}>
-          Click to open
-        </a>
-          {/*<Filt iFilter={props.iFilter} query={props.query}/>*/}
+        <Button onClick={props.canvasToggle} variant="light">
+          <i className="fas fa-filter"></i>{' '}
+          Filter
+        </Button>
+        <Button onClick={props.canvasToggle} variant="light">
+          <i className="fas fa-undo-alt"></i>{' '}
+          Reset Filter
+        </Button>
         <Add refreshPage={props.refreshPage}/>
         <Dropdown id="user-dropdown" navbar={true} drop="left">
           <Dropdown.Toggle as={CustomToggle}>

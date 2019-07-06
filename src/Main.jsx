@@ -12,15 +12,17 @@ import {
   Link, 
   withRouter 
 }                          from 'react-router-dom';
-import Button              from 'react-bootstrap/Button';
-import Table               from 'react-bootstrap/Table';
-import { TableOfIssues }   from './TableOfIssues.jsx';
-import { Header }          from './Header.jsx';
 import { 
   OffCanvas, 
   OffCanvasMenu, 
   OffCanvasBody
 }                          from "react-offcanvas";
+import Button              from 'react-bootstrap/Button';
+import Table               from 'react-bootstrap/Table';
+import Filter              from './Filter.jsx';
+import { TableOfIssues }   from './TableOfIssues.jsx';
+import { Header }          from './Header.jsx';
+
 
 
 class Main extends React.Component {
@@ -28,7 +30,7 @@ class Main extends React.Component {
     super(props);
     this.state = { 
       issues: [],  
-      isMenuOpened: false,
+      filterOn: false,
     };
 
     this.canvasToggle = this.canvasToggle.bind(this);
@@ -56,7 +58,7 @@ class Main extends React.Component {
 
  
   canvasToggle() {
-    this.setState({ isMenuOpened: !this.state.isMenuOpened });
+    this.setState({ filterOn: !this.state.filterOn });
   }
 
   loadData() {
@@ -217,20 +219,11 @@ class Main extends React.Component {
   render() {
     return (
       <OffCanvas
-        width={300}
-        transitionDuration={300}
-        effect={"parallax"}
-        isMenuOpened={this.state.isMenuOpened}
-        position={"left"}
-            
+        width={400} transitionDuration={200} position={"left"}
+        effect={"push"} isMenuOpened={this.state.filterOn}
       >
         <OffCanvasBody>
-          <Header 
-            iFilter={this.iFilter}
-            query={this.props.location.search} 
-            refreshPage={this.refreshPage}
-            canvasToggle={this.canvasToggle}
-          />
+          <Header refreshPage={this.refreshPage} canvasToggle={this.canvasToggle} />
           <TableOfIssues 
             issues={this.state.issues} 
             refreshPage={this.refreshPage}
@@ -245,8 +238,8 @@ class Main extends React.Component {
           />
         </OffCanvasBody>
         <OffCanvasMenu>
-          <p> Placeholder content </p>
-          <a href="#" onClick={this.canvasToggle}>Click to close</a>
+          <Filter iFilter={this.iFilter} query={this.props.location.search} />
+          <a href="#" onClick={this.canvasToggle}>Close</a>
         </OffCanvasMenu>
       </OffCanvas>
     );

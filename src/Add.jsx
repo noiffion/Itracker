@@ -53,10 +53,10 @@ const Add = props => {
 
   return (
     <Nav.Item>
-      <span id="createIssueModal" onClick={() => setShow(true)}>
+      <Button id="createIssueModal" variant="light" onClick={() => setShow(true)}>
         <i className="fas fa-plus"></i>{' '}
         Create Issue
-      </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Create Issue</Modal.Title>
