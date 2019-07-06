@@ -10,16 +10,21 @@ import tableButtons from './tableButtons.jsx';
 
 
 const TableOfIssues = props =>  {
-  const issueRows = props.issues.map(issue => {
-    return (
-      <Row 
-        key={issue._id} 
-        issue={issue} 
-        selectSingleRow={props.selectSingleRow} 
-        cancelSingleRow={props.cancelSingleRow}
-        deleteSingleRow={props.deleteSingleRow}
-      />
-    );
+  const actual = props.actualPage;
+  const iPerPage = props.iPerPage;
+  const issueRows = [];
+  props.issues.forEach((issue, i) => {
+    if ((i >= actual * iPerPage) && (i < actual * iPerPage + iPerPage)) {
+      issueRows.push(
+        <Row
+          key={issue._id}
+          issue={issue}
+          selectSingleRow={props.selectSingleRow}
+          cancelSingleRow={props.cancelSingleRow}
+          deleteSingleRow={props.deleteSingleRow}
+        />
+      );
+    }
   });
 
   const ids = Object.keys(props.issues);
@@ -48,6 +53,7 @@ const TableOfIssues = props =>  {
     </Form>
   );
 }
+
 
 TableOfIssues.propTypes = {
   issues: PropTypes.array.isRequired,

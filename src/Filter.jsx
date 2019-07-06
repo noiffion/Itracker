@@ -19,8 +19,6 @@ import DropdownButton      from 'react-bootstrap/DropdownButton';
 
 
 const Filter = props => {
-  const [show, setShow] = useState(false);
-  const [opened, setOpen] = useState(false);
   const [sts, setSts] = useState('');
   const [effort_gte, setEffGte] = useState('');
   const [effort_lte, setEffLte] = useState('');

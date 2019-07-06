@@ -4,36 +4,33 @@ import 'whatwg-fetch';
 import React, { Fragment } from 'react';
 import ReactDOM            from 'react-dom';
 import PropTypes           from 'prop-types';
-import { 
-  BrowserRouter as Router, 
-  Switch, 
-  Route, 
-  Redirect,
-  Link, 
-  withRouter 
-}                          from 'react-router-dom';
-import { 
-  OffCanvas, 
-  OffCanvasMenu, 
+import {
+  OffCanvas,
+  OffCanvasMenu,
   OffCanvasBody
 }                          from "react-offcanvas";
-import Button              from 'react-bootstrap/Button';
 import Table               from 'react-bootstrap/Table';
-import Filter              from './Filter.jsx';
-import TableOfIssues       from './TableOfIssues.jsx';
+import Button              from 'react-bootstrap/Button';
 import Header              from './Header.jsx';
-
+import Filter              from './Filter.jsx';
+import Paginator           from './Paginator.jsx';
+import TableOfIssues       from './TableOfIssues.jsx';
 
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      issues: [],  
+    this.state = {
+      issues: [],
       filterOn: false,
+      actualPage: 0,
+      maxPageNum: 0,
+      iPerPage: 20,
     };
 
     this.canvasToggle = this.canvasToggle.bind(this);
+    
+    this.pagiGo = this.pagiGo.bind(this);
 
     this.refreshPage = this.refreshPage.bind(this);
     this.iFilter = this.iFilter.bind(this);
@@ -55,7 +52,6 @@ class Main extends React.Component {
   componentDidMount() {
     this.loadData();
   }
-
  
   canvasToggle() {
     this.setState({ filterOn: !this.state.filterOn });
@@ -69,14 +65,18 @@ class Main extends React.Component {
           // console.log('Total count of records:', data._metadata.total_count);
           data.records.forEach((issue) => {
             issue.selected = '';
+            issue.shown = true;
             issue.creation = new Date(issue.creation);
             if (issue.completion) issue.completion = new Date(issue.completion);
           });
-          this.setState({ issues: data.records });
+          this.setState({ 
+            issues: data.records,
+            maxPageNum: Math.ceil(data.records.length / this.state.iPerPage),
+          });
         });
       } else {
         response.json().then((error) => {
-          alert(`Failed to fetch issues:${error.message}`);
+          alert(`Failed to fetch issues: ${error.message}`);
         });
       }
     })
@@ -89,18 +89,11 @@ class Main extends React.Component {
     this.loadData();
   }
 
-  iFilter(query) {
-    const toQueryString = (obj) => {
-      const parts = []; 
-      for (let i in obj) {
-          if (obj.hasOwnProperty(i)) {
-              parts.push(encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]));
-          }
-      }
-      return parts.join('&');
-    }
+  pagiGo(pageNumber) {
+    this.setState({ actualPage: pageNumber })
+  }
 
-    const path = this.props.location.pathname;
+  iFilter(query) {
     const queryString = toQueryString(query);
     this.props.history.push({pathname: path, search: queryString});
   }
@@ -224,17 +217,29 @@ class Main extends React.Component {
       >
         <OffCanvasBody>
           <Header refreshPage={this.refreshPage} canvasToggle={this.canvasToggle} />
-          <TableOfIssues 
-            issues={this.state.issues} 
+          <Paginator 
+            actualPage={this.state.actualPage} 
+            maxPageNum={this.state.maxPageNum}
+            pagiGo={this.pagiGo}
+          />
+          <TableOfIssues
+            issues={this.state.issues}
+            actualPage={this.state.actualPage}
+            iPerPage={this.state.iPerPage}
             refreshPage={this.refreshPage}
             submitChanges={this.submitChanges}
-            selectSingleRow={this.selectSingleRow} 
+            selectSingleRow={this.selectSingleRow}
             cancelSingleRow={this.cancelSingleRow}
             deleteSingleRow={this.deleteSingleRow}
-            selectAll={this.selectAll} 
+            selectAll={this.selectAll}
             selectDelAll={this.selectDelAll}
             unSelectDelAll={this.unSelectDelAll}
             cancelAll={this.cancelAll}
+          />
+          <Paginator 
+            actualPage={this.state.actualPage} 
+            maxPageNum={this.state.maxPageNum}
+            pagiGo={this.pagiGo}
           />
           <footer>
             <span> Source: </span>
@@ -244,7 +249,7 @@ class Main extends React.Component {
           </footer>
         </OffCanvasBody>
         <OffCanvasMenu>
-          <Filter iFilter={this.iFilter} /> 
+          <Filter iFilter={this.iFilter} />
           <a href="#" onClick={this.canvasToggle}>Close</a>
         </OffCanvasMenu>
       </OffCanvas>

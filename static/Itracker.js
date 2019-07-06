@@ -278,10 +278,10 @@ var Add = function Add(props) {
   }, "Cancel")))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Add));
 Add.propTypes = {
   refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (Add);
 
 /***/ }),
 
@@ -457,30 +457,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Filter = function Filter(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
-      show = _useState2[0],
-      setShow = _useState2[1];
+      sts = _useState2[0],
+      setSts = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      opened = _useState4[0],
-      setOpen = _useState4[1];
+      effort_gte = _useState4[0],
+      setEffGte = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      sts = _useState6[0],
-      setSts = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState8 = _slicedToArray(_useState7, 2),
-      effort_gte = _useState8[0],
-      setEffGte = _useState8[1];
-
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      effort_lte = _useState10[0],
-      setEffLte = _useState10[1];
+      effort_lte = _useState6[0],
+      setEffLte = _useState6[1];
 
   var applyFilter = function applyFilter() {
     var newFilter = {};
@@ -570,11 +560,10 @@ var Filter = function Filter(props) {
   }, "Reset"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Filter));
 Filter.propTypes = {
-  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
-  query: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (Filter);
 
 /***/ }),
 
@@ -582,12 +571,11 @@ Filter.propTypes = {
 /*!************************!*\
   !*** ./src/Header.jsx ***!
   \************************/
-/*! exports provided: Header */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Header", function() { return Header; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -696,6 +684,12 @@ var Header = function Header(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_5___default.a.Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_5___default.a.Item, null, "Logout")))));
 };
 
+Header.propTypes = {
+  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
 /***/ }),
 
 /***/ "./src/Main.jsx":
@@ -714,16 +708,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
+/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Table */ "./node_modules/react-bootstrap/Table.js");
+/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/Table */ "./node_modules/react-bootstrap/Table.js");
-/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Header_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Header.jsx */ "./src/Header.jsx");
 /* harmony import */ var _Filter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Filter.jsx */ "./src/Filter.jsx");
-/* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
-/* harmony import */ var _Header_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Header.jsx */ "./src/Header.jsx");
+/* harmony import */ var _Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Paginator.jsx */ "./src/Paginator.jsx");
+/* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -768,9 +762,13 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
     _this.state = {
       issues: [],
-      filterOn: false
+      filterOn: false,
+      actualPage: 0,
+      maxPageNum: 0,
+      iPerPage: 20
     };
     _this.canvasToggle = _this.canvasToggle.bind(_assertThisInitialized(_this));
+    _this.pagiGo = _this.pagiGo.bind(_assertThisInitialized(_this));
     _this.refreshPage = _this.refreshPage.bind(_assertThisInitialized(_this));
     _this.iFilter = _this.iFilter.bind(_assertThisInitialized(_this));
     _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
@@ -803,23 +801,25 @@ function (_React$Component) {
     value: function loadData() {
       var _this2 = this;
 
-      fetch("/api/issues".concat(this.props.location.search)).then(function (response) {
+      fetch("/api/issues").then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
             // console.log('Total count of records:', data._metadata.total_count);
             data.records.forEach(function (issue) {
               issue.selected = '';
+              issue.shown = true;
               issue.creation = new Date(issue.creation);
               if (issue.completion) issue.completion = new Date(issue.completion);
             });
 
             _this2.setState({
-              issues: data.records
+              issues: data.records,
+              maxPageNum: Math.ceil(data.records.length / _this2.state.iPerPage)
             });
           });
         } else {
           response.json().then(function (error) {
-            alert("Failed to fetch issues:".concat(error.message));
+            alert("Failed to fetch issues: ".concat(error.message));
           });
         }
       })["catch"](function (err) {
@@ -832,21 +832,15 @@ function (_React$Component) {
       this.loadData();
     }
   }, {
+    key: "pagiGo",
+    value: function pagiGo(pageNumber) {
+      this.setState({
+        actualPage: pageNumber
+      });
+    }
+  }, {
     key: "iFilter",
     value: function iFilter(query) {
-      var toQueryString = function toQueryString(obj) {
-        var parts = [];
-
-        for (var i in obj) {
-          if (obj.hasOwnProperty(i)) {
-            parts.push(encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]));
-          }
-        }
-
-        return parts.join('&');
-      };
-
-      var path = this.props.location.pathname;
       var queryString = toQueryString(query);
       this.props.history.push({
         pathname: path,
@@ -1009,17 +1003,23 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_5__["OffCanvas"], {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvas"], {
         width: 400,
         transitionDuration: 200,
         position: "left",
         effect: "push",
         isMenuOpened: this.state.filterOn
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_5__["OffCanvasBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_10__["Header"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvasBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
         refreshPage: this.refreshPage,
         canvasToggle: this.canvasToggle
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_9__["TableOfIssues"], {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        actualPage: this.state.actualPage,
+        maxPageNum: this.state.maxPageNum,
+        pagiGo: this.pagiGo
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
         issues: this.state.issues,
+        actualPage: this.state.actualPage,
+        iPerPage: this.state.iPerPage,
         refreshPage: this.refreshPage,
         submitChanges: this.submitChanges,
         selectSingleRow: this.selectSingleRow,
@@ -1029,9 +1029,20 @@ function (_React$Component) {
         selectDelAll: this.selectDelAll,
         unSelectDelAll: this.unSelectDelAll,
         cancelAll: this.cancelAll
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_5__["OffCanvasMenu"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        iFilter: this.iFilter,
-        query: this.props.location.search
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        actualPage: this.state.actualPage,
+        maxPageNum: this.state.maxPageNum,
+        pagiGo: this.pagiGo
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Source: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "https://github.com/noiffion/Itracker.git",
+        target: "_blank"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "fab fa-github",
+        style: {
+          fontSize: '24px'
+        }
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvasMenu"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        iFilter: this.iFilter
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: "#",
         onClick: this.canvasToggle
@@ -1042,41 +1053,85 @@ function (_React$Component) {
   return Main;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-var NoMatch = function NoMatch() {
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Page Not Found");
-};
+var mainNode = document.getElementById('main');
+react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Main, null), mainNode);
+if (false) {}
 
-var RoutedApp = function RoutedApp() {
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-    path: "/",
-    render: function render(props) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-        path: "/issues",
-        component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Main)
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
-        from: "/",
-        to: "/issues"
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-        path: "*",
-        component: NoMatch
-      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Source: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "https://github.com/noiffion/Itracker.git",
-        target: "_blank"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-        className: "fab fa-github",
-        style: {
-          fontSize: '24px'
+/***/ }),
+
+/***/ "./src/Paginator.jsx":
+/*!***************************!*\
+  !*** ./src/Paginator.jsx ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/Pagination.js");
+/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var Paginator = function Paginator(props) {
+  var pagiGo = props.pagiGo;
+  var actual = props.actualPage;
+  var max = props.maxPageNum;
+  var pagItems = [];
+
+  var arrFill = function arrFill(till, actual) {
+    if (actual >= till) return;
+
+    if (actual === props.actualPage) {
+      pagItems.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
+        key: actual + 1,
+        active: true
+      }, actual + 1));
+    } else {
+      pagItems.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
+        key: actual + 1,
+        onClick: function onClick() {
+          return props.pagiGo(actual);
         }
-      }))));
+      }, actual + 1));
+    }
+
+    return arrFill(till, actual + 1);
+  };
+
+  arrFill(props.maxPageNum, 0);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "paginators"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.First, {
+    onClick: function onClick() {
+      return pagiGo(0);
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Prev, {
+    onClick: function onClick() {
+      actual > 0 ? pagiGo(actual - 1) : pagiGo(0);
+    }
+  }), pagItems, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Next, {
+    onClick: function onClick() {
+      actual < max - 1 ? pagiGo(actual + 1) : pagiGo(max - 1);
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Last, {
+    onClick: function onClick() {
+      return pagiGo(max - 1);
     }
   }));
 };
 
-var mainNode = document.getElementById('main');
-react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(RoutedApp, null), mainNode);
-if (false) {}
+Paginator.propTypes = {
+  pagiGo: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  actualPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  maxPageNum: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Paginator);
 
 /***/ }),
 
@@ -1084,12 +1139,11 @@ if (false) {}
 /*!*********************!*\
   !*** ./src/Row.jsx ***!
   \*********************/
-/*! exports provided: Row */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Row", function() { return Row; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -1101,13 +1155,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var Row = function Row(props) {
   var selected = props.issue.selected;
-  var rowNormal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowNormal_jsx__WEBPACK_IMPORTED_MODULE_2__["RowNormal"], {
+  var rowNormal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowNormal_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     issue: props.issue,
     selectSingleRow: props.selectSingleRow
   });
-  var rowEdit = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowEdit_jsx__WEBPACK_IMPORTED_MODULE_3__["RowEdit"], {
+  var rowEdit = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowEdit_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     issue: props.issue,
     cancelSingleRow: props.cancelSingleRow,
     deleteSingleRow: props.deleteSingleRow,
@@ -1115,12 +1170,14 @@ var Row = function Row(props) {
   });
   return selected ? rowEdit : rowNormal;
 };
+
 Row.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   cancelSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   deleteSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (Row);
 
 /***/ }),
 
@@ -1300,12 +1357,11 @@ BeingDeleted.propTypes = {
 /*!*************************!*\
   !*** ./src/RowEdit.jsx ***!
   \*************************/
-/*! exports provided: RowEdit */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RowEdit", function() { return RowEdit; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -1313,6 +1369,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ValidInput_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ValidInput.jsx */ "./src/ValidInput.jsx");
 /* harmony import */ var _RowEdDel_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowEdDel.jsx */ "./src/RowEdDel.jsx");
 // RowEdit.jsx
+
 
 
 
@@ -1353,11 +1410,13 @@ var RowEdit = function RowEdit(props) {
   });
   return del ? beingDeleted : beingEdited;
 };
+
 RowEdit.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   deleteSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   cancelSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (RowEdit);
 
 /***/ }),
 
@@ -1365,18 +1424,18 @@ RowEdit.propTypes = {
 /*!***************************!*\
   !*** ./src/RowNormal.jsx ***!
   \***************************/
-/*! exports provided: RowNormal */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RowNormal", function() { return RowNormal; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 // RowNormal.jsx
+
 
 
 
@@ -1410,10 +1469,12 @@ var RowNormal = function RowNormal(props) {
     className: "far fa-edit"
   }))));
 };
+
 RowNormal.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (RowNormal);
 
 /***/ }),
 
@@ -1421,12 +1482,11 @@ RowNormal.propTypes = {
 /*!*******************************!*\
   !*** ./src/TableOfIssues.jsx ***!
   \*******************************/
-/*! exports provided: TableOfIssues */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableOfIssues", function() { return TableOfIssues; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -1446,15 +1506,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var TableOfIssues = function TableOfIssues(props) {
-  var issueRows = props.issues.map(function (issue) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["Row"], {
-      key: issue._id,
-      issue: issue,
-      selectSingleRow: props.selectSingleRow,
-      cancelSingleRow: props.cancelSingleRow,
-      deleteSingleRow: props.deleteSingleRow
-    });
+  var actual = props.actualPage;
+  var iPerPage = props.iPerPage;
+  var issueRows = [];
+  props.issues.forEach(function (issue, i) {
+    if (i >= actual * iPerPage && i < actual * iPerPage + iPerPage) {
+      issueRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        key: issue._id,
+        issue: issue,
+        selectSingleRow: props.selectSingleRow,
+        cancelSingleRow: props.cancelSingleRow,
+        deleteSingleRow: props.deleteSingleRow
+      }));
+    }
   });
   var ids = Object.keys(props.issues);
   var anyEdit = ids.some(function (id) {
@@ -1476,10 +1542,12 @@ var TableOfIssues = function TableOfIssues(props) {
     className: "cornerButtons"
   }, anyEdit ? tB.editTable : tB.displayTable))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, issueRows)));
 };
+
 TableOfIssues.propTypes = {
   issues: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
   refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (TableOfIssues);
 
 /***/ }),
 
