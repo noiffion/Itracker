@@ -112,9 +112,9 @@ const Filter = props => {
 }
 
 
-export default withRouter(Filter);
-
 Filter.propTypes = {
   iFilter: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired,
-} ;
+};
+
+
+export default Filter;

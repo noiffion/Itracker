@@ -4,12 +4,12 @@ import React        from 'react';
 import PropTypes    from 'prop-types';
 import Table        from 'react-bootstrap/Table';
 import Form         from 'react-bootstrap/Form';
-import { Row }      from './Row.jsx';
+import Row          from './Row.jsx';
 import Bubble       from './Bubble.jsx';
 import tableButtons from './tableButtons.jsx';
 
 
-export const TableOfIssues = props =>  {
+const TableOfIssues = props =>  {
   const issueRows = props.issues.map(issue => {
     return (
       <Row 
@@ -53,3 +53,6 @@ TableOfIssues.propTypes = {
   issues: PropTypes.array.isRequired,
   refreshPage: PropTypes.func.isRequired,
 };
+
+
+export default TableOfIssues;

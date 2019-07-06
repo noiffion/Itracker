@@ -12,7 +12,7 @@ import {
   OffCanvas, 
   OffCanvasMenu, 
   OffCanvasBody
-}                          from "react-offcanvas";
+}                     from "react-offcanvas";
 
 
 
@@ -38,7 +38,7 @@ class CustomToggle extends React.Component {
 }
 
 
-export const Header = props => {
+const Header = props => {
   return (
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
@@ -64,3 +64,12 @@ export const Header = props => {
     </Navbar>
   );
 }
+
+
+Header.propTypes = { 
+  canvasToggle: PropTypes.func.isRequired,
+  refreshPage: PropTypes.func.isRequired,
+};
+
+
+export default Header;

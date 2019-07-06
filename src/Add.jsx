@@ -89,9 +89,9 @@ const Add = props => {
 }
 
 
-export default withRouter(Add);
-
-
 Add.propTypes = {
   refreshPage: PropTypes.func.isRequired,
 };
+
+
+export default Add;

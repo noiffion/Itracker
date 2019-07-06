@@ -138,18 +138,10 @@ MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })
   const dBase = client.db('Itracker');
   const coll = dBase.collection('issues');
 
-  try {
-      coll.deleteMany({})
-  } catch (e) {
-      console.log(e); 
-  }
+  coll.deleteMany({})
+  .then(() => coll.insertMany(entries))
+  .then(() => client.close())
+  .catch(err => console.log(err));
 
-  try {
-     coll.insertMany(entries) 
-  } catch (e) {
-     console.log(e);
-  }
-  
-  client.close();
 })
 .catch(error => console.log(error));

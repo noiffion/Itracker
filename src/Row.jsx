@@ -1,12 +1,12 @@
 // Row.jsx
 
-import React         from 'react';
-import PropTypes     from 'prop-types';
-import { RowNormal } from './RowNormal.jsx';
-import { RowEdit }   from './RowEdit.jsx';
+import React     from 'react';
+import PropTypes from 'prop-types';
+import RowNormal from './RowNormal.jsx';
+import RowEdit   from './RowEdit.jsx';
 
 
-export const Row = props => {
+const Row = props => {
   const selected = props.issue.selected;
 
   const rowNormal = (
@@ -37,3 +37,6 @@ Row.propTypes = {
   cancelSingleRow: PropTypes.func.isRequired,
   deleteSingleRow: PropTypes.func.isRequired,
 };
+
+
+export default Row;

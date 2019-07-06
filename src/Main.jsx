@@ -20,8 +20,8 @@ import {
 import Button              from 'react-bootstrap/Button';
 import Table               from 'react-bootstrap/Table';
 import Filter              from './Filter.jsx';
-import { TableOfIssues }   from './TableOfIssues.jsx';
-import { Header }          from './Header.jsx';
+import TableOfIssues       from './TableOfIssues.jsx';
+import Header              from './Header.jsx';
 
 
 
@@ -62,7 +62,7 @@ class Main extends React.Component {
   }
 
   loadData() {
-    fetch(`/api/issues${this.props.location.search}`)
+    fetch(`/api/issues`)
     .then((response) => {
       if (response.ok) {
         response.json().then((data) => {
@@ -236,9 +236,15 @@ class Main extends React.Component {
             unSelectDelAll={this.unSelectDelAll}
             cancelAll={this.cancelAll}
           />
+          <footer>
+            <span> Source: </span>
+            <a href="https://github.com/noiffion/Itracker.git" target="_blank">
+               <i className="fab fa-github" style={{fontSize: '24px'}}></i>
+            </a>
+          </footer>
         </OffCanvasBody>
         <OffCanvasMenu>
-          <Filter iFilter={this.iFilter} query={this.props.location.search} />
+          <Filter iFilter={this.iFilter} /> 
           <a href="#" onClick={this.canvasToggle}>Close</a>
         </OffCanvasMenu>
       </OffCanvas>
@@ -246,35 +252,7 @@ class Main extends React.Component {
   }
 }
 
-
-const NoMatch = () => <p>Page Not Found</p>;
-
-const RoutedApp = () => (
-  <Router>
-    <Route path="/" render={(props) => { 
-      return (
-        <Fragment>
-          <div className="container-fluid">
-            <Switch>
-              <Route path="/issues" component={withRouter(Main)} />
-              <Redirect from="/" to="/issues" />
-              <Route path="*" component={NoMatch} />
-            </Switch>
-          </div>
-          <footer>
-            <span> Source: </span>
-            <a href="https://github.com/noiffion/Itracker.git" target="_blank">
-               <i className="fab fa-github" style={{fontSize: '24px'}}></i>
-            </a>
-          </footer>
-        </Fragment>
-      )
-    }} />
-  </Router>
-);
-
-
 const mainNode = document.getElementById('main');
-ReactDOM.render(<RoutedApp />, mainNode);
+ReactDOM.render(<Main />, mainNode);
 
 if (module.hot) module.hot.accept();

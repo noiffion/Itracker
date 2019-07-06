@@ -6,7 +6,7 @@ import { NumInput, DateInput }       from './ValidInput.jsx';
 import { BeingEdited, BeingDeleted } from './RowEdDel.jsx';
 
 
-export const RowEdit = props => {
+const RowEdit = props => {
 /*
   onChange(event, convertedValue) {
     const issue = Object.assign({}, state.issue);
@@ -56,3 +56,6 @@ RowEdit.propTypes = {
   deleteSingleRow: PropTypes.func.isRequired,
   cancelSingleRow: PropTypes.func.isRequired,
 };
+
+
+export default RowEdit;

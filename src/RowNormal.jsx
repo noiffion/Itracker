@@ -5,7 +5,7 @@ import PropTypes  from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 
-export const RowNormal = props => {
+const RowNormal = props => {
   const iss = props.issue;
   return (
     <tr>
@@ -33,3 +33,6 @@ RowNormal.propTypes = {
   issue: PropTypes.object.isRequired,
   selectSingleRow: PropTypes.func.isRequired,
 };
+
+
+export default RowNormal;
