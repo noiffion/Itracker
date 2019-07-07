@@ -64,10 +64,11 @@ body {
   justify-content: center;
 }
 
-.cornerButtons {
+.buttonCell {
   display: flex;
   justify-content: center;
 }
+
 
 #issueId {
   cursor: alias;

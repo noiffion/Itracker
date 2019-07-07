@@ -44,11 +44,13 @@ const Header = props => {
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
       <Nav id="navItems">
-        <Form>
+        <Form onSubmit={(event) => event.preventDefault()}>
           <Form.Control 
             id="goToPage" title="Press Enter to go to page" 
             style={{width: '50px', fontSize: '12px', textAlign: 'center'}}
             size="sm" as="input" placeholder={'Go to'}
+            onFocus={() => event.target.placeholder=''}
+            onBlur={() => event.target.placeholder='Go to'}
             onKeyPress={(event) => {
               if (event.key === 'Enter') {
                 const page = Number(event.target.value);

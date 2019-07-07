@@ -89,8 +89,8 @@ class Main extends React.Component {
     this.loadData();
   }
 
-  pageGo(pageNumber) {
-    this.setState({ actualPage: pageNumber })
+  pageGo(pageNum) {
+    this.setState({ actualPage: pageNum })
   }
 
   iFilter(query) {

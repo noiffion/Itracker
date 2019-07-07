@@ -45,7 +45,9 @@ const TableOfIssues = props =>  {
             <th>Effort</th>
             <th>Completed&nbsp;on</th>
             <th>Description</th>
-            <th className="cornerButtons">{anyEdit ? tB.editTable : tB.displayTable}</th>
+            <th className="buttonCell">
+              {anyEdit ? tB.editTable : tB.displayTable} 
+            </th>
           </tr>
         </thead>
         <tbody>{issueRows}</tbody>

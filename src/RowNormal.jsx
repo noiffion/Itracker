@@ -1,8 +1,8 @@
 // RowNormal.jsx
 
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import { Button } from 'react-bootstrap';
+import React       from 'react';
+import PropTypes   from 'prop-types';
+import Button      from 'react-bootstrap/Button';
 
 
 const RowNormal = props => {
@@ -18,8 +18,8 @@ const RowNormal = props => {
         {iss.completion ? iss.completion.toDateString() : ''} 
       </td>
       <td id="issueDescription">{iss.description}</td>
-      <td className="cornerButtons">
-        <Button 
+      <td className="buttonCell"> 
+        <Button
           title="Edit row" variant="warning" size="sm" 
           onClick={() => props.selectSingleRow(iss._id)}>
           <i className="far fa-edit"></i>

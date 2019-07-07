@@ -1,5 +1,5 @@
-import React                     from 'react';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import React       from 'react';
+import Button      from 'react-bootstrap/Button';
 
 
 export default function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll) {
@@ -29,19 +29,19 @@ export default function tableButtons(issues, selectAll, selectDelAll, unSelectDe
   const allSelectedDelete = selected.every(id => issues[id].selected === 'delete');
   
   const editTable = (
-    <ButtonToolbar>
+    <React.Fragment>
       <Button type="submit" title="Submit"
               variant="primary" size="sm">
         <i className="far fa-save"></i>
       </Button>
-      &nbsp;&nbsp;
+      &nbsp;
       {allSelectedDelete ? cancelDel : selectDel}
-      &nbsp;&nbsp;
+      &nbsp;
       <Button title="Cancel all" onClick={cancelAll}
               variant="secondary" size="sm">
         <i className="fas fa-ban"></i>
       </Button>
-    </ButtonToolbar>
+    </React.Fragment>
   );
 
   return { displayTable, editTable }

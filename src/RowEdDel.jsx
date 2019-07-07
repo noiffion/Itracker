@@ -1,10 +1,9 @@
 // RowEdDel.jsx
 
-import React         from 'react';
-import PropTypes     from 'prop-types';
-import Button        from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Form          from 'react-bootstrap/Form';
+import React       from 'react';
+import PropTypes   from 'prop-types';
+import Button      from 'react-bootstrap/Button';
+import Form        from 'react-bootstrap/Form';
 
 
 export const BeingEdited = props => (
@@ -33,17 +32,15 @@ export const BeingEdited = props => (
       <Form.Control name={props.iss._id+'description'} size="sm" as="input"
                     placeholder={props.iss.description} />
     </td>
-    <td className="cornerButtons">
-      <ButtonToolbar>
-        <Button title="Delete issue" variant="light" size="sm"
-                onClick={() => props.deleteSingleRow(props.iss._id)}>
-          <i className="far fa-trash-alt"></i>
-        </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button title="Cancel" variant="secondary" size="sm"
-                onClick={() => props.cancelSingleRow(props.iss._id)}>
-          <i className="fas fa-ban"></i>
-        </Button>
-      </ButtonToolbar>
+    <td className="buttonCell">
+      <Button title="Delete issue" variant="light" size="sm"
+              onClick={() => props.deleteSingleRow(props.iss._id)}>
+        <i className="far fa-trash-alt"></i>
+      </Button>&nbsp;
+      <Button title="Cancel" variant="secondary" size="sm"
+              onClick={() => props.cancelSingleRow(props.iss._id)}>
+        <i className="fas fa-ban"></i>
+      </Button>
     </td>
   </tr>
 );
@@ -76,17 +73,15 @@ export const BeingDeleted = props => (
     <td id="issueDescription">
       <Form.Control disabled size="sm" as="input" placeholder="—" />
     </td>
-    <td className="cornerButtons">
-      <ButtonToolbar>
-        <Button title="Cancel delete" variant="danger" size="sm"
-                onClick={() => props.cancelDelete(props.iss._id)}>
-          <i className="far fa-trash-alt"></i>
-        </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button title="Cancel edit" variant="secondary" size="sm"
-                onClick={() => props.cancelSingleRow(props.iss._id)}>
-          <i className="fas fa-ban"></i>
-        </Button>
-      </ButtonToolbar>
+    <td className="buttonCell">
+      <Button title="Cancel delete" variant="danger" size="sm"
+              onClick={() => props.cancelDelete(props.iss._id)}>
+        <i className="far fa-trash-alt"></i>
+      </Button>&nbsp;
+      <Button title="Cancel edit" variant="secondary" size="sm"
+              onClick={() => props.cancelSingleRow(props.iss._id)}>
+        <i className="fas fa-ban"></i>
+      </Button>
     </td>
   </tr>
 );
