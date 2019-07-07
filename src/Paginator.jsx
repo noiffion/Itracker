@@ -1,65 +1,66 @@
 import React      from 'react';
 import PropTypes  from 'prop-types';
+import Form       from 'react-bootstrap/Form';
 import Pagination from 'react-bootstrap/Pagination';
 
 const Paginator = props => {
-  const pagiGo = props.pagiGo;
-  const actual = props.actualPage;
+  const pageGo = props.pageGo;
+  const actPg = props.actualPage;
   const max = props.maxPageNum;
+  const pagItems = [];
+  let pagiDisplay;
 
-  const pagItems = []; 
-  
-  const arrFill = (till, actual) => {
-    if (actual >= till) return;
-    if (actual === props.actualPage) {
+  const arrFill = (till, current) => {
+    if (current === till) return;
+    if (current === actPg) {
         pagItems.push(
-          <Pagination.Item key={actual+1} active> 
-            {actual+1} 
+          <Pagination.Item key={current+1} active>
+            {current+1}
           </Pagination.Item>
         );
     } else {
         pagItems.push(
-          <Pagination.Item key={actual+1} onClick={() => props.pagiGo(actual)}> 
-            {actual+1} 
-          </Pagination.Item>);
+          <Pagination.Item key={current+1} onClick={() => pageGo(current)}>
+            {current+1}
+          </Pagination.Item>
+        );
     }
-    return arrFill(till, actual+1);
+    return arrFill(till, current+1);
   }
-  arrFill(props.maxPageNum, 0);
- 
+
+  if (max <= 10) {
+      arrFill(max, 0);
+      pagiDisplay = pagItems;
+  } else {
+      pagiDisplay = (
+        <Pagination.Item active>
+         {actPg+1}
+        </Pagination.Item>
+      );
+  }
+
+
   return (
     <Pagination className="paginators">
-      <Pagination.First onClick={() => pagiGo(0)} />
-      <Pagination.Prev 
-        onClick={() => {
-          (actual > 0) ? pagiGo(actual-1): pagiGo(0)
-         }
-        }
+      <Pagination.Item onClick={() => pageGo(0)}> 1 </Pagination.Item>
+      &nbsp;&nbsp;
+      <Pagination.Prev
+        onClick={() => (actPg > 0) ? pageGo(actPg-1) : pageGo(0)}
       />
-      {pagItems}
-      {/*
-      <Pagination.Ellipsis />
 
-      <Pagination.Item>{10}</Pagination.Item>
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-      <Pagination.Item disabled>{14}</Pagination.Item>
+      {pagiDisplay}
 
-      <Pagination.Ellipsis />
-      */}
-      <Pagination.Next 
-        onClick={() => {
-          (actual < max-1) ? pagiGo(actual+1): pagiGo(max-1)}
-        }
+      <Pagination.Next
+        onClick={() => (actPg < max-1) ? pageGo(actPg+1) : pageGo(max-1)}
       />
-      <Pagination.Last onClick={() => pagiGo(max-1)} />
+      &nbsp;&nbsp;
+      <Pagination.Item onClick={() => pageGo(max-1)}> {max} </Pagination.Item>
     </Pagination>
   )
 }
 
 Paginator.propTypes = {
-  pagiGo: PropTypes.func.isRequired,
+  pageGo: PropTypes.func.isRequired,
   actualPage: PropTypes.number.isRequired,
   maxPageNum: PropTypes.number.isRequired,
 };

@@ -30,7 +30,7 @@ class Main extends React.Component {
 
     this.canvasToggle = this.canvasToggle.bind(this);
     
-    this.pagiGo = this.pagiGo.bind(this);
+    this.pageGo = this.pageGo.bind(this);
 
     this.refreshPage = this.refreshPage.bind(this);
     this.iFilter = this.iFilter.bind(this);
@@ -89,7 +89,7 @@ class Main extends React.Component {
     this.loadData();
   }
 
-  pagiGo(pageNumber) {
+  pageGo(pageNumber) {
     this.setState({ actualPage: pageNumber })
   }
 
@@ -216,11 +216,16 @@ class Main extends React.Component {
         effect={"push"} isMenuOpened={this.state.filterOn}
       >
         <OffCanvasBody>
-          <Header refreshPage={this.refreshPage} canvasToggle={this.canvasToggle} />
+          <Header 
+            refreshPage={this.refreshPage} 
+            canvasToggle={this.canvasToggle} 
+            maxPageNum={this.state.maxPageNum}
+            pageGo={this.pageGo}
+          />
           <Paginator 
             actualPage={this.state.actualPage} 
             maxPageNum={this.state.maxPageNum}
-            pagiGo={this.pagiGo}
+            pageGo={this.pageGo}
           />
           <TableOfIssues
             issues={this.state.issues}
@@ -239,7 +244,7 @@ class Main extends React.Component {
           <Paginator 
             actualPage={this.state.actualPage} 
             maxPageNum={this.state.maxPageNum}
-            pagiGo={this.pagiGo}
+            pageGo={this.pageGo}
           />
           <footer>
             <span> Source: </span>

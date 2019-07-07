@@ -41,9 +41,9 @@ const TableOfIssues = props =>  {
             <th>Id</th>
             <th>State</th>
             <th>Owner</th>
-            <th>Created on</th>
+            <th>Created&nbsp;on</th>
             <th>Effort</th>
-            <th>Completed on</th>
+            <th>Completed&nbsp;on</th>
             <th>Description</th>
             <th className="cornerButtons">{anyEdit ? tB.editTable : tB.displayTable}</th>
           </tr>

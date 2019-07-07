@@ -2,6 +2,7 @@
 
 import React          from 'react';
 import PropTypes      from 'prop-types';
+import Form           from 'react-bootstrap/Form';
 import Button         from 'react-bootstrap/Button'
 import Navbar         from 'react-bootstrap/Navbar'
 import Nav            from 'react-bootstrap/Nav'
@@ -42,7 +43,23 @@ const Header = props => {
   return (
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
-      <Nav className="justify-content-between">
+      <Nav id="navItems">
+        <Form>
+          <Form.Control 
+            id="goToPage" title="Press Enter to go to page" 
+            style={{width: '50px', fontSize: '12px', textAlign: 'center'}}
+            size="sm" as="input" placeholder={'Go to'}
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                const page = Number(event.target.value);
+                if (page >= 1 && page <= props.maxPageNum) {
+                  event.target.value = '';
+                  props.pageGo(page-1);
+                }
+              }
+            }}
+          />
+        </Form>&nbsp;
         <Button onClick={props.canvasToggle} variant="light">
           <i className="fas fa-filter"></i>{' '}
           Filter
