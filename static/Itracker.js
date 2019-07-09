@@ -401,35 +401,16 @@ Bubble.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/Row.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Col */ "./node_modules/react-bootstrap/Col.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Nav */ "./node_modules/react-bootstrap/Nav.js");
-/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/Card.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/Modal.js");
-/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap/Collapse */ "./node_modules/react-bootstrap/Collapse.js");
-/* harmony import */ var react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Dropdown */ "./node_modules/react-bootstrap/Dropdown.js");
-/* harmony import */ var react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/InputGroup */ "./node_modules/react-bootstrap/InputGroup.js");
-/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-bootstrap/ButtonGroup */ "./node_modules/react-bootstrap/ButtonGroup.js");
-/* harmony import */ var react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-bootstrap/ButtonToolbar */ "./node_modules/react-bootstrap/ButtonToolbar.js");
-/* harmony import */ var react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-bootstrap/DropdownButton */ "./node_modules/react-bootstrap/DropdownButton.js");
-/* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/Row.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/InputGroup */ "./node_modules/react-bootstrap/InputGroup.js");
+/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -446,122 +427,190 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-
-
-
-
-
-
-
-
 var Filter = function Filter(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
       _useState2 = _slicedToArray(_useState, 2),
       sts = _useState2[0],
-      setSts = _useState2[1];
+      setStatus = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
       _useState4 = _slicedToArray(_useState3, 2),
-      effort_gte = _useState4[0],
+      effortGte = _useState4[0],
       setEffGte = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
       _useState6 = _slicedToArray(_useState5, 2),
-      effort_lte = _useState6[0],
+      effortLte = _useState6[0],
       setEffLte = _useState6[1];
 
-  var applyFilter = function applyFilter() {
-    var newFilter = {};
-    if (sts) newFilter.sts = sts;
-    if (effort_gte) newFilter.effort_gte = effort_gte;
-    if (effort_lte) newFilter.effort_lte = effort_lte;
-    props.iFilter(newFilter);
+  var iFilter = props.iFilter;
+
+  var filterObj = function filterObj() {
+    return {
+      state: sts,
+      owner: 'All',
+      creation: 'All',
+      effort: [effortGte, effortLte],
+      completion: 'All',
+      description: 'All'
+    };
   };
 
   var onChangeSts = function onChangeSts(event) {
-    setSts(event.target.value);
-    console.log(sts);
-    applyFilter();
+    var filter = filterObj();
+    var tValue = event.target.value;
+    filter.state = tValue;
+    iFilter(filter);
+    setStatus(tValue);
   };
 
-  var onChangeEffortGte = function onChangeEffortGte(event) {
-    var effortString = event.target.value;
+  var onChangeEffort = function onChangeEffort(event, subType) {
+    var filter = filterObj();
+    var tValue = Number(event.target.value);
 
-    if (effortString.match(/^\d*$/)) {
-      setEffGte(effortString);
+    if (tValue > 0 && tValue < 11) {
+      if (subType === 'gte' && tValue <= effortLte) {
+        if (tValue === 1 && effortLte === 10) {
+          filter.effort = 'All';
+          iFilter(filter);
+          setEffGte(tValue);
+          return;
+        }
+
+        filter.effort = [tValue, effortLte];
+        iFilter(filter);
+        setEffGte(tValue);
+      } else if (subType === 'lte' && tValue >= effortGte) {
+        if (effortGte === 1 && tValue === 10) {
+          filter.effort = 'All';
+          iFilter(filter);
+          setEffGte(tValue);
+          return;
+        }
+
+        filter.effort = [effortGte, tValue];
+        iFilter(filter);
+        setEffLte(tValue);
+      }
     }
-  };
-
-  var onChangeEffortLte = function onChangeEffortLte(event) {
-    var effortString = event.target.value;
-
-    if (effortString.match(/^\d*$/)) {
-      setEffLte(effortString);
-    }
-  };
-
-  var resetFilter = function resetFilter() {
-    props.iFilter({});
   };
 
   var clearFilter = function clearFilter() {
-    setSts(props.query.sts || sts);
-    setEffGte(props.query.effort_gte);
-    setEffLte(props.query.effort_lte);
+    filter = filterObj();
+    Object.keys(filter).forEach(function (key) {
+      return filter[key] = 'All';
+    });
+    setStatus('All');
+    setEffGte(1);
+    setEffLte(10);
+    iFilter(filter);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a, {
+  var optionMaker = function optionMaker(unique) {
+    var options = [];
+
+    var recOpt = function recOpt(till, current) {
+      if (current > till) return;
+      options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: current + unique
+      }, " ", current, " "));
+      return recOpt(till, current + 1);
+    };
+
+    recOpt(10, 1);
+    return options;
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    id: "sideFilter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "sideCloseDiv"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    onClick: props.canvasToggle,
+    variant: "light"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-times"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a, {
     id: "filterForm",
     name: "filter"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Group, {
-    as: react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a,
-    id: "stateFilter"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Label, {
-    column: true,
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " State: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Control, {
+  }, " State: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    as: react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2___default.a,
+    id: "stateFilter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     as: "select",
     value: sts,
     onChange: onChangeSts,
     size: "sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "(Any)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Group, {
-    as: react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a,
-    id: "effortFilter"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Label, {
-    column: true,
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " Effort: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_12___default.a, {
-    size: "sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Control, {
-    as: "input",
-    value: effort_gte,
-    onChange: onChangeEffortGte,
-    placeholder: "from"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_12___default.a.Append, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_12___default.a.Text, null, "\u2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Control, {
-    as: "input",
-    value: effort_lte,
-    onChange: onChangeEffortLte,
-    placeholder: "to"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_13___default.a, {
+  }, " Owner: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    id: "ownerFilter",
+    type: "text"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
+    type: "text",
     size: "sm",
-    "aria-label": "Filter_buttons",
-    id: "applyClear"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    onClick: applyFilter
-  }, "Apply"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "info",
+    placeholder: "Name"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+    sm: 2
+  }, " Created On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    className: "datesFilter",
+    type: "text"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
+    type: "text",
+    size: "sm",
+    placeholder: "DD-MM-YYYY"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+    sm: 2
+  }, " Effort: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Row, {
+    id: "effortFilter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    id: "effortGte"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
+    as: "select",
+    value: effortGte,
+    onChange: function onChange(event) {
+      return onChangeEffort(event, 'gte');
+    },
+    size: "sm"
+  }, optionMaker('effortGte'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, null, "\xA0\u2015\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    id: "effortLte"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
+    as: "select",
+    value: effortLte,
+    onChange: function onChange(event) {
+      return onChangeEffort(event, 'lte');
+    },
+    size: "sm"
+  }, optionMaker('effortLte')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+    sm: 2
+  }, " Completed On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    className: "datesFilter",
+    type: "text"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
+    type: "text",
+    size: "sm",
+    placeholder: "DD-MM-YYYY"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+    sm: 2
+  }, " Description "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+    id: "descFilter",
+    type: "text"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
+    type: "text",
+    size: "sm",
+    placeholder: "Description"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    variant: "success",
     onClick: clearFilter
-  }, "Clear"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "info",
-    onClick: resetFilter,
-    disabled: props.query === ''
-  }, "Reset"))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-undo-alt"
+  }), "\xA0Clear"))));
 };
 
 Filter.propTypes = {
-  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Filter);
 
@@ -665,12 +714,12 @@ var Header = function Header(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_4___default.a.Brand, null, "Issue Tracker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5___default.a, {
     id: "navItems"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    onSubmit: function onSubmit(event) {
+    onSubmit: function onSubmit() {
       return event.preventDefault();
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default.a.Control, {
     id: "goToPage",
-    title: "Press Enter to go to page",
+    title: "Number + Enter to go to page",
     style: {
       width: '50px',
       fontSize: '12px',
@@ -685,7 +734,7 @@ var Header = function Header(props) {
     onBlur: function onBlur() {
       return event.target.placeholder = 'Go to';
     },
-    onKeyPress: function onKeyPress(event) {
+    onKeyPress: function onKeyPress() {
       if (event.key === 'Enter') {
         var page = Number(event.target.value);
 
@@ -700,12 +749,7 @@ var Header = function Header(props) {
     variant: "light"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-filter"
-  }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    onClick: props.canvasToggle,
-    variant: "light"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-undo-alt"
-  }), ' ', "Reset Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     refreshPage: props.refreshPage
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a, {
     id: "user-dropdown",
@@ -720,7 +764,8 @@ var Header = function Header(props) {
 
 Header.propTypes = {
   canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
@@ -840,10 +885,18 @@ function (_React$Component) {
           response.json().then(function (data) {
             // console.log('Total count of records:', data._metadata.total_count);
             data.records.forEach(function (issue) {
-              issue.selected = '';
-              issue.shown = true;
-              issue.creation = new Date(issue.creation);
               if (issue.completion) issue.completion = new Date(issue.completion);
+              issue.creation = new Date(issue.creation);
+              issue.selected = '';
+              issue.filters = {
+                state: true,
+                owner: true,
+                creation: true,
+                effort: true,
+                completion: true,
+                description: true
+              };
+              issue.filteredIn = true;
             });
 
             _this2.setState({
@@ -871,15 +924,40 @@ function (_React$Component) {
       this.setState({
         actualPage: pageNum
       });
-      console.log(this.state);
     }
   }, {
     key: "iFilter",
-    value: function iFilter(query) {
-      var queryString = toQueryString(query);
-      this.props.history.push({
-        pathname: path,
-        search: queryString
+    value: function iFilter(filter) {
+      var issues = this.state.issues;
+      var types = Object.keys(filter);
+      var count = -1;
+      issues.forEach(function (issue) {
+        types.forEach(function (type) {
+          if (filter[type] === 'All') {
+            issue.filters[type] = true;
+          } else if (type === 'effort') {
+            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
+              issue.filters[type] = false;
+            } else {
+              issue.filters[type] = true;
+            }
+          } else {
+            if (issue[type] !== filter[type]) {
+              issue.filters[type] = false;
+            } else {
+              issue.filters[type] = true;
+            }
+          }
+        });
+        issue.filteredIn = Object.values(issue.filters).every(function (filter) {
+          return filter;
+        });
+        if (issue.filteredIn) count++;
+      });
+      this.setState({
+        issues: issues,
+        maxPageNum: Math.ceil(count / this.state.iPerPage),
+        actualPage: 0
       });
     }
   }, {
@@ -887,7 +965,7 @@ function (_React$Component) {
     value: function selectAll() {
       var issues = this.state.issues;
       issues.forEach(function (issue) {
-        return issue.selected = 'edit';
+        if (issue.filteredIn) return issue.selected = 'edit';
       });
       this.setState({
         issues: issues
@@ -1039,7 +1117,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvas"], {
-        width: 400,
+        width: 160,
         transitionDuration: 200,
         position: "left",
         effect: "push",
@@ -1047,6 +1125,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvasBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
         refreshPage: this.refreshPage,
         canvasToggle: this.canvasToggle,
+        iFilter: this.iFilter,
         maxPageNum: this.state.maxPageNum,
         pageGo: this.pageGo
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1079,11 +1158,9 @@ function (_React$Component) {
           fontSize: '24px'
         }
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvasMenu"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        iFilter: this.iFilter
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "#",
-        onClick: this.canvasToggle
-      }, "Close")));
+        iFilter: this.iFilter,
+        canvasToggle: this.canvasToggle
+      })));
     }
   }]);
 
@@ -1247,12 +1324,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/ButtonToolbar */ "./node_modules/react-bootstrap/ButtonToolbar.js");
-/* harmony import */ var react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__);
 // RowEdDel.jsx
-
 
 
 
@@ -1263,50 +1337,48 @@ var BeingEdited = function BeingEdited(props) {
     title: props.iss._id
   }, props.iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueState"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'state',
     size: "sm",
     as: "input",
     placeholder: props.iss.state
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'owner',
     size: "sm",
     as: "input",
     placeholder: props.iss.owner
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCreation"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'creation',
     size: "sm",
     as: "input",
     placeholder: props.iss.creation.toDateString()
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueEffort"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'effort',
     size: "sm",
     as: "input",
     placeholder: props.iss.effort
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCompletion"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'completion',
     size: "sm",
     as: "input",
     placeholder: props.iss.completion ? props.iss.completion.toDateString() : ''
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueDescription"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'description',
     size: "sm",
     as: "input",
     placeholder: props.iss.description
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "buttonCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: "cornerButtons"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     title: "Delete issue",
     variant: "light",
@@ -1316,7 +1388,7 @@ var BeingEdited = function BeingEdited(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
-  })), "\xA0\xA0\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  })), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     title: "Cancel",
     variant: "secondary",
     size: "sm",
@@ -1325,7 +1397,7 @@ var BeingEdited = function BeingEdited(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ban"
-  })))));
+  }))));
 };
 BeingEdited.propTypes = {
   iss: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
@@ -1336,50 +1408,48 @@ var BeingDeleted = function BeingDeleted(props) {
     title: props.iss._id
   }, props.iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueState"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
     size: "sm",
     as: "input",
     placeholder: "\u2014"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
     size: "sm",
     as: "input",
     placeholder: "\u2014"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCreation"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
     size: "sm",
     as: "input",
     placeholder: "\u2014"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueEffort"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
     size: "sm",
     as: "input",
     placeholder: "\u2014"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCompletion"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
     size: "sm",
     as: "input",
     placeholder: "\u2014"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueDescription"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
     size: "sm",
     as: "input",
     placeholder: "\u2014"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "buttonCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: "cornerButtons"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     title: "Cancel delete",
     variant: "danger",
@@ -1389,7 +1459,7 @@ var BeingDeleted = function BeingDeleted(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
-  })), "\xA0\xA0\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  })), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     title: "Cancel edit",
     variant: "secondary",
     size: "sm",
@@ -1398,7 +1468,7 @@ var BeingDeleted = function BeingDeleted(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ban"
-  })))));
+  }))));
 };
 BeingDeleted.propTypes = {
   iss: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
@@ -1488,10 +1558,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/ButtonToolbar */ "./node_modules/react-bootstrap/ButtonToolbar.js");
-/* harmony import */ var react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3__);
 // RowNormal.jsx
-
 
 
 
@@ -1515,8 +1582,6 @@ var RowNormal = function RowNormal(props) {
     id: "issueDescription"
   }, iss.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "buttonCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: "cornerButtons"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     title: "Edit row",
     variant: "warning",
@@ -1526,7 +1591,7 @@ var RowNormal = function RowNormal(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-edit"
-  })))));
+  }))));
 };
 
 RowNormal.propTypes = {
@@ -1570,15 +1635,20 @@ var TableOfIssues = function TableOfIssues(props) {
   var actual = props.actualPage;
   var iPerPage = props.iPerPage;
   var issueRows = [];
-  props.issues.forEach(function (issue, i) {
-    if (i >= actual * iPerPage && i < actual * iPerPage + iPerPage) {
-      issueRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        key: issue._id,
-        issue: issue,
-        selectSingleRow: props.selectSingleRow,
-        cancelSingleRow: props.cancelSingleRow,
-        deleteSingleRow: props.deleteSingleRow
-      }));
+  var ind = -1;
+  props.issues.forEach(function (issue) {
+    if (issue.filteredIn) {
+      ind++;
+
+      if (ind >= actual * iPerPage && ind < actual * iPerPage + iPerPage) {
+        issueRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          key: issue._id,
+          issue: issue,
+          selectSingleRow: props.selectSingleRow,
+          cancelSingleRow: props.cancelSingleRow,
+          deleteSingleRow: props.deleteSingleRow
+        }));
+      }
     }
   });
   var ids = Object.keys(props.issues);
@@ -1839,21 +1909,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return tableButtons; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll) {
-  var displayTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["ButtonToolbar"], {
-    className: "cornerEditButtons"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  var displayTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     title: "Edit all rows",
     onClick: selectAll,
     variant: "success",
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-check-square"
-  })));
-  var selectDel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  }));
+  var selectDel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     title: "Mark selected for deletion",
     onClick: selectDelAll,
     variant: "light",
@@ -1861,7 +1930,7 @@ function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
   }));
-  var cancelDel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  var cancelDel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     title: "Cancel deletion of selected",
     onClick: unSelectDelAll,
     variant: "danger",
@@ -1876,16 +1945,14 @@ function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll
   var allSelectedDelete = selected.every(function (id) {
     return issues[id].selected === 'delete';
   });
-  var editTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["ButtonToolbar"], {
-    className: "cornerEditButtons"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  var editTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     type: "submit",
     title: "Submit",
     variant: "primary",
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-save"
-  })), "\xA0\xA0", allSelectedDelete ? cancelDel : selectDel, "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  })), "\xA0", allSelectedDelete ? cancelDel : selectDel, "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     title: "Cancel all",
     onClick: cancelAll,
     variant: "secondary",

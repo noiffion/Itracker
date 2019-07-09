@@ -3,18 +3,17 @@
 import React          from 'react';
 import PropTypes      from 'prop-types';
 import Form           from 'react-bootstrap/Form';
-import Button         from 'react-bootstrap/Button'
-import Navbar         from 'react-bootstrap/Navbar'
-import Nav            from 'react-bootstrap/Nav'
-import Dropdown       from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import Button         from 'react-bootstrap/Button';
+import Navbar         from 'react-bootstrap/Navbar';
+import Nav            from 'react-bootstrap/Nav';
+import Dropdown       from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import Add            from './Add.jsx';
 import { 
-  OffCanvas, 
-  OffCanvasMenu, 
+  OffCanvas,
+  OffCanvasMenu,
   OffCanvasBody
-}                     from "react-offcanvas";
-
+}                     from 'react-offcanvas';
 
 
 class CustomToggle extends React.Component {
@@ -44,14 +43,14 @@ const Header = props => {
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
       <Nav id="navItems">
-        <Form onSubmit={(event) => event.preventDefault()}>
-          <Form.Control 
-            id="goToPage" title="Press Enter to go to page" 
+        <Form onSubmit={() => event.preventDefault()}>
+          <Form.Control
+            id="goToPage" title="Number + Enter to go to page"
             style={{width: '50px', fontSize: '12px', textAlign: 'center'}}
             size="sm" as="input" placeholder={'Go to'}
             onFocus={() => event.target.placeholder=''}
             onBlur={() => event.target.placeholder='Go to'}
-            onKeyPress={(event) => {
+            onKeyPress={() => {
               if (event.key === 'Enter') {
                 const page = Number(event.target.value);
                 if (page >= 1 && page <= props.maxPageNum) {
@@ -65,10 +64,6 @@ const Header = props => {
         <Button onClick={props.canvasToggle} variant="light">
           <i className="fas fa-filter"></i>{' '}
           Filter
-        </Button>
-        <Button onClick={props.canvasToggle} variant="light">
-          <i className="fas fa-undo-alt"></i>{' '}
-          Reset Filter
         </Button>
         <Add refreshPage={props.refreshPage}/>
         <Dropdown id="user-dropdown" navbar={true} drop="left">
@@ -88,6 +83,7 @@ const Header = props => {
 Header.propTypes = { 
   canvasToggle: PropTypes.func.isRequired,
   refreshPage: PropTypes.func.isRequired,
+  iFilter: PropTypes.func.isRequired,
 };
 
 

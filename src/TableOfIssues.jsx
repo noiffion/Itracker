@@ -9,21 +9,25 @@ import Bubble       from './Bubble.jsx';
 import tableButtons from './tableButtons.jsx';
 
 
-const TableOfIssues = props =>  {
+const TableOfIssues = props => {
   const actual = props.actualPage;
   const iPerPage = props.iPerPage;
   const issueRows = [];
-  props.issues.forEach((issue, i) => {
-    if ((i >= actual * iPerPage) && (i < actual * iPerPage + iPerPage)) {
-      issueRows.push(
-        <Row
-          key={issue._id}
-          issue={issue}
-          selectSingleRow={props.selectSingleRow}
-          cancelSingleRow={props.cancelSingleRow}
-          deleteSingleRow={props.deleteSingleRow}
-        />
-      );
+  let ind = -1;
+  props.issues.forEach((issue) => {
+    if (issue.filteredIn) {
+      ind++;
+      if ((ind >= actual * iPerPage) && (ind < actual * iPerPage + iPerPage)) {
+        issueRows.push(
+         <Row
+           key={issue._id}
+           issue={issue}
+           selectSingleRow={props.selectSingleRow}
+           cancelSingleRow={props.cancelSingleRow}
+           deleteSingleRow={props.deleteSingleRow}
+         />
+       );
+      }
     }
   });
 
@@ -46,7 +50,7 @@ const TableOfIssues = props =>  {
             <th>Completed&nbsp;on</th>
             <th>Description</th>
             <th className="buttonCell">
-              {anyEdit ? tB.editTable : tB.displayTable} 
+              {anyEdit ? tB.editTable : tB.displayTable}
             </th>
           </tr>
         </thead>

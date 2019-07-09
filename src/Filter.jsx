@@ -1,74 +1,105 @@
 // Filter.jsx
 
 import React, { useState } from 'react';
-import { withRouter }      from 'react-router';
 import PropTypes           from 'prop-types';
 import Row                 from 'react-bootstrap/Row';
-import Col                 from 'react-bootstrap/Col';
-import Nav                 from 'react-bootstrap/Nav';
-import Card                from 'react-bootstrap/Card';
 import Form                from 'react-bootstrap/Form';
-import Modal               from 'react-bootstrap/Modal';
 import Button              from 'react-bootstrap/Button';
-import Collapse            from 'react-bootstrap/Collapse';
-import Dropdown            from 'react-bootstrap/Dropdown';
 import InputGroup          from 'react-bootstrap/InputGroup';
-import ButtonGroup         from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar       from 'react-bootstrap/ButtonToolbar';
-import DropdownButton      from 'react-bootstrap/DropdownButton';
 
 
 const Filter = props => {
-  const [sts, setSts] = useState('');
-  const [effort_gte, setEffGte] = useState('');
-  const [effort_lte, setEffLte] = useState('');
+  const [sts, setStatus] = useState('All');
+  const [effortGte, setEffGte] = useState(1);
+  const [effortLte, setEffLte] = useState(10);
 
-  const applyFilter = () => {
-    const newFilter = {};
-    if (sts) newFilter.sts = sts;
-    if (effort_gte) newFilter.effort_gte = effort_gte;
-    if (effort_lte) newFilter.effort_lte = effort_lte;
-    props.iFilter(newFilter);
+  const iFilter = props.iFilter;
+
+  const filterObj = () => {
+    return {
+      state: sts,
+      owner: 'All',
+      creation: 'All',
+      effort: [effortGte, effortLte],
+      completion: 'All',
+      description: 'All',
+    };
   }
 
   const onChangeSts = (event) => {
-    setSts(event.target.value);
-    console.log(sts);
-    applyFilter();
+    const filter = filterObj();
+    const tValue = event.target.value;
+    filter.state = tValue;
+    iFilter(filter);
+    setStatus(tValue);
   }
- 
-  const onChangeEffortGte = (event) => {
-    const effortString = event.target.value;
-    if (effortString.match(/^\d*$/)) {
-      setEffGte(effortString);
+
+  const onChangeEffort = (event, subType) => {
+    const filter = filterObj();
+    const tValue = Number(event.target.value);
+    if (tValue > 0 && tValue < 11) {
+      if (subType === 'gte' && tValue <= effortLte) {
+          if (tValue === 1 && effortLte === 10) {
+            filter.effort = 'All';
+            iFilter(filter);
+            setEffGte(tValue);
+            return;
+          }
+          filter.effort = [tValue, effortLte];
+          iFilter(filter);
+          setEffGte(tValue);
+      } else if (subType === 'lte' && tValue >= effortGte){
+          if (effortGte === 1 && tValue === 10) {
+            filter.effort = 'All';
+            iFilter(filter);
+            setEffGte(tValue);
+            return;
+          }
+          filter.effort = [effortGte, tValue];
+          iFilter(filter);
+          setEffLte(tValue);       
+      }
     }
   }
- 
-  const onChangeEffortLte = (event) => {
-    const effortString = event.target.value;
-    if (effortString.match(/^\d*$/)) {
-      setEffLte(effortString);
-    }
-  }
- 
-  const resetFilter = () => {
-    props.iFilter({});
-  }
- 
+
   const clearFilter = () => {
-    setSts(props.query.sts || sts);
-    setEffGte(props.query.effort_gte);
-    setEffLte(props.query.effort_lte);
+    filter = filterObj();
+    Object.keys(filter).forEach(key => filter[key] = 'All');
+    setStatus('All');
+    setEffGte(1);
+    setEffLte(10);
+    iFilter(filter);
   }
-  
+
+  const optionMaker = (unique) => {
+    const options = [];
+
+    const recOpt = (till, current) => {
+      if (current > till) return;
+      options.push(<option key={current+unique}> {current} </option>);
+      return recOpt(till, current+1);
+    }
+    recOpt(10, 1);
+    return options;
+  }
+
   return (
-    <Form id="filterForm" name="filter">
-      <Form.Group as={Row} id="stateFilter">
-        <Form.Label column sm={2}> State: </Form.Label>
-          <Form.Control as="select" value={sts} 
+    <section id="sideFilter">
+
+      <div id="sideCloseDiv">
+        <Button onClick={props.canvasToggle} variant="light">
+          <i className="fas fa-times"></i>
+        </Button>
+      </div>
+          
+      <Form id="filterForm" name="filter" >
+
+        <Form.Text sm={2}> State: </Form.Text>
+        <Form.Group as={Row} id="stateFilter">
+          <Form.Control as="select" value={sts}
             onChange={onChangeSts} size="sm"
           >
-            <option>(Any)</option>
+            <option>All</option>
             <option>New</option>
             <option>Open</option>
             <option>Assigned</option>
@@ -76,36 +107,58 @@ const Filter = props => {
             <option>Verified</option>
             <option>Closed</option>
           </Form.Control>
-      </Form.Group>
-      <Form.Group as={Row} id="effortFilter">
-          <Form.Label column sm={2}> Effort: </Form.Label>
-            <InputGroup size="sm">
-              <Form.Control as="input" value={effort_gte} 
-                onChange={onChangeEffortGte} placeholder="from" 
-              />
-               <InputGroup.Append> 
-                 <InputGroup.Text>―</InputGroup.Text>
-               </InputGroup.Append>
-              <Form.Control as="input" value={effort_lte} 
-                onChange={onChangeEffortLte} placeholder="to" 
-              />
-            </InputGroup>
-      </Form.Group>
-      <Form.Group>
-        <ButtonGroup size="sm" aria-label="Filter_buttons" id="applyClear">
-          <Button onClick={applyFilter}>
-            Apply
-          </Button>&nbsp;
-          <Button variant="info" onClick={clearFilter}>
-            Clear 
+        </Form.Group>
+
+        <Form.Text sm={2}> Owner: </Form.Text>
+        <Form.Group id="ownerFilter" type="text">
+          <Form.Control type="text" size="sm" placeholder="Name" />
+        </Form.Group>
+          
+        <Form.Text sm={2}> Created On: </Form.Text>
+        <Form.Group className="datesFilter" type="text">
+          <Form.Control type="text" size="sm" placeholder="DD-MM-YYYY" />
+        </Form.Group>
+
+        <Form.Text sm={2}> Effort: </Form.Text>
+        <Form.Row id="effortFilter"> 
+          <Form.Group id="effortGte">
+            <Form.Control as="select" value={effortGte}
+              onChange={(event) => onChangeEffort(event, 'gte')} size="sm"
+            >
+            {optionMaker('effortGte')}
+            </Form.Control>
+          </Form.Group>
+          <Form.Text>&nbsp;―&nbsp;</Form.Text>
+          <Form.Group id="effortLte">
+            <Form.Control as="select" value={effortLte}
+              onChange={(event) => onChangeEffort(event, 'lte')} size="sm"
+            >
+            {optionMaker('effortLte')}
+            </Form.Control>
+          </Form.Group>
+        </Form.Row>
+
+        <Form.Text sm={2}> Completed On: </Form.Text>
+        <Form.Group className="datesFilter" type="text">
+          <Form.Control type="text" size="sm" placeholder="DD-MM-YYYY" />
+        </Form.Group>
+
+        <Form.Text sm={2}> Description </Form.Text>
+        <Form.Group id="descFilter" type="text">
+          <Form.Control type="text" size="sm" placeholder="Description" />
+        </Form.Group>
+
+
+
+        <Form.Group>
+          <Button variant="success" onClick={clearFilter}>
+            <i className="fas fa-undo-alt"></i>&nbsp;Clear
           </Button>
-          <Button variant="info" onClick={resetFilter}
-            disabled={props.query === ''}>
-            Reset
-          </Button>
-        </ButtonGroup>
-      </Form.Group>
-    </Form>
+        </Form.Group>
+
+      </Form>
+
+    </section>
   );
 }
 

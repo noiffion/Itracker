@@ -10,7 +10,14 @@ function fillDb(n) {
   const owners = ['Eric', 'Susan', 'Jamal', 'Liu', 'Ravan', 'Walda'];
 
   const startDate = () => {
-    let month = Math.ceil(Math.random() * 12);
+    if (Math.random() < 0.15) {
+      const mSecsPerDay = 86400000;
+      const recent = Math.floor(Date.now() - (Math.random() * (mSecsPerDay * 7)));
+      //console.log(new Date(recent).toISOString());
+      return (new Date(recent))
+    }
+
+    let month = Math.ceil(Math.random() * 7);
     let day;
   
     switch (month) {
@@ -40,9 +47,9 @@ function fillDb(n) {
     if (month < 10) month = `0${month}`;
     if (day < 10) day = `0${day}`;
     let date = `2019-${month}-${day}`;
-    date = new Date(date);
+    date = (new Date(date));
   
-    return date.toISOString();
+    return date;
   }
 
   // in a scale of 1-10 
@@ -50,9 +57,8 @@ function fillDb(n) {
 
   const endDate = (creationDate, effort, state) => {
 
-    let beginDate = new Date(creationDate);
     // const mSecsPerDay = 86400000  // 24hour*60min*60sec*1000msec -> 86,400,000
-    beginDate = beginDate.valueOf();  // in millisecs since 1970-01-01
+    beginDate = creationDate.valueOf();  // in millisecs since 1970-01-01
     const minWorkHours = Math.pow(effort, 3);
     const maxWorkHours = Math.pow(effort+1, 3) - 1;
     const workHours = Math.max(minWorkHours, (Math.floor(Math.random() * maxWorkHours)));
@@ -64,7 +70,7 @@ function fillDb(n) {
     finishDate = finishDate.setTime(beginDate + workMilliSecs);
     finishDate = finishDate > now ? undefined : finishDate;
     if (finishDate) {
-      finishDate = new Date(finishDate);// convert millisecs to normal date
+      finishDate = new Date(finishDate); // convert millisecs to normal date
       finishDate = finishDate.toISOString();
     }
 
@@ -110,7 +116,7 @@ function fillDb(n) {
         const mSecsPerDay = 86400000;
         const begin = entry.creation.valueOf();
         const now = Date.now();
-        if (now - begin < mSecsPerDay * 7) {
+        if (now - begin >= 0 && now - begin <= mSecsPerDay * 7) {
             const newStates = ['New', 'Assigned'];
             entry.state = newStates[Math.floor(Math.random() * newStates.length)];
         } else {
@@ -119,6 +125,7 @@ function fillDb(n) {
         }
     }
     entry.description = descriptions[Math.floor(Math.random() * descriptions.length)]
+    entry.creation = entry.creation.toISOString();
   
     return entry;
   }

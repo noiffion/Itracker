@@ -8,7 +8,7 @@ import {
   OffCanvas,
   OffCanvasMenu,
   OffCanvasBody
-}                          from "react-offcanvas";
+}                          from 'react-offcanvas';
 import Table               from 'react-bootstrap/Table';
 import Button              from 'react-bootstrap/Button';
 import Header              from './Header.jsx';
@@ -64,10 +64,18 @@ class Main extends React.Component {
         response.json().then((data) => {
           // console.log('Total count of records:', data._metadata.total_count);
           data.records.forEach((issue) => {
-            issue.selected = '';
-            issue.shown = true;
-            issue.creation = new Date(issue.creation);
             if (issue.completion) issue.completion = new Date(issue.completion);
+            issue.creation = new Date(issue.creation);
+            issue.selected = '';
+            issue.filters = {
+              state: true,
+              owner: true,
+              creation: true,
+              effort: true,
+              completion: true,
+              description: true,
+            };
+            issue.filteredIn = true;
           });
           this.setState({ 
             issues: data.records,
@@ -93,14 +101,43 @@ class Main extends React.Component {
     this.setState({ actualPage: pageNum })
   }
 
-  iFilter(query) {
-    const queryString = toQueryString(query);
-    this.props.history.push({pathname: path, search: queryString});
+  iFilter(filter) {
+    const issues = this.state.issues;
+    const types = Object.keys(filter);
+    let count = -1;
+
+    issues.forEach(issue => {
+      types.forEach(type => {
+        if (filter[type] === 'All') {
+            issue.filters[type] = true;
+        } else if (type === 'effort') {
+            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
+                issue.filters[type] = false;
+            } else {
+                issue.filters[type] = true;
+            }
+        } else {
+            if (issue[type] !== filter[type]) {
+                issue.filters[type] = false;
+            } else {
+                issue.filters[type] = true;
+            }
+        }
+      });
+      issue.filteredIn = Object.values(issue.filters).every(filter => filter);
+      if (issue.filteredIn) count++;
+    });
+
+    this.setState({
+      issues: issues,
+      maxPageNum: Math.ceil(count / this.state.iPerPage),
+      actualPage: 0,
+    });
   }
 
   selectAll() {
     const issues = this.state.issues;
-    issues.forEach(issue => issue.selected = 'edit');
+    issues.forEach(issue => { if (issue.filteredIn) return issue.selected = 'edit'; });
     this.setState({ issues: issues });
   }
 
@@ -212,13 +249,14 @@ class Main extends React.Component {
   render() {
     return (
       <OffCanvas
-        width={400} transitionDuration={200} position={"left"}
+        width={160} transitionDuration={200} position={"left"}
         effect={"push"} isMenuOpened={this.state.filterOn}
       >
         <OffCanvasBody>
-          <Header 
+          <Header
             refreshPage={this.refreshPage} 
             canvasToggle={this.canvasToggle} 
+            iFilter={this.iFilter}
             maxPageNum={this.state.maxPageNum}
             pageGo={this.pageGo}
           />
@@ -254,8 +292,7 @@ class Main extends React.Component {
           </footer>
         </OffCanvasBody>
         <OffCanvasMenu>
-          <Filter iFilter={this.iFilter} />
-          <a href="#" onClick={this.canvasToggle}>Close</a>
+          <Filter iFilter={this.iFilter} canvasToggle={this.canvasToggle} />
         </OffCanvasMenu>
       </OffCanvas>
     );
