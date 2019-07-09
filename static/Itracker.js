@@ -390,6 +390,107 @@ Bubble.defaultProps = {
 
 /***/ }),
 
+/***/ "./src/DatePicker.jsx":
+/*!****************************!*\
+  !*** ./src/DatePicker.jsx ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/Modal.js");
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_infinite_calendar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-infinite-calendar */ "./node_modules/react-infinite-calendar/es/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// DatePicker.jsx
+
+
+
+
+
+
+var DatePicker = function DatePicker(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      modal = _useState2[0],
+      setModal = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      selectedDate = _useState4[0],
+      setDate = _useState4[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "datePickerBtns",
+    title: "Select a date",
+    variant: "info",
+    onClick: function onClick() {
+      return setModal(true);
+    }
+  }, props.date === 'All' ? 'All' : props.date.toLocaleDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    show: modal,
+    onHide: function onHide() {
+      return setModal(false);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Header, {
+    closeButton: true
+  }, props.subType === 'creation' ? 'Created On' : 'Completed On'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Body, {
+    style: {
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_infinite_calendar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    min: new Date(2018, 0, 1),
+    max: new Date(2020, 12, 31),
+    minDate: new Date(2018, 0, 1),
+    maxDate: new Date(2020, 12, 31),
+    height: window.innerHeight - 400,
+    selected: false,
+    display: "years",
+    locale: {
+      blank: 'Select a date...',
+      headerFormat: 'ddd, MMM Do',
+      todayLabel: {
+        "long": 'Today'
+      },
+      weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      weekStartsOn: 1
+    },
+    onSelect: function onSelect(date) {
+      return setDate(new Date(date));
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    variant: "primary",
+    onClick: function onClick() {
+      props.onChangeDate(selectedDate, props.subType);
+      setDate('');
+      setModal(false);
+    }
+  }, "Pick date"))));
+};
+
+DatePicker.propTypes = {
+  onChangeDate: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  subType: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (DatePicker);
+
+/***/ }),
+
 /***/ "./src/Filter.jsx":
 /*!************************!*\
   !*** ./src/Filter.jsx ***!
@@ -411,6 +512,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/InputGroup */ "./node_modules/react-bootstrap/InputGroup.js");
 /* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/Modal.js");
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_infinite_calendar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-infinite-calendar */ "./node_modules/react-infinite-calendar/es/index.js");
+/* harmony import */ var _DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DatePicker.jsx */ "./src/DatePicker.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -427,41 +532,103 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var Filter = function Filter(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
-      sts = _useState2[0],
-      setStatus = _useState2[1];
+      modal = _useState2[0],
+      setModal = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
       _useState4 = _slicedToArray(_useState3, 2),
-      effortGte = _useState4[0],
-      setEffGte = _useState4[1];
+      state = _useState4[0],
+      setState = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      effortLte = _useState6[0],
-      setEffLte = _useState6[1];
+      owner = _useState6[0],
+      setOwner = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
+      _useState8 = _slicedToArray(_useState7, 2),
+      creation = _useState8[0],
+      setCreation = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
+      _useState10 = _slicedToArray(_useState9, 2),
+      effortGte = _useState10[0],
+      setEffGte = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
+      _useState12 = _slicedToArray(_useState11, 2),
+      effortLte = _useState12[0],
+      setEffLte = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
+      _useState14 = _slicedToArray(_useState13, 2),
+      completion = _useState14[0],
+      setCompletion = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      description = _useState16[0],
+      setDesc = _useState16[1];
 
   var iFilter = props.iFilter;
 
   var filterObj = function filterObj() {
     return {
-      state: sts,
-      owner: 'All',
-      creation: 'All',
-      effort: [effortGte, effortLte],
-      completion: 'All',
-      description: 'All'
+      state: state,
+      owner: owner || 'All',
+      creation: creation,
+      effort: effortGte === 1 && effortLte === 10 ? 'All' : [effortGte, effortLte],
+      completion: completion,
+      description: description || 'All'
     };
   };
 
-  var onChangeSts = function onChangeSts(event) {
+  var onChangeState = function onChangeState(event) {
     var filter = filterObj();
     var tValue = event.target.value;
     filter.state = tValue;
     iFilter(filter);
-    setStatus(tValue);
+    setState(tValue);
+  };
+
+  var onChangeOwner = function onChangeOwner(event) {
+    var filter = filterObj();
+    var tValue = event.target.value.toLowerCase();
+    tValue === '' ? filter.owner = 'All' : filter.owner = tValue;
+    iFilter(filter);
+    setOwner(tValue);
+  };
+
+  var onChangeDate = function onChangeDate(date, subType) {
+    var filter = filterObj();
+
+    if (subType === 'creation') {
+      if (date === '') {
+        filter.creation = 'All';
+        setCreation('All');
+      } else {
+        date = new Date(date);
+        filter.creation = date;
+        setCreation(date);
+      }
+    } else if (subType === 'completion') {
+      if (date === '') {
+        filter.completion = 'All';
+        setCompletion('All');
+      } else {
+        date = new Date(date);
+        filter.completion = date;
+        setCompletion(date);
+      }
+    }
+
+    iFilter(filter);
   };
 
   var onChangeEffort = function onChangeEffort(event, subType) {
@@ -495,14 +662,26 @@ var Filter = function Filter(props) {
     }
   };
 
+  var onChangeDesc = function onChangeDesc(event) {
+    var filter = filterObj();
+    var tValue = event.target.value.toLowerCase();
+    tValue === '' ? filter.description = 'All' : filter.description = tValue;
+    iFilter(filter);
+    setDesc(tValue);
+  };
+
   var clearFilter = function clearFilter() {
     filter = filterObj();
     Object.keys(filter).forEach(function (key) {
       return filter[key] = 'All';
     });
-    setStatus('All');
+    setState('All');
+    setOwner('');
+    setCreation('All');
     setEffGte(1);
     setEffLte(10);
+    setCompletion('All');
+    setDesc('');
     iFilter(filter);
   };
 
@@ -540,8 +719,8 @@ var Filter = function Filter(props) {
     id: "stateFilter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     as: "select",
-    value: sts,
-    onChange: onChangeSts,
+    value: state,
+    onChange: onChangeState,
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
@@ -551,17 +730,16 @@ var Filter = function Filter(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     type: "text",
     size: "sm",
-    placeholder: "Name"
+    placeholder: "Name",
+    value: owner,
+    onChange: onChangeOwner
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " Created On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
-    className: "datesFilter",
-    type: "text"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    type: "text",
-    size: "sm",
-    placeholder: "DD-MM-YYYY"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+  }, " Created On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    date: creation,
+    subType: "creation",
+    onChangeDate: onChangeDate
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " Effort: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Row, {
     id: "effortFilter"
@@ -585,14 +763,11 @@ var Filter = function Filter(props) {
     size: "sm"
   }, optionMaker('effortLte')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " Completed On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
-    className: "datesFilter",
-    type: "text"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    type: "text",
-    size: "sm",
-    placeholder: "DD-MM-YYYY"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+  }, " Completed On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    date: completion,
+    subType: "completion",
+    onChangeDate: onChangeDate
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " Description "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
     id: "descFilter",
@@ -600,8 +775,11 @@ var Filter = function Filter(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     type: "text",
     size: "sm",
-    placeholder: "Description"
+    placeholder: "Description",
+    value: description,
+    onChange: onChangeDesc
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    id: "clearFilter",
     variant: "success",
     onClick: clearFilter
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -931,6 +1109,8 @@ function (_React$Component) {
       var issues = this.state.issues;
       var types = Object.keys(filter);
       var count = -1;
+      console.log(filter);
+      console.log(issues.slice(0, 2));
       issues.forEach(function (issue) {
         types.forEach(function (type) {
           if (filter[type] === 'All') {
@@ -941,8 +1121,16 @@ function (_React$Component) {
             } else {
               issue.filters[type] = true;
             }
+          } else if (type === 'owner' || type === 'description') {
+            if (!issue[type].toLowerCase().includes(filter[type])) {
+              issue.filters[type] = false;
+            } else {
+              issue.filters[type] = true;
+            }
           } else {
-            if (issue[type] !== filter[type]) {
+            if (!issue[type]) {
+              issue.filters[type] = false;
+            } else if (issue[type].toString() !== filter[type].toString()) {
               issue.filters[type] = false;
             } else {
               issue.filters[type] = true;
@@ -956,7 +1144,7 @@ function (_React$Component) {
       });
       this.setState({
         issues: issues,
-        maxPageNum: Math.ceil(count / this.state.iPerPage),
+        maxPageNum: Math.ceil(count / this.state.iPerPage) || 1,
         actualPage: 0
       });
     }

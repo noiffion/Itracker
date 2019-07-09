@@ -105,6 +105,8 @@ class Main extends React.Component {
     const issues = this.state.issues;
     const types = Object.keys(filter);
     let count = -1;
+    console.log(filter);
+    console.log(issues.slice(0,2));
 
     issues.forEach(issue => {
       types.forEach(type => {
@@ -116,8 +118,16 @@ class Main extends React.Component {
             } else {
                 issue.filters[type] = true;
             }
+        } else if (type === 'owner' || type === 'description') {
+            if (!issue[type].toLowerCase().includes(filter[type])) {
+                issue.filters[type] = false;
+            } else {
+                issue.filters[type] = true;
+            }
         } else {
-            if (issue[type] !== filter[type]) {
+            if (!issue[type]) {
+                issue.filters[type] = false;
+            } else if (issue[type].toString() !== filter[type].toString()) {
                 issue.filters[type] = false;
             } else {
                 issue.filters[type] = true;
@@ -130,7 +140,7 @@ class Main extends React.Component {
 
     this.setState({
       issues: issues,
-      maxPageNum: Math.ceil(count / this.state.iPerPage),
+      maxPageNum: (Math.ceil(count / this.state.iPerPage) || 1),
       actualPage: 0,
     });
   }
