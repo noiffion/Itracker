@@ -15,27 +15,27 @@ const Filter = props => {
   const [modal, setModal] = useState(false);
   const [state, setState] = useState('All');
   const [owner, setOwner] = useState('');
-  const [creation, setCreation] = useState('All');
+  const [description, setDesc] = useState('');
   const [effortGte, setEffGte] = useState(1);
   const [effortLte, setEffLte] = useState(10);
-  const [completion, setCompletion] = useState('All');
-  const [description, setDesc] = useState('');
+  const [from, setFrom] = useState('All');
+  const [until, setUntil] = useState('All');
 
   const iFilter = props.iFilter;
 
-  const filterObj = () => {
+
+  const filterMaker = () => {
     return {
       state: state,
       owner: owner || 'All',
-      creation: creation,
-      effort: (effortGte === 1 && effortLte === 10) ? 'All' : [effortGte, effortLte],
-      completion: completion,
       description: description || 'All',
+      effort: (effortGte === 1 && effortLte === 10) ? 'All' : [effortGte, effortLte],
+      creation: (from === 'All' && until === 'All') ? 'All' : [from, until],
     };
   }
 
   const onChangeState = (event) => {
-    const filter = filterObj();
+    const filter = filterMaker();
     const tValue = event.target.value;
     filter.state = tValue;
     iFilter(filter);
@@ -43,7 +43,7 @@ const Filter = props => {
   }
 
   const onChangeOwner = (event) => {
-    const filter = filterObj();
+    const filter = filterMaker();
     const tValue = event.target.value.toLowerCase();
     (tValue === '') ? filter.owner = 'All' : filter.owner = tValue;
     iFilter(filter);
@@ -51,59 +51,52 @@ const Filter = props => {
   }
 
   const onChangeDate = (date, subType) => {
-    const filter = filterObj();
-    if (subType === 'creation') {
-        if (date === '') { 
-            filter.creation = 'All';
-            setCreation('All');
-        } else {
-            date = new Date(date);
-            filter.creation = date;
-            setCreation(date);
-        }
-    } else if (subType === 'completion') {
-        if (date === '') { 
-            filter.completion = 'All';
-            setCompletion('All');
-        } else {
-            date = new Date(date);
-            filter.completion = date;
-            setCompletion(date);
-        }
+    const filter = filterMaker();
+    if (subType === 'from') {
+      setFrom(date);
+      if (date === 'All') {
+        until === 'All' ? filter.creation = 'All' : filter.creation = [new Date(1), until];
+      } else {
+        until === 'All' ? filter.creation = [date, new Date(2100, 0, 1)] : filter.creation = [date, until];
+      } 
+    } else if (subType === 'until') {
+      setUntil(date);
+      if (date === 'All') {
+        from === 'All' ? filter.creation = 'All' : filter.creation = [from, new Date(2100, 0, 1)];
+      } else {
+        from === 'All' ? filter.creation = [new Date(1), date] : filter.creation = [from, date];
       }
+    }
     iFilter(filter);
   }
 
   const onChangeEffort = (event, subType) => {
-    const filter = filterObj();
+    const filter = filterMaker();
     const tValue = Number(event.target.value);
     if (tValue > 0 && tValue < 11) {
       if (subType === 'gte' && tValue <= effortLte) {
+          setEffGte(tValue);
           if (tValue === 1 && effortLte === 10) {
             filter.effort = 'All';
             iFilter(filter);
-            setEffGte(tValue);
             return;
           }
           filter.effort = [tValue, effortLte];
-          iFilter(filter);
-          setEffGte(tValue);
       } else if (subType === 'lte' && tValue >= effortGte){
+          setEffLte(tValue);
           if (effortGte === 1 && tValue === 10) {
             filter.effort = 'All';
             iFilter(filter);
-            setEffGte(tValue);
             return;
           }
           filter.effort = [effortGte, tValue];
-          iFilter(filter);
-          setEffLte(tValue);       
       }
+      iFilter(filter);
     }
   }
 
   const onChangeDesc = (event) => {
-    const filter = filterObj();
+    const filter = filterMaker();
     const tValue = event.target.value.toLowerCase();
     (tValue === '') ? filter.description = 'All' : filter.description = tValue;
     iFilter(filter);
@@ -111,16 +104,16 @@ const Filter = props => {
   }
 
   const clearFilter = () => {
-    filter = filterObj();
+    filter = filterMaker();
     Object.keys(filter).forEach(key => filter[key] = 'All');
 
     setState('All');
     setOwner('');
-    setCreation('All');
+    setDesc('');
     setEffGte(1);
     setEffLte(10);
-    setCompletion('All');
-    setDesc('');
+    setFrom('All');
+    setUntil('All');
 
     iFilter(filter);
   }
@@ -169,13 +162,6 @@ const Filter = props => {
             onChange={onChangeOwner} 
           />
         </Form.Group>
-
-        <Form.Text sm={2}> Created On: </Form.Text>
-        <DatePicker 
-          date={creation}
-          subType="creation"
-          onChangeDate={onChangeDate}
-        />
          
         <Form.Text sm={2}> Effort: </Form.Text>
         <Form.Row id="effortFilter"> 
@@ -196,19 +182,26 @@ const Filter = props => {
           </Form.Group>
         </Form.Row>
 
-        <Form.Text sm={2}> Completed On: </Form.Text>
-        <DatePicker 
-          date={completion}
-          subType="completion"
-          onChangeDate={onChangeDate} 
-        />
-
         <Form.Text sm={2}> Description </Form.Text>
         <Form.Group id="descFilter" type="text">
           <Form.Control type="text" size="sm" placeholder="Description" value={description}
             onChange={onChangeDesc}
           />
         </Form.Group>
+
+        <Form.Text sm={2}> From: </Form.Text>
+        <DatePicker 
+          date={from}
+          subType="from"
+          onChangeDate={onChangeDate}
+        />
+
+        <Form.Text sm={2}> Until: </Form.Text>
+        <DatePicker 
+          date={until}
+          subType="until"
+          onChangeDate={onChangeDate} 
+        />
 
         <Form.Group>
           <Button id="clearFilter" variant="success" onClick={clearFilter}>

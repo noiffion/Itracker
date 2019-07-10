@@ -106,14 +106,13 @@ class Main extends React.Component {
     const types = Object.keys(filter);
     let count = -1;
     console.log(filter);
-    console.log(issues.slice(0,2));
 
     issues.forEach(issue => {
       types.forEach(type => {
         if (filter[type] === 'All') {
             issue.filters[type] = true;
-        } else if (type === 'effort') {
-            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
+        } else if (type === 'state') {
+            if (issue[type] !== filter[type]) {
                 issue.filters[type] = false;
             } else {
                 issue.filters[type] = true;
@@ -124,10 +123,17 @@ class Main extends React.Component {
             } else {
                 issue.filters[type] = true;
             }
-        } else {
-            if (!issue[type]) {
+        } else if (type === 'effort') {
+            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
                 issue.filters[type] = false;
-            } else if (issue[type].toString() !== filter[type].toString()) {
+            } else {
+                issue.filters[type] = true;
+            }
+        } else if (type === 'creation') {
+            const issueDate = issue[type].valueOf();
+            const from = filter[type][0].valueOf();
+            const until = filter[type][1].valueOf();
+            if (issueDate < from || issueDate > until) {
                 issue.filters[type] = false;
             } else {
                 issue.filters[type] = true;

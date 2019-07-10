@@ -9,7 +9,7 @@ import InfiniteCalendar    from 'react-infinite-calendar';
 
 const DatePicker = props => {
   const [modal, setModal] = useState(false);
-  const [selectedDate, setDate] = useState('');
+  const [selectedDate, setDate] = useState('All');
 
   return (
     <React.Fragment>
@@ -23,7 +23,7 @@ const DatePicker = props => {
 
       <Modal show={modal} onHide={() => setModal(false)}>
           <Modal.Header closeButton>
-            {props.subType === 'creation' ? 'Created On' : 'Completed On'}
+            {props.subType === 'from' ? 'From' : 'Until'}
           </Modal.Header>
           <Modal.Body style={{display: 'flex', justifyContent: 'center'}}>
           <InfiniteCalendar
@@ -51,7 +51,7 @@ const DatePicker = props => {
               variant="primary" 
               onClick={() => { 
                 props.onChangeDate(selectedDate, props.subType);
-                setDate('');
+                setDate('All');
                 setModal(false);
               }}
             >

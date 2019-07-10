@@ -20,8 +20,8 @@ const Add = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-  
-    const form = document.forms.addForm;
+    const form = event.target;
+
     const newIssue = {
       owner: form.ownerInput.value,
       description: form.descInput.value,

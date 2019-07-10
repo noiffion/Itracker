@@ -210,7 +210,7 @@ var Add = function Add(props) {
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
-    var form = document.forms.addForm;
+    var form = event.target;
     var newIssue = {
       owner: form.ownerInput.value,
       description: form.descInput.value,
@@ -429,7 +429,7 @@ var DatePicker = function DatePicker(props) {
       modal = _useState2[0],
       setModal = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
       _useState4 = _slicedToArray(_useState3, 2),
       selectedDate = _useState4[0],
       setDate = _useState4[1];
@@ -448,7 +448,7 @@ var DatePicker = function DatePicker(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Header, {
     closeButton: true
-  }, props.subType === 'creation' ? 'Created On' : 'Completed On'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Body, {
+  }, props.subType === 'from' ? 'From' : 'Until'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Body, {
     style: {
       display: 'flex',
       justifyContent: 'center'
@@ -477,7 +477,7 @@ var DatePicker = function DatePicker(props) {
     variant: "primary",
     onClick: function onClick() {
       props.onChangeDate(selectedDate, props.subType);
-      setDate('');
+      setDate('All');
       setModal(false);
     }
   }, "Pick date"))));
@@ -551,10 +551,10 @@ var Filter = function Filter(props) {
       owner = _useState6[0],
       setOwner = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      creation = _useState8[0],
-      setCreation = _useState8[1];
+      description = _useState8[0],
+      setDesc = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
       _useState10 = _slicedToArray(_useState9, 2),
@@ -568,29 +568,28 @@ var Filter = function Filter(props) {
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
       _useState14 = _slicedToArray(_useState13, 2),
-      completion = _useState14[0],
-      setCompletion = _useState14[1];
+      from = _useState14[0],
+      setFrom = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
       _useState16 = _slicedToArray(_useState15, 2),
-      description = _useState16[0],
-      setDesc = _useState16[1];
+      until = _useState16[0],
+      setUntil = _useState16[1];
 
   var iFilter = props.iFilter;
 
-  var filterObj = function filterObj() {
+  var filterMaker = function filterMaker() {
     return {
       state: state,
       owner: owner || 'All',
-      creation: creation,
+      description: description || 'All',
       effort: effortGte === 1 && effortLte === 10 ? 'All' : [effortGte, effortLte],
-      completion: completion,
-      description: description || 'All'
+      creation: from === 'All' && until === 'All' ? 'All' : [from, until]
     };
   };
 
   var onChangeState = function onChangeState(event) {
-    var filter = filterObj();
+    var filter = filterMaker();
     var tValue = event.target.value;
     filter.state = tValue;
     iFilter(filter);
@@ -598,7 +597,7 @@ var Filter = function Filter(props) {
   };
 
   var onChangeOwner = function onChangeOwner(event) {
-    var filter = filterObj();
+    var filter = filterMaker();
     var tValue = event.target.value.toLowerCase();
     tValue === '' ? filter.owner = 'All' : filter.owner = tValue;
     iFilter(filter);
@@ -606,25 +605,23 @@ var Filter = function Filter(props) {
   };
 
   var onChangeDate = function onChangeDate(date, subType) {
-    var filter = filterObj();
+    var filter = filterMaker();
 
-    if (subType === 'creation') {
-      if (date === '') {
-        filter.creation = 'All';
-        setCreation('All');
+    if (subType === 'from') {
+      setFrom(date);
+
+      if (date === 'All') {
+        until === 'All' ? filter.creation = 'All' : filter.creation = [new Date(1), until];
       } else {
-        date = new Date(date);
-        filter.creation = date;
-        setCreation(date);
+        until === 'All' ? filter.creation = [date, new Date(2100, 0, 1)] : filter.creation = [date, until];
       }
-    } else if (subType === 'completion') {
-      if (date === '') {
-        filter.completion = 'All';
-        setCompletion('All');
+    } else if (subType === 'until') {
+      setUntil(date);
+
+      if (date === 'All') {
+        from === 'All' ? filter.creation = 'All' : filter.creation = [from, new Date(2100, 0, 1)];
       } else {
-        date = new Date(date);
-        filter.completion = date;
-        setCompletion(date);
+        from === 'All' ? filter.creation = [new Date(1), date] : filter.creation = [from, date];
       }
     }
 
@@ -632,38 +629,38 @@ var Filter = function Filter(props) {
   };
 
   var onChangeEffort = function onChangeEffort(event, subType) {
-    var filter = filterObj();
+    var filter = filterMaker();
     var tValue = Number(event.target.value);
 
     if (tValue > 0 && tValue < 11) {
       if (subType === 'gte' && tValue <= effortLte) {
+        setEffGte(tValue);
+
         if (tValue === 1 && effortLte === 10) {
           filter.effort = 'All';
           iFilter(filter);
-          setEffGte(tValue);
           return;
         }
 
         filter.effort = [tValue, effortLte];
-        iFilter(filter);
-        setEffGte(tValue);
       } else if (subType === 'lte' && tValue >= effortGte) {
+        setEffLte(tValue);
+
         if (effortGte === 1 && tValue === 10) {
           filter.effort = 'All';
           iFilter(filter);
-          setEffGte(tValue);
           return;
         }
 
         filter.effort = [effortGte, tValue];
-        iFilter(filter);
-        setEffLte(tValue);
       }
+
+      iFilter(filter);
     }
   };
 
   var onChangeDesc = function onChangeDesc(event) {
-    var filter = filterObj();
+    var filter = filterMaker();
     var tValue = event.target.value.toLowerCase();
     tValue === '' ? filter.description = 'All' : filter.description = tValue;
     iFilter(filter);
@@ -671,17 +668,17 @@ var Filter = function Filter(props) {
   };
 
   var clearFilter = function clearFilter() {
-    filter = filterObj();
+    filter = filterMaker();
     Object.keys(filter).forEach(function (key) {
       return filter[key] = 'All';
     });
     setState('All');
     setOwner('');
-    setCreation('All');
+    setDesc('');
     setEffGte(1);
     setEffLte(10);
-    setCompletion('All');
-    setDesc('');
+    setFrom('All');
+    setUntil('All');
     iFilter(filter);
   };
 
@@ -735,12 +732,6 @@ var Filter = function Filter(props) {
     onChange: onChangeOwner
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " Created On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    date: creation,
-    subType: "creation",
-    onChangeDate: onChangeDate
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
-    sm: 2
   }, " Effort: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Row, {
     id: "effortFilter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
@@ -763,12 +754,6 @@ var Filter = function Filter(props) {
     size: "sm"
   }, optionMaker('effortLte')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " Completed On: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    date: completion,
-    subType: "completion",
-    onChangeDate: onChangeDate
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
-    sm: 2
   }, " Description "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
     id: "descFilter",
     type: "text"
@@ -778,7 +763,19 @@ var Filter = function Filter(props) {
     placeholder: "Description",
     value: description,
     onChange: onChangeDesc
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+    sm: 2
+  }, " From: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    date: from,
+    subType: "from",
+    onChangeDate: onChangeDate
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+    sm: 2
+  }, " Until: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    date: until,
+    subType: "until",
+    onChangeDate: onChangeDate
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     id: "clearFilter",
     variant: "success",
     onClick: clearFilter
@@ -1110,13 +1107,12 @@ function (_React$Component) {
       var types = Object.keys(filter);
       var count = -1;
       console.log(filter);
-      console.log(issues.slice(0, 2));
       issues.forEach(function (issue) {
         types.forEach(function (type) {
           if (filter[type] === 'All') {
             issue.filters[type] = true;
-          } else if (type === 'effort') {
-            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
+          } else if (type === 'state') {
+            if (issue[type] !== filter[type]) {
               issue.filters[type] = false;
             } else {
               issue.filters[type] = true;
@@ -1127,10 +1123,18 @@ function (_React$Component) {
             } else {
               issue.filters[type] = true;
             }
-          } else {
-            if (!issue[type]) {
+          } else if (type === 'effort') {
+            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
               issue.filters[type] = false;
-            } else if (issue[type].toString() !== filter[type].toString()) {
+            } else {
+              issue.filters[type] = true;
+            }
+          } else if (type === 'creation') {
+            var issueDate = issue[type].valueOf();
+            var from = filter[type][0].valueOf();
+            var until = filter[type][1].valueOf();
+
+            if (issueDate < from || issueDate > until) {
               issue.filters[type] = false;
             } else {
               issue.filters[type] = true;
