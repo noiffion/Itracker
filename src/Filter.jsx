@@ -218,6 +218,7 @@ const Filter = props => {
 
 Filter.propTypes = {
   iFilter: PropTypes.func.isRequired,
+  canvasToggle: PropTypes.func.isRequired,
 };
 
 

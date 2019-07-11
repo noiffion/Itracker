@@ -2,7 +2,8 @@ import React       from 'react';
 import Button      from 'react-bootstrap/Button';
 
 
-export default function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll) {
+export default function tableButtons(issues, selectAll, 
+  selectDelAll, unSelectDelAll, cancelAll, submitChanges) {
   const displayTable = (
     <Button title="Edit all rows" onClick={selectAll}
             variant="success" size="sm">
@@ -24,13 +25,12 @@ export default function tableButtons(issues, selectAll, selectDelAll, unSelectDe
     </Button>
   );
  
-  const ids = Object.keys(issues);
-  const selected = ids.filter(id => issues[id].selected);
-  const allSelectedDelete = selected.every(id => issues[id].selected === 'delete');
+  const selected = issues.filter(issue => issue.selected);
+  const allSelectedDelete = selected.every(issue => issue.selected === 'delete');
   
   const editTable = (
     <React.Fragment>
-      <Button type="submit" title="Submit"
+      <Button type="submit" title="Submit" onClick={submitChanges}
               variant="primary" size="sm">
         <i className="far fa-save"></i>
       </Button>

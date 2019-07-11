@@ -3,6 +3,7 @@ import PropTypes  from 'prop-types';
 import Form       from 'react-bootstrap/Form';
 import Pagination from 'react-bootstrap/Pagination';
 
+
 const Paginator = props => {
   const pageGo = props.pageGo;
   const actPg = props.actualPage;

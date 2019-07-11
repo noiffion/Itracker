@@ -3,7 +3,7 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
 import RowNormal from './RowNormal.jsx';
-import RowEdit   from './RowEdit.jsx';
+import RowSelect   from './RowSelect.jsx';
 
 
 const Row = props => {
@@ -16,8 +16,8 @@ const Row = props => {
     /> 
   );
 
-  const rowEdit = (
-    <RowEdit 
+  const rowSelect = (
+    <RowSelect 
       issue={props.issue} 
       cancelSingleRow={props.cancelSingleRow}
       deleteSingleRow={props.deleteSingleRow}
@@ -26,7 +26,7 @@ const Row = props => {
   );
 
   return (
-    selected ? rowEdit : rowNormal
+    selected ? rowSelect : rowNormal
   );
 };
 

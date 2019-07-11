@@ -8805,106 +8805,6 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ "./node_modules/react-bootstrap/Alert.js":
-/*!***********************************************!*\
-  !*** ./node_modules/react-bootstrap/Alert.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
-
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"));
-
-var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _hook = _interopRequireDefault(__webpack_require__(/*! uncontrollable/hook */ "./node_modules/uncontrollable/hook.js"));
-
-var _useEventCallback = _interopRequireDefault(__webpack_require__(/*! @restart/hooks/useEventCallback */ "./node_modules/@restart/hooks/esm/useEventCallback.js"));
-
-var _createWithBsPrefix = _interopRequireDefault(__webpack_require__(/*! ./utils/createWithBsPrefix */ "./node_modules/react-bootstrap/utils/createWithBsPrefix.js"));
-
-var _divWithClassName = _interopRequireDefault(__webpack_require__(/*! ./utils/divWithClassName */ "./node_modules/react-bootstrap/utils/divWithClassName.js"));
-
-var _ThemeProvider = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/ThemeProvider.js");
-
-var _Fade = _interopRequireDefault(__webpack_require__(/*! ./Fade */ "./node_modules/react-bootstrap/Fade.js"));
-
-var _CloseButton = _interopRequireDefault(__webpack_require__(/*! ./CloseButton */ "./node_modules/react-bootstrap/CloseButton.js"));
-
-var _SafeAnchor = _interopRequireDefault(__webpack_require__(/*! ./SafeAnchor */ "./node_modules/react-bootstrap/SafeAnchor.js"));
-
-var defaultProps = {
-  show: true,
-  transition: _Fade.default,
-  closeLabel: 'Close alert'
-};
-var controllables = {
-  show: 'onClose'
-};
-
-var Alert = _react.default.forwardRef(function (uncontrolledProps, ref) {
-  var _useControllable = (0, _hook.default)(uncontrolledProps, controllables),
-      bsPrefix = _useControllable.bsPrefix,
-      show = _useControllable.show,
-      closeLabel = _useControllable.closeLabel,
-      className = _useControllable.className,
-      children = _useControllable.children,
-      variant = _useControllable.variant,
-      onClose = _useControllable.onClose,
-      dismissible = _useControllable.dismissible,
-      Transition = _useControllable.transition,
-      props = (0, _objectWithoutPropertiesLoose2.default)(_useControllable, ["bsPrefix", "show", "closeLabel", "className", "children", "variant", "onClose", "dismissible", "transition"]);
-
-  var prefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'alert');
-  var handleClose = (0, _useEventCallback.default)(function (e) {
-    onClose(false, e);
-  });
-
-  var alert = _react.default.createElement("div", (0, _extends2.default)({
-    role: "alert"
-  }, Transition ? props : undefined, {
-    className: (0, _classnames.default)(className, prefix, variant && prefix + "-" + variant, dismissible && prefix + "-dismissible")
-  }), dismissible && _react.default.createElement(_CloseButton.default, {
-    onClick: handleClose,
-    label: closeLabel
-  }), children);
-
-  if (!Transition) return show ? alert : null;
-  return _react.default.createElement(Transition, (0, _extends2.default)({
-    unmountOnExit: true,
-    ref: ref
-  }, props, {
-    in: show
-  }), alert);
-});
-
-var DivStyledAsH4 = (0, _divWithClassName.default)('h4');
-DivStyledAsH4.displayName = 'DivStyledAsH4';
-Alert.displayName = 'Alert';
-Alert.defaultProps = defaultProps;
-Alert.Link = (0, _createWithBsPrefix.default)('alert-link', {
-  Component: _SafeAnchor.default
-});
-Alert.Heading = (0, _createWithBsPrefix.default)('alert-heading', {
-  Component: DivStyledAsH4
-});
-var _default = Alert;
-exports.default = _default;
-module.exports = exports["default"];
-
-/***/ }),
-
 /***/ "./node_modules/react-bootstrap/Button.js":
 /*!************************************************!*\
   !*** ./node_modules/react-bootstrap/Button.js ***!
@@ -12386,6 +12286,226 @@ function createBootstrapComponent(Component, opts) {
 
 var _default = ThemeProvider;
 exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/react-bootstrap/Toast.js":
+/*!***********************************************!*\
+  !*** ./node_modules/react-bootstrap/Toast.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"));
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _Fade = _interopRequireDefault(__webpack_require__(/*! ./Fade */ "./node_modules/react-bootstrap/Fade.js"));
+
+var _ToastHeader = _interopRequireDefault(__webpack_require__(/*! ./ToastHeader */ "./node_modules/react-bootstrap/ToastHeader.js"));
+
+var _ToastBody = _interopRequireDefault(__webpack_require__(/*! ./ToastBody */ "./node_modules/react-bootstrap/ToastBody.js"));
+
+var _ThemeProvider = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/ThemeProvider.js");
+
+var _ToastContext = _interopRequireDefault(__webpack_require__(/*! ./ToastContext */ "./node_modules/react-bootstrap/ToastContext.js"));
+
+var defaultProps = {
+  animation: true,
+  autohide: false,
+  delay: 3000,
+  show: true,
+  transition: _Fade.default
+};
+
+var Toast = function Toast(_ref) {
+  var bsPrefix = _ref.bsPrefix,
+      className = _ref.className,
+      children = _ref.children,
+      Transition = _ref.transition,
+      show = _ref.show,
+      animation = _ref.animation,
+      delay = _ref.delay,
+      autohide = _ref.autohide,
+      onClose = _ref.onClose,
+      innerRef = _ref.innerRef,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "className", "children", "transition", "show", "animation", "delay", "autohide", "onClose", "innerRef"]);
+  (0, _react.useEffect)(function () {
+    if (autohide && show) {
+      var timer = setTimeout(function () {
+        onClose();
+      }, delay);
+      return function () {
+        clearTimeout(timer);
+      };
+    }
+
+    return function () {
+      return null;
+    };
+  }, [autohide, show]);
+  var useAnimation = Transition && animation;
+
+  var toast = _react.default.createElement("div", (0, _extends2.default)({}, props, {
+    ref: innerRef,
+    className: (0, _classnames.default)(bsPrefix, className, !useAnimation && show && 'show'),
+    role: "alert",
+    "aria-live": "assertive",
+    "aria-atomic": "true"
+  }), children);
+
+  var toastContext = {
+    onClose: onClose
+  };
+  return _react.default.createElement(_ToastContext.default.Provider, {
+    value: toastContext
+  }, useAnimation ? _react.default.createElement(Transition, {
+    in: show
+  }, toast) : toast);
+};
+
+Toast.defaultProps = defaultProps;
+var DecoratedToast = (0, _ThemeProvider.createBootstrapComponent)(Toast, 'toast');
+DecoratedToast.Body = _ToastBody.default;
+DecoratedToast.Header = _ToastHeader.default;
+var _default = DecoratedToast;
+exports.default = _default;
+module.exports = exports["default"];
+
+/***/ }),
+
+/***/ "./node_modules/react-bootstrap/ToastBody.js":
+/*!***************************************************!*\
+  !*** ./node_modules/react-bootstrap/ToastBody.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _createWithBsPrefix = _interopRequireDefault(__webpack_require__(/*! ./utils/createWithBsPrefix */ "./node_modules/react-bootstrap/utils/createWithBsPrefix.js"));
+
+var _default = (0, _createWithBsPrefix.default)('toast-body');
+
+exports.default = _default;
+module.exports = exports["default"];
+
+/***/ }),
+
+/***/ "./node_modules/react-bootstrap/ToastContext.js":
+/*!******************************************************!*\
+  !*** ./node_modules/react-bootstrap/ToastContext.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var ToastContext = _react.default.createContext({
+  onClose: function onClose() {}
+});
+
+var _default = ToastContext;
+exports.default = _default;
+module.exports = exports["default"];
+
+/***/ }),
+
+/***/ "./node_modules/react-bootstrap/ToastHeader.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/react-bootstrap/ToastHeader.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _useEventCallback = _interopRequireDefault(__webpack_require__(/*! @restart/hooks/useEventCallback */ "./node_modules/@restart/hooks/esm/useEventCallback.js"));
+
+var _ThemeProvider = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/ThemeProvider.js");
+
+var _CloseButton = _interopRequireDefault(__webpack_require__(/*! ./CloseButton */ "./node_modules/react-bootstrap/CloseButton.js"));
+
+var _ToastContext = _interopRequireDefault(__webpack_require__(/*! ./ToastContext */ "./node_modules/react-bootstrap/ToastContext.js"));
+
+var defaultProps = {
+  closeLabel: 'Close',
+  closeButton: true
+};
+
+var ToastHeader = function ToastHeader(_ref) {
+  var bsPrefix = _ref.bsPrefix,
+      closeLabel = _ref.closeLabel,
+      closeButton = _ref.closeButton,
+      className = _ref.className,
+      children = _ref.children,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "closeLabel", "closeButton", "className", "children"]);
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'toast-header');
+  var context = (0, _react.useContext)(_ToastContext.default);
+  var handleClick = (0, _useEventCallback.default)(function () {
+    if (context) {
+      context.onClose();
+    }
+  });
+  return _react.default.createElement("div", (0, _extends2.default)({}, props, {
+    className: (0, _classnames.default)(bsPrefix, className)
+  }), children, closeButton && _react.default.createElement(_CloseButton.default, {
+    label: closeLabel,
+    onClick: handleClick,
+    className: "ml-2 mb-1",
+    "data-dismiss": "toast"
+  }));
+};
+
+ToastHeader.displayName = 'ToastHeader';
+ToastHeader.defaultProps = defaultProps;
+var _default = ToastHeader;
+exports.default = _default;
+module.exports = exports["default"];
 
 /***/ }),
 

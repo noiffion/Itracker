@@ -15,6 +15,7 @@ import Header              from './Header.jsx';
 import Filter              from './Filter.jsx';
 import Paginator           from './Paginator.jsx';
 import TableOfIssues       from './TableOfIssues.jsx';
+import AlertMsg            from './AlertMsg.jsx';
 
 
 class Main extends React.Component {
@@ -26,9 +27,13 @@ class Main extends React.Component {
       actualPage: 0,
       maxPageNum: 0,
       iPerPage: 20,
+      alertShow: false,
+      alertMsg: ' ',
     };
 
     this.canvasToggle = this.canvasToggle.bind(this);
+          
+    this.setAlert = this.setAlert.bind(this);
     
     this.pageGo = this.pageGo.bind(this);
 
@@ -57,6 +62,13 @@ class Main extends React.Component {
     this.setState({ filterOn: !this.state.filterOn });
   }
 
+  setAlert(bool, msg) {
+    this.setState({ 
+      alertShow: bool, 
+      alertMsg: msg,
+    })
+  }
+
   loadData() {
     fetch(`/api/issues`)
     .then((response) => {
@@ -66,13 +78,13 @@ class Main extends React.Component {
           data.records.forEach((issue) => {
             if (issue.completion) issue.completion = new Date(issue.completion);
             issue.creation = new Date(issue.creation);
+            issue.onScreen = false;
             issue.selected = '';
             issue.filters = {
               state: true,
               owner: true,
               creation: true,
               effort: true,
-              completion: true,
               description: true,
             };
             issue.filteredIn = true;
@@ -84,12 +96,12 @@ class Main extends React.Component {
         });
       } else {
         response.json().then((error) => {
-          alert(`Failed to fetch issues: ${error.message}`);
+          setAlert(true, `Failed to fetch issues: ${error.message}`);
         });
       }
     })
     .catch((err) => {
-      alert('Error in fetching data from server:', err);
+      setAlert(true, 'Error in fetching data from server:', err);
     });
   }
 
@@ -105,7 +117,6 @@ class Main extends React.Component {
     const issues = this.state.issues;
     const types = Object.keys(filter);
     let count = -1;
-    console.log(filter);
 
     issues.forEach(issue => {
       types.forEach(type => {
@@ -153,7 +164,9 @@ class Main extends React.Component {
 
   selectAll() {
     const issues = this.state.issues;
-    issues.forEach(issue => { if (issue.filteredIn) return issue.selected = 'edit'; });
+    issues.forEach(issue => { 
+      if (issue.filteredIn && issue.onScreen) return issue.selected = 'edit'; 
+    });
     this.setState({ issues: issues });
   }
 
@@ -193,40 +206,86 @@ class Main extends React.Component {
     this.setState({ issues: issues });
   }
 
+
   deleteIssues(issues) {
-    const rowsToDelete = issues.filter(issue => issue.selected === 'delete');
+    const setAlert = this.setAlert;
+    const rowsToDelete = []
+    issues.forEach(issue => { if (issue.selected === 'delete') rowsToDelete.push(issue._id) });
 
-    rowsToDelete.forEach(row => fetch(`/api/issues/${row._id}`, {method: 'DELETE'})
-      .then(response => {
-        if (response.ok) {
-            //delete selectedRows[id];
+    if (rowsToDelete.length === 1) {
+        const id = rowsToDelete[0];
 
-        } else {
-            alert(`Failed to delete issue: ${id}!`);
+        fetch(`/api/issues/${id}`, {method: 'DELETE'})
+        .then(response => {
+          const success = [true, `Successfully deleted the issue`];
+          const failure = [true, `Failed to delete the issue!`];
+          response.ok ? setAlert(...success) : setAlert(...failure);
+        })
+        .catch(error => console.log(error))
+    } else if (rowsToDelete.length > 1) {
+        const delParams = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(rowsToDelete),
         }
-      })
-      .catch(error => alert(error))
-    );
+
+        fetch(`/api/issues/deleteMany`, delParams) 
+        .then(response => {
+          const success = [true, `Successfully deleted the issues`];
+          const failure = [true, `Failed to delete the issues`];
+          response.ok ? setAlert(...success) : setAlert(...failure);
+        })
+        .catch(error => console.log(error))
+    }
   }
 
+
   updateIssues(issues) {
+    const setAlert = this.setAlert;
     const rowsToUpdate = issues.filter(issue => issue.selected === 'edit');
-    
+    const issueNumber = rowsToUpdate.length;
+    let currentIssue = 0;
+    const respOKs = [];
+
+    const feedbackAlert = (current) => {
+      if (current === issueNumber) {
+        const allRight = respOKs.every(resp => resp);
+        const plural = issueNumber > 1 ? 's' : '';
+        const success = [true, `Successfully updated the issue${plural}.`]
+        const failure = [true, `Failed to update the issue${plural}!`]
+        allRight ? setAlert(...success) : setAlert(...failure);
+      } 
+    }
+
     rowsToUpdate.forEach((row) => {
-      const issue = {};
+      const issue = {}; 
       const properties = ['state', 'owner', 'creation', 'effort', 'completion', 'description'];
 
       properties.forEach((property) => {
         const input = document.forms.tableForm[`${row._id+property}`];
         input.value ? issue[property] = input.value : issue[property] = input.placeholder;
         if (property === 'creation' || property === 'completion') {
-          let date = Date.parse(issue[property]);
-          date ? date = (new Date(date)).toISOString() : date = null;
-          issue[property] = date;
-        } 
+          if (issue[property]) {
+            let date;
+            date = Date.parse(issue[property]);
+            date = new Date(date);
+            if (date.toString() === 'Invalid Date') {
+              const dateErr = new Error(`Invalid ${property} date! /${row._id.substr(-4)}/`);
+              setAlert(true, `${dateErr.message}`);
+              throw dateErr;
+            }
+            console.log(date, new Date(issue.creation));
+            if (property === 'completion' && date < new Date(issue.creation)) {
+              const seqErr = new Error(`Completion date should come after creation date!`)
+              setAlert(true, `${seqErr.message}`);
+              throw seqErr;             
+            }
+            issue[property] = date.toISOString();
+          }
+        }
       });
 
-      const putParams = {
+      const putParams = { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(issue),  
@@ -234,19 +293,20 @@ class Main extends React.Component {
 
       fetch(`/api/issues/${row._id}`, putParams)
       .then(response => {
-        if (response.ok) {
-            //delete selectedRows[id];
-        } else {
-            alert(`Failed to update issue: ${id}!`);
-        }
-        this.setState({selectedRows: {}});
-      })
-      .catch(err => alert(`Error in sending data to server: ${err.message}`))
-    });
+        currentIssue++;
+        respOKs.push(response.ok ? true : false);
+        feedbackAlert(currentIssue);
+      })  
+      .catch(error => {
+        currentIssue++;
+        respOKs.push(false);
+        setAlert(true, `Error in sending data to server: ${error.message}`)
+      });
+    }); 
   }
 
+
   submitChanges(event) {
-    event.preventDefault();
 
     /*
     if (Object.keys(this.state.invalidFields).length !== 0) {
@@ -276,10 +336,15 @@ class Main extends React.Component {
             maxPageNum={this.state.maxPageNum}
             pageGo={this.pageGo}
           />
-          <Paginator 
+          <Paginator
             actualPage={this.state.actualPage} 
             maxPageNum={this.state.maxPageNum}
             pageGo={this.pageGo}
+          />
+          <AlertMsg 
+            setAlert={this.setAlert}
+            alertMsg={this.state.alertMsg}
+            alertShow={this.state.alertShow}
           />
           <TableOfIssues
             issues={this.state.issues}

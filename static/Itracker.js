@@ -285,108 +285,51 @@ Add.propTypes = {
 
 /***/ }),
 
-/***/ "./src/Bubble.jsx":
-/*!************************!*\
-  !*** ./src/Bubble.jsx ***!
-  \************************/
+/***/ "./src/AlertMsg.jsx":
+/*!**************************!*\
+  !*** ./src/AlertMsg.jsx ***!
+  \**************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Bubble; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Alert */ "./node_modules/react-bootstrap/Alert.js");
-/* harmony import */ var react_bootstrap_Alert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Alert__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Collapse */ "./node_modules/react-bootstrap/Collapse.js");
-/* harmony import */ var react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-// Bubble.jsx
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Toast */ "./node_modules/react-bootstrap/Toast.js");
+/* harmony import */ var react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
- //TODO: useState, useEffect
-
-var Bubble =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Bubble, _React$Component);
-
-  function Bubble() {
-    _classCallCheck(this, Bubble);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Bubble).apply(this, arguments));
-  }
-
-  _createClass(Bubble, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      if (this.props.showing) {
-        clearTimeout(this.dismissTimer);
-        this.dismissTimer = setTimeout(this.props.onDismiss, 3000);
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      clearTimeout(this.dismissTimer);
-    } // onDismiss={this.props.onDismiss}
-
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Collapse__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        "in": this.props.showing
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          position: 'fixed',
-          top: 30,
-          left: 0,
-          right: 0,
-          textAlign: 'center'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Alert__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        style: {
-          display: 'inline-block',
-          width: 500
-        }
-      }, this.props.message)));
-    }
-  }]);
-
-  return Bubble;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
-Bubble.propTypes = {
-  showing: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool.isRequired,
-  onDismiss: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  bsStyle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.any.isRequired
+var AlertMsg = function AlertMsg(props) {
+  var setAlert = props.setAlert;
+  var alertMsg = props.alertMsg;
+  var alertShow = props.alertShow;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    id: "alertSection"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    id: "alertToast",
+    autohide: true,
+    onClose: function onClose() {
+      return setAlert(false, ' ');
+    },
+    show: alertShow,
+    delay: 3000
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default.a.Body, null, alertMsg)));
 };
-Bubble.defaultProps = {
-  bsStyle: 'success'
+
+AlertMsg.propTypes = {
+  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  alertMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  alertShow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
 };
+/* harmony default export */ __webpack_exports__["default"] = (AlertMsg);
 
 /***/ }),
 
@@ -785,7 +728,8 @@ var Filter = function Filter(props) {
 };
 
 Filter.propTypes = {
-  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Filter);
 
@@ -804,21 +748,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Navbar */ "./node_modules/react-bootstrap/Navbar.js");
-/* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Nav */ "./node_modules/react-bootstrap/Nav.js");
-/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Nav */ "./node_modules/react-bootstrap/Nav.js");
+/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Navbar */ "./node_modules/react-bootstrap/Navbar.js");
+/* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Dropdown */ "./node_modules/react-bootstrap/Dropdown.js");
 /* harmony import */ var react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/DropdownButton */ "./node_modules/react-bootstrap/DropdownButton.js");
 /* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Add_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Add.jsx */ "./src/Add.jsx");
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
+/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Add_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Add.jsx */ "./src/Add.jsx");
+/* harmony import */ var _AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AlertMsg.jsx */ "./src/AlertMsg.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -838,6 +783,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // Header.jsx
+
 
 
 
@@ -884,15 +830,15 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var Header = function Header(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5___default.a, {
     id: "navbar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_4___default.a.Brand, null, "Issue Tracker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_5___default.a, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5___default.a.Brand, null, "Issue Tracker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_2___default.a, {
     id: "navItems"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a, {
     onSubmit: function onSubmit() {
       return event.preventDefault();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default.a.Control, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     id: "goToPage",
     title: "Number + Enter to go to page",
     style: {
@@ -919,12 +865,12 @@ var Header = function Header(props) {
         }
       }
     }
-  })), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  })), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     onClick: props.canvasToggle,
     variant: "light"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-filter"
-  }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
     refreshPage: props.refreshPage
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a, {
     id: "user-dropdown",
@@ -972,6 +918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Filter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Filter.jsx */ "./src/Filter.jsx");
 /* harmony import */ var _Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Paginator.jsx */ "./src/Paginator.jsx");
 /* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
+/* harmony import */ var _AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AlertMsg.jsx */ "./src/AlertMsg.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1003,6 +950,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Main =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1019,9 +967,12 @@ function (_React$Component) {
       filterOn: false,
       actualPage: 0,
       maxPageNum: 0,
-      iPerPage: 20
+      iPerPage: 20,
+      alertShow: false,
+      alertMsg: ' '
     };
     _this.canvasToggle = _this.canvasToggle.bind(_assertThisInitialized(_this));
+    _this.setAlert = _this.setAlert.bind(_assertThisInitialized(_this));
     _this.pageGo = _this.pageGo.bind(_assertThisInitialized(_this));
     _this.refreshPage = _this.refreshPage.bind(_assertThisInitialized(_this));
     _this.iFilter = _this.iFilter.bind(_assertThisInitialized(_this));
@@ -1051,6 +1002,14 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "setAlert",
+    value: function setAlert(bool, msg) {
+      this.setState({
+        alertShow: bool,
+        alertMsg: msg
+      });
+    }
+  }, {
     key: "loadData",
     value: function loadData() {
       var _this2 = this;
@@ -1062,13 +1021,13 @@ function (_React$Component) {
             data.records.forEach(function (issue) {
               if (issue.completion) issue.completion = new Date(issue.completion);
               issue.creation = new Date(issue.creation);
+              issue.onScreen = false;
               issue.selected = '';
               issue.filters = {
                 state: true,
                 owner: true,
                 creation: true,
                 effort: true,
-                completion: true,
                 description: true
               };
               issue.filteredIn = true;
@@ -1081,11 +1040,11 @@ function (_React$Component) {
           });
         } else {
           response.json().then(function (error) {
-            alert("Failed to fetch issues: ".concat(error.message));
+            setAlert(true, "Failed to fetch issues: ".concat(error.message));
           });
         }
       })["catch"](function (err) {
-        alert('Error in fetching data from server:', err);
+        setAlert(true, 'Error in fetching data from server:', err);
       });
     }
   }, {
@@ -1106,7 +1065,6 @@ function (_React$Component) {
       var issues = this.state.issues;
       var types = Object.keys(filter);
       var count = -1;
-      console.log(filter);
       issues.forEach(function (issue) {
         types.forEach(function (type) {
           if (filter[type] === 'All') {
@@ -1157,7 +1115,7 @@ function (_React$Component) {
     value: function selectAll() {
       var issues = this.state.issues;
       issues.forEach(function (issue) {
-        if (issue.filteredIn) return issue.selected = 'edit';
+        if (issue.filteredIn && issue.onScreen) return issue.selected = 'edit';
       });
       this.setState({
         issues: issues
@@ -1232,30 +1190,63 @@ function (_React$Component) {
   }, {
     key: "deleteIssues",
     value: function deleteIssues(issues) {
-      var rowsToDelete = issues.filter(function (issue) {
-        return issue.selected === 'delete';
+      var setAlert = this.setAlert;
+      var rowsToDelete = [];
+      issues.forEach(function (issue) {
+        if (issue.selected === 'delete') rowsToDelete.push(issue._id);
       });
-      rowsToDelete.forEach(function (row) {
-        return fetch("/api/issues/".concat(row._id), {
+
+      if (rowsToDelete.length === 1) {
+        var id = rowsToDelete[0];
+        fetch("/api/issues/".concat(id), {
           method: 'DELETE'
         }).then(function (response) {
-          if (response.ok) {//delete selectedRows[id];
-          } else {
-            alert("Failed to delete issue: ".concat(id, "!"));
-          }
+          var success = [true, "Successfully deleted the issue"];
+          var failure = [true, "Failed to delete the issue!"];
+          response.ok ? setAlert.apply(void 0, success) : setAlert.apply(void 0, failure);
         })["catch"](function (error) {
-          return alert(error);
+          return console.log(error);
         });
-      });
+      } else if (rowsToDelete.length > 1) {
+        var delParams = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(rowsToDelete)
+        };
+        fetch("/api/issues/deleteMany", delParams).then(function (response) {
+          var success = [true, "Successfully deleted the issues"];
+          var failure = [true, "Failed to delete the issues"];
+          response.ok ? setAlert.apply(void 0, success) : setAlert.apply(void 0, failure);
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
     }
   }, {
     key: "updateIssues",
     value: function updateIssues(issues) {
-      var _this3 = this;
-
+      var setAlert = this.setAlert;
       var rowsToUpdate = issues.filter(function (issue) {
         return issue.selected === 'edit';
       });
+      var issueNumber = rowsToUpdate.length;
+      var currentIssue = 0;
+      var respOKs = [];
+
+      var feedbackAlert = function feedbackAlert(current) {
+        if (current === issueNumber) {
+          var allRight = respOKs.every(function (resp) {
+            return resp;
+          });
+          var plural = issueNumber > 1 ? 's' : '';
+          var success = [true, "Successfully updated the issue".concat(plural, ".")];
+          var failure = [true, "Failed to update the issue".concat(plural, "!")];
+          allRight ? setAlert.apply(void 0, success) : setAlert.apply(void 0, failure);
+        }
+      };
+
       rowsToUpdate.forEach(function (row) {
         var issue = {};
         var properties = ['state', 'owner', 'creation', 'effort', 'completion', 'description'];
@@ -1264,9 +1255,27 @@ function (_React$Component) {
           input.value ? issue[property] = input.value : issue[property] = input.placeholder;
 
           if (property === 'creation' || property === 'completion') {
-            var date = Date.parse(issue[property]);
-            date ? date = new Date(date).toISOString() : date = null;
-            issue[property] = date;
+            if (issue[property]) {
+              var date;
+              date = Date.parse(issue[property]);
+              date = new Date(date);
+
+              if (date.toString() === 'Invalid Date') {
+                var dateErr = new Error("Invalid ".concat(property, " date! /").concat(row._id.substr(-4), "/"));
+                setAlert(true, "".concat(dateErr.message));
+                throw dateErr;
+              }
+
+              console.log(date, new Date(issue.creation));
+
+              if (property === 'completion' && date < new Date(issue.creation)) {
+                var seqErr = new Error("Completion date should come after creation date!");
+                setAlert(true, "".concat(seqErr.message));
+                throw seqErr;
+              }
+
+              issue[property] = date.toISOString();
+            }
           }
         });
         var putParams = {
@@ -1277,29 +1286,24 @@ function (_React$Component) {
           body: JSON.stringify(issue)
         };
         fetch("/api/issues/".concat(row._id), putParams).then(function (response) {
-          if (response.ok) {//delete selectedRows[id];
-          } else {
-            alert("Failed to update issue: ".concat(id, "!"));
-          }
-
-          _this3.setState({
-            selectedRows: {}
-          });
-        })["catch"](function (err) {
-          return alert("Error in sending data to server: ".concat(err.message));
+          currentIssue++;
+          respOKs.push(response.ok ? true : false);
+          feedbackAlert(currentIssue);
+        })["catch"](function (error) {
+          currentIssue++;
+          respOKs.push(false);
+          setAlert(true, "Error in sending data to server: ".concat(error.message));
         });
       });
     }
   }, {
     key: "submitChanges",
     value: function submitChanges(event) {
-      event.preventDefault();
       /*
       if (Object.keys(this.state.invalidFields).length !== 0) {
         return;
       }
       */
-
       var issues = this.state.issues;
       this.deleteIssues(issues);
       this.updateIssues(issues);
@@ -1324,6 +1328,10 @@ function (_React$Component) {
         actualPage: this.state.actualPage,
         maxPageNum: this.state.maxPageNum,
         pageGo: this.pageGo
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        setAlert: this.setAlert,
+        alertMsg: this.state.alertMsg,
+        alertShow: this.state.alertShow
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
         issues: this.state.issues,
         actualPage: this.state.actualPage,
@@ -1467,7 +1475,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _RowNormal_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RowNormal.jsx */ "./src/RowNormal.jsx");
-/* harmony import */ var _RowEdit_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowEdit.jsx */ "./src/RowEdit.jsx");
+/* harmony import */ var _RowSelect_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowSelect.jsx */ "./src/RowSelect.jsx");
 // Row.jsx
 
 
@@ -1480,13 +1488,13 @@ var Row = function Row(props) {
     issue: props.issue,
     selectSingleRow: props.selectSingleRow
   });
-  var rowEdit = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowEdit_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  var rowSelect = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowSelect_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     issue: props.issue,
     cancelSingleRow: props.cancelSingleRow,
     deleteSingleRow: props.deleteSingleRow,
     selectSingleRow: props.selectSingleRow
   });
-  return selected ? rowEdit : rowNormal;
+  return selected ? rowSelect : rowNormal;
 };
 
 Row.propTypes = {
@@ -1499,10 +1507,69 @@ Row.propTypes = {
 
 /***/ }),
 
-/***/ "./src/RowEdDel.jsx":
-/*!**************************!*\
-  !*** ./src/RowEdDel.jsx ***!
-  \**************************/
+/***/ "./src/RowNormal.jsx":
+/*!***************************!*\
+  !*** ./src/RowNormal.jsx ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__);
+// RowNormal.jsx
+
+
+
+
+var RowNormal = function RowNormal(props) {
+  var iss = props.issue;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueId",
+    title: iss._id
+  }, iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueState"
+  }, iss.state), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueOwner"
+  }, iss.owner), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueCreation"
+  }, iss.creation.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueEffort"
+  }, iss.effort), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueCompletion"
+  }, iss.completion ? iss.completion.toDateString() : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    id: "issueDescription"
+  }, iss.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "buttonCell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    title: "Edit row",
+    variant: "warning",
+    size: "sm",
+    onClick: function onClick() {
+      return props.selectSingleRow(iss._id);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "far fa-edit"
+  }))));
+};
+
+RowNormal.propTypes = {
+  issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (RowNormal);
+
+/***/ }),
+
+/***/ "./src/RowSelEdDel.jsx":
+/*!*****************************!*\
+  !*** ./src/RowSelEdDel.jsx ***!
+  \*****************************/
 /*! exports provided: BeingEdited, BeingDeleted */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1518,12 +1585,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__);
-// RowEdDel.jsx
+// RowSelEdDel.jsx
 
 
 
 
 var BeingEdited = function BeingEdited(props) {
+  var optionMaker = function optionMaker(unique) {
+    var options = [];
+
+    var recOpt = function recOpt(till, current) {
+      if (current > till) return;
+      options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: current + unique
+      }, " ", current, " "));
+      return recOpt(till, current + 1);
+    };
+
+    recOpt(10, 1);
+    return options;
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueId",
     title: props.iss._id
@@ -1532,9 +1614,9 @@ var BeingEdited = function BeingEdited(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'state',
     size: "sm",
-    as: "input",
+    as: "select",
     placeholder: props.iss.state
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'owner',
@@ -1553,9 +1635,9 @@ var BeingEdited = function BeingEdited(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'effort',
     size: "sm",
-    as: "input",
+    as: "select",
     placeholder: props.iss.effort
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, optionMaker('effort'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCompletion"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'completion',
@@ -1668,76 +1750,9 @@ BeingDeleted.propTypes = {
 
 /***/ }),
 
-/***/ "./src/RowEdit.jsx":
-/*!*************************!*\
-  !*** ./src/RowEdit.jsx ***!
-  \*************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ValidInput_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ValidInput.jsx */ "./src/ValidInput.jsx");
-/* harmony import */ var _RowEdDel_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowEdDel.jsx */ "./src/RowEdDel.jsx");
-// RowEdit.jsx
-
-
-
-
-
-var RowEdit = function RowEdit(props) {
-  /*
-    onChange(event, convertedValue) {
-      const issue = Object.assign({}, state.issue);
-      const value = (convertedValue !== undefined) ? convertedValue : event.target.value;
-      issue[event.target.name] = value;
-      setState({ issue });
-    }
-  
-    onValidityChange(event, valid) {
-      const invalidFields = Object.assign({}, state.invalidFields);
-      if (!valid) {
-        invalidFields[event.target.name] = true;
-      } else {
-        delete invalidFields[event.target.name];
-      }
-      setState({ invalidFields });
-    }
-  
-    const noInvalidFields = Object.keys(state.invalidFields).length === 0;
-    const msg = (<div className="error">Please correct invalid fields before submitting.</div>);
-    const validationMessage =  noInvalidFields ?  null : msg;
-  */
-  var del = props.issue.selected === 'delete';
-  var beingEdited = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowEdDel_jsx__WEBPACK_IMPORTED_MODULE_3__["BeingEdited"], {
-    iss: props.issue,
-    deleteSingleRow: props.deleteSingleRow,
-    cancelSingleRow: props.cancelSingleRow
-  });
-  var beingDeleted = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowEdDel_jsx__WEBPACK_IMPORTED_MODULE_3__["BeingDeleted"], {
-    iss: props.issue,
-    cancelDelete: props.selectSingleRow,
-    cancelSingleRow: props.cancelSingleRow
-  });
-  return del ? beingDeleted : beingEdited;
-};
-
-RowEdit.propTypes = {
-  issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
-  deleteSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  cancelSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (RowEdit);
-
-/***/ }),
-
-/***/ "./src/RowNormal.jsx":
+/***/ "./src/RowSelect.jsx":
 /*!***************************!*\
-  !*** ./src/RowNormal.jsx ***!
+  !*** ./src/RowSelect.jsx ***!
   \***************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -1748,49 +1763,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__);
-// RowNormal.jsx
+/* harmony import */ var _RowSelEdDel_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RowSelEdDel.jsx */ "./src/RowSelEdDel.jsx");
+// RowSelect.jsx
 
 
 
 
-var RowNormal = function RowNormal(props) {
-  var iss = props.issue;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueId",
-    title: iss._id
-  }, iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueState"
-  }, iss.state), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueOwner"
-  }, iss.owner), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueCreation"
-  }, iss.creation.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueEffort"
-  }, iss.effort), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueCompletion"
-  }, iss.completion ? iss.completion.toDateString() : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "issueDescription"
-  }, iss.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "buttonCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    title: "Edit row",
-    variant: "warning",
-    size: "sm",
-    onClick: function onClick() {
-      return props.selectSingleRow(iss._id);
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "far fa-edit"
-  }))));
+var RowSelect = function RowSelect(props) {
+  var del = props.issue.selected === 'delete';
+  var beingEdited = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowSelEdDel_jsx__WEBPACK_IMPORTED_MODULE_2__["BeingEdited"], {
+    iss: props.issue,
+    deleteSingleRow: props.deleteSingleRow,
+    cancelSingleRow: props.cancelSingleRow
+  });
+  var beingDeleted = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowSelEdDel_jsx__WEBPACK_IMPORTED_MODULE_2__["BeingDeleted"], {
+    iss: props.issue,
+    cancelDelete: props.selectSingleRow,
+    cancelSingleRow: props.cancelSingleRow
+  });
+  return del ? beingDeleted : beingEdited;
 };
 
-RowNormal.propTypes = {
+RowSelect.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
-  selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  deleteSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  cancelSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
-/* harmony default export */ __webpack_exports__["default"] = (RowNormal);
+/* harmony default export */ __webpack_exports__["default"] = (RowSelect);
 
 /***/ }),
 
@@ -1812,8 +1811,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Row_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Row.jsx */ "./src/Row.jsx");
-/* harmony import */ var _Bubble_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Bubble.jsx */ "./src/Bubble.jsx");
-/* harmony import */ var _tableButtons_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tableButtons.jsx */ "./src/tableButtons.jsx");
+/* harmony import */ var _tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tableButtons.jsx */ "./src/tableButtons.jsx");
 // TableOfIssues.jsx
 
 
@@ -1822,17 +1820,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var TableOfIssues = function TableOfIssues(props) {
+  var p = props;
   var actual = props.actualPage;
   var iPerPage = props.iPerPage;
   var issueRows = [];
   var ind = -1;
-  props.issues.forEach(function (issue) {
+  var anyEdit = false;
+  p.issues.forEach(function (issue) {
     if (issue.filteredIn) {
       ind++;
 
       if (ind >= actual * iPerPage && ind < actual * iPerPage + iPerPage) {
+        issue.onScreen = true;
         issueRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
           key: issue._id,
           issue: issue,
@@ -1840,18 +1840,20 @@ var TableOfIssues = function TableOfIssues(props) {
           cancelSingleRow: props.cancelSingleRow,
           deleteSingleRow: props.deleteSingleRow
         }));
+      } else {
+        issue.onScreen = false;
+        issue.selected = '';
       }
     }
+
+    if (issue.selected) anyEdit = true;
   });
-  var ids = Object.keys(props.issues);
-  var anyEdit = ids.some(function (id) {
-    return props.issues[id].selected !== '';
-  });
-  var p = props;
-  var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_6__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll);
+  var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll, p.submitChanges);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a, {
     name: "tableForm",
-    onSubmit: props.submitChanges
+    onSubmit: function onSubmit(event) {
+      return event.preventDefault();
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_2___default.a, {
     size: "sm",
     variant: "dark",
@@ -1872,223 +1874,6 @@ TableOfIssues.propTypes = {
 
 /***/ }),
 
-/***/ "./src/ValidInput.jsx":
-/*!****************************!*\
-  !*** ./src/ValidInput.jsx ***!
-  \****************************/
-/*! exports provided: NumInput, DateInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NumInput", function() { return NumInput; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateInput", function() { return DateInput; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-// ValidInput.jsx
-
-
-var NumInput =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(NumInput, _React$Component);
-
-  function NumInput(props) {
-    var _this;
-
-    _classCallCheck(this, NumInput);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(NumInput).call(this, props));
-    _this.state = {
-      value: _this.format(props.value)
-    };
-    _this.onBlur = _this.onBlur.bind(_assertThisInitialized(_this));
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(NumInput, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(newProps) {
-      this.setState({
-        value: this.format(newProps.value)
-      });
-    }
-  }, {
-    key: "onBlur",
-    value: function onBlur(e) {
-      this.props.onChange(e, this.unformat(this.state.value));
-    }
-  }, {
-    key: "onChange",
-    value: function onChange(e) {
-      if (e.target.value.match(/^\d*$/)) {
-        this.setState({
-          value: e.target.value
-        });
-      }
-    }
-  }, {
-    key: "format",
-    value: function format(num) {
-      return num != null ? num.toString() : '';
-    }
-  }, {
-    key: "unformat",
-    value: function unformat(str) {
-      var val = parseInt(str, 10);
-      return isNaN(val) ? null : val;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
-        type: "text"
-      }, this.props, {
-        value: this.state.value,
-        onBlur: this.onBlur,
-        onChange: this.onChange
-      }));
-    }
-  }]);
-
-  return NumInput;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-NumInput.propTypes = {
-  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
-};
-var DateInput =
-/*#__PURE__*/
-function (_React$Component2) {
-  _inherits(DateInput, _React$Component2);
-
-  function DateInput(props) {
-    var _this2;
-
-    _classCallCheck(this, DateInput);
-
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(DateInput).call(this, props));
-    _this2.state = {
-      value: _this2.editFormat(props.value),
-      focused: false,
-      valid: true
-    };
-    _this2.onFocus = _this2.onFocus.bind(_assertThisInitialized(_this2));
-    _this2.onBlur = _this2.onBlur.bind(_assertThisInitialized(_this2));
-    _this2.onChange = _this2.onChange.bind(_assertThisInitialized(_this2));
-    return _this2;
-  }
-
-  _createClass(DateInput, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(newProps) {
-      if (newProps.value !== this.props.value) {
-        this.setState({
-          value: this.editFormat(newProps.value)
-        });
-      }
-    }
-  }, {
-    key: "onFocus",
-    value: function onFocus() {
-      this.setState({
-        focused: true
-      });
-    }
-  }, {
-    key: "onBlur",
-    value: function onBlur(e) {
-      var value = this.unformat(this.state.value);
-      var valid = this.state.value === '' || value != null;
-
-      if (valid !== this.state.valid && this.props.onValidityChange) {
-        this.props.onValidityChange(e, valid);
-      }
-
-      this.setState({
-        focused: false,
-        valid: valid
-      });
-      if (valid) this.props.onChange(e, value);
-    }
-  }, {
-    key: "onChange",
-    value: function onChange(e) {
-      if (e.target.value.match(/^[\d-]*$/)) {
-        this.setState({
-          value: e.target.value
-        });
-      }
-    }
-  }, {
-    key: "displayFormat",
-    value: function displayFormat(date) {
-      return date != null ? date.toDateString() : '';
-    }
-  }, {
-    key: "editFormat",
-    value: function editFormat(date) {
-      return date != null ? date.toISOString().substr(0, 10) : '';
-    }
-  }, {
-    key: "unformat",
-    value: function unformat(str) {
-      var val = new Date(str);
-      return isNaN(val.getTime()) ? null : val;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var className = !this.state.valid && !this.state.focused ? 'invalid' : null;
-      var value = this.state.focused || !this.state.valid ? this.state.value : this.displayFormat(this.props.value);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        size: 20,
-        name: this.props.name,
-        className: className,
-        value: value,
-        placeholder: this.state.focused ? 'YYYY-MM-DD' : null,
-        onFocus: this.onFocus,
-        onBlur: this.onBlur,
-        onChange: this.onChange
-      });
-    }
-  }]);
-
-  return DateInput;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-DateInput.propTypes = {
-  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  onValidityChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
-};
-
-/***/ }),
-
 /***/ "./src/tableButtons.jsx":
 /*!******************************!*\
   !*** ./src/tableButtons.jsx ***!
@@ -2105,7 +1890,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll) {
+function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll, submitChanges) {
   var displayTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     title: "Edit all rows",
     onClick: selectAll,
@@ -2130,16 +1915,16 @@ function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
   }));
-  var ids = Object.keys(issues);
-  var selected = ids.filter(function (id) {
-    return issues[id].selected;
+  var selected = issues.filter(function (issue) {
+    return issue.selected;
   });
-  var allSelectedDelete = selected.every(function (id) {
-    return issues[id].selected === 'delete';
+  var allSelectedDelete = selected.every(function (issue) {
+    return issue.selected === 'delete';
   });
   var editTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     type: "submit",
     title: "Submit",
+    onClick: submitChanges,
     variant: "primary",
     size: "sm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {

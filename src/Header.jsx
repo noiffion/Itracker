@@ -2,18 +2,20 @@
 
 import React          from 'react';
 import PropTypes      from 'prop-types';
+import Nav            from 'react-bootstrap/Nav';
 import Form           from 'react-bootstrap/Form';
 import Button         from 'react-bootstrap/Button';
 import Navbar         from 'react-bootstrap/Navbar';
-import Nav            from 'react-bootstrap/Nav';
 import Dropdown       from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Add            from './Add.jsx';
 import { 
   OffCanvas,
   OffCanvasMenu,
   OffCanvasBody
 }                     from 'react-offcanvas';
+import Add            from './Add.jsx';
+import AlertMsg       from './AlertMsg.jsx';
+
 
 
 class CustomToggle extends React.Component {

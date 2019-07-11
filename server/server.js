@@ -15,6 +15,7 @@ let issueTracker;
 app.get('/api/issues', (req, res) => {
   const filter = {};
   if (req.query.sts) filter.state = req.query.sts;
+  if (req.query.owner) filter.owner = req.query.owner;
   if (req.query.effort_lte || req.query.effort_gte) filter.effort = {};
   if (req.query.effort_lte) filter.effort.$lte = parseInt(req.query.effort_lte, 10);
   if (req.query.effort_gte) filter.effort.$gte = parseInt(req.query.effort_gte, 10);
@@ -39,17 +40,17 @@ app.delete('/api/issues/:id', (req, res) => {
       return;
   }
 
+
   issueTracker.collection('issues').deleteOne({_id: issueId})
-  .then((deleteResult) => {
-    if (deleteResult.result.n === 1) {
-        res.json({ status: 'OK' });
-    } else { 
-        res.json({ status: 'Warning: object not found' });
-    }
+  .then((feedback) => {
+   const ok = { status: 'OK'};
+   const notOk = { status: 'Warning: objects not found'};
+   feedback.deletedCount === 1 ?  res.json(ok) : res.json(notOk);
   })
   .catch(error => {
     console.log(error);
-    res.status(500).json({ message: `Internal Server Error: ${error}` })});
+    res.status(500).json({ message: `Internal Server Error: ${error}` })
+  });
 });
 
 
@@ -73,34 +74,57 @@ app.post('/api/issues', (req, res) => {
 
 
 app.put('/api/issues/:id', (req, res) => {
-  let issueId;
+  const issue = req.body;
+  let issueID = req.params.id;
+
   try {
-      issueId = new ObjectId(req.params.id);
+    issueID = new ObjectId(issueID);
   } catch (error) {
       res.status(422).json({ message: `Invalid issue ID format: ${error}` });
       return;
   }
 
-  const issue = req.body;
-  delete issue._id;
-
-  const err = Issue.validateIssue(issue);
-  if (err) {
-    res.status(422).json({ message: `Invalid request: ${err}` });
-    return;
-  }
-  const cIs = Issue.convertIssue(issue);
-  issueTracker.collection('issues')
-  .updateOne({_id: issueId}, 
-    {$set: { 'state': cIs.state, 'owner': cIs.owner,
-             'effort': parseInt(cIs.effort, 10), 'creation': cIs.creation,
-             'completion': cIs.completion,
-             'description': cIs.description}})
-  .then(() => issueTracker.collection('issues').findOne({_id: issueId}))
-  .then(savedIssue => res.json(savedIssue))
+  issueTracker.collection('issues').updateOne({_id: issueID}, 
+    { $set: { 
+        state: issue.state, 
+        owner: issue.owner,
+        effort: parseInt(issue.effort, 10), 
+        creation: issue.creation,
+        completion: issue.completion,
+        description: issue.description
+      }
+    }
+  )
+  .then(feedback => {
+    res.json(feedback);
+  })
   .catch(error => {
     console.log(error);
     res.status(500).json({ message: `Internal Server Error: ${error}` });
+  });
+});
+
+
+app.post('/api/issues/deleteMany', (req, res) => {
+  const issueIDs = [];
+
+  try {
+      req.body.forEach(id => issueIDs.push(new ObjectId(id)));
+  } catch (error) {
+      res.status(422).json({ message: `Invalid issue ID format: ${error}` });
+      return;
+  }
+
+  issueTracker.collection('issues').deleteMany({_id: {$in: issueIDs}})
+  .then((feedback) => {
+   const issueNum = issueIDs.length;
+   const ok = { status: 'OK'};
+   const notOk = { status: 'Warning: objects not found'};
+   feedback.deletedCount === issueNum ? res.json(ok) : res.json(notOk);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error: ${error}` })
   });
 });
 
