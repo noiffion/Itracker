@@ -1,16 +1,21 @@
-// server.js
+// server.j
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
+const express                   = require('express');
+const bodyParser                = require('body-parser');
+const path                      = require('path');
+const dotenv                    = require('dotenv');
 const { MongoClient, ObjectId } = require('mongodb');
-const Issue = require('./issue.js');
+const Issue                     = require('./issue.js');
+
 
 const app = express();
 app.use(express.static('static'));
 app.use(bodyParser.json());
-let issueTracker;
 
+const result = dotenv.config();
+if (result.error) throw result.error;
+
+let issueTracker;
 
 app.get('/api/issues', (req, res) => {
   const filter = {};
@@ -134,7 +139,10 @@ app.get('*', (req, res) => {
 });
 
 
-MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+
+const connection = process.env.DB;
+//MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+MongoClient.connect(connection, { useNewUrlParser: true })
 .then((client) => {
   issueTracker = client.db('Itracker');
   app.listen(3000, () => console.log('App started on port 3000'))

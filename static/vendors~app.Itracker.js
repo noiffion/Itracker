@@ -38585,7 +38585,7 @@ var OffCanvasMenu = function OffCanvasMenu(_ref) {
       className = _ref.className,
       style = _ref.style;
 
-  //console.log(position, effect);
+  console.log(position, effect);
   // closed state style
   var left = position === "left" ? -1 * width + "px" : "auto";
   var right = position === "left" ? "auto" : -1 * width + "px";
@@ -38630,7 +38630,6 @@ OffCanvasMenu.propTypes = {
 };
 
 exports.default = OffCanvasMenu;
-
 
 /***/ }),
 
