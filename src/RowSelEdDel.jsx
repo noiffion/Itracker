@@ -29,7 +29,6 @@ export const BeingEdited = props => {
 
       <td id="issueState">
           <Form.Control name={props.iss._id+'state'} size="sm" as="select" placeholder={props.iss.state} >
-            <option>All</option>
             <option>New</option>
             <option>Open</option>
             <option>Assigned</option>

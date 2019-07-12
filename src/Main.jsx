@@ -29,6 +29,7 @@ class Main extends React.Component {
       iPerPage: 20,
       alertShow: false,
       alertMsg: ' ',
+      normalMsg: true,
     };
 
     this.canvasToggle = this.canvasToggle.bind(this);
@@ -62,10 +63,11 @@ class Main extends React.Component {
     this.setState({ filterOn: !this.state.filterOn });
   }
 
-  setAlert(bool, msg) {
+  setAlert(msg, normal=true, show=true) {
     this.setState({ 
-      alertShow: bool, 
       alertMsg: msg,
+      normalMsg: normal,
+      alertShow: show, 
     })
   }
 
@@ -96,12 +98,12 @@ class Main extends React.Component {
         });
       } else {
         response.json().then((error) => {
-          setAlert(true, `Failed to fetch issues: ${error.message}`);
+          setAlert(`Failed to fetch issues: ${error.message}`, false);
         });
       }
     })
     .catch((err) => {
-      setAlert(true, 'Error in fetching data from server:', err);
+      setAlert(`Error in fetching data from server: ${err}`, false);
     });
   }
 
@@ -217,9 +219,9 @@ class Main extends React.Component {
 
         fetch(`/api/issues/${id}`, {method: 'DELETE'})
         .then(response => {
-          const success = [true, `Successfully deleted the issue`];
-          const failure = [true, `Failed to delete the issue!`];
-          response.ok ? setAlert(...success) : setAlert(...failure);
+          const success = `Successfully deleted the issue`;
+          const failure = `Failed to delete the issue!`;
+          response.ok ? setAlert(success) : setAlert(failure);
         })
         .catch(error => console.log(error))
     } else if (rowsToDelete.length > 1) {
@@ -231,9 +233,9 @@ class Main extends React.Component {
 
         fetch(`/api/issues/deleteMany`, delParams) 
         .then(response => {
-          const success = [true, `Successfully deleted the issues`];
-          const failure = [true, `Failed to delete the issues`];
-          response.ok ? setAlert(...success) : setAlert(...failure);
+          const success = `Successfully deleted the issues`;
+          const failure = `Failed to delete the issues`;
+          response.ok ? setAlert(success) : setAlert(failure);
         })
         .catch(error => console.log(error))
     }
@@ -251,9 +253,9 @@ class Main extends React.Component {
       if (current === issueNumber) {
         const allRight = respOKs.every(resp => resp);
         const plural = issueNumber > 1 ? 's' : '';
-        const success = [true, `Successfully updated the issue${plural}.`]
-        const failure = [true, `Failed to update the issue${plural}!`]
-        allRight ? setAlert(...success) : setAlert(...failure);
+        const success = `Successfully updated the issue${plural}.`;
+        const failure = `Failed to update the issue${plural}!`;
+        allRight ? setAlert(success) : setAlert(failure);
       } 
     }
 
@@ -270,14 +272,13 @@ class Main extends React.Component {
             date = Date.parse(issue[property]);
             date = new Date(date);
             if (date.toString() === 'Invalid Date') {
-              const dateErr = new Error(`Invalid ${property} date! /${row._id.substr(-4)}/`);
-              setAlert(true, `${dateErr.message}`);
+              const dateErr = new Error(`${row._id.substr(-4)}: Invalid ${property} date!`);
+              setAlert(`${dateErr.message}`, false);
               throw dateErr;
             }
-            console.log(date, new Date(issue.creation));
             if (property === 'completion' && date < new Date(issue.creation)) {
-              const seqErr = new Error(`Completion date should come after creation date!`)
-              setAlert(true, `${seqErr.message}`);
+              const seqErr = new Error(`Completion should be later than creation!`)
+              setAlert(`${seqErr.message}`, false);
               throw seqErr;             
             }
             issue[property] = date.toISOString();
@@ -300,25 +301,17 @@ class Main extends React.Component {
       .catch(error => {
         currentIssue++;
         respOKs.push(false);
-        setAlert(true, `Error in sending data to server: ${error.message}`)
+        setAlert(`Error in sending data to server: ${error.message}`, false);
       });
     }); 
   }
 
 
   submitChanges(event) {
-
-    /*
-    if (Object.keys(this.state.invalidFields).length !== 0) {
-      return;
-    }
-    */
-
     const issues = this.state.issues;
 
     this.deleteIssues(issues);
     this.updateIssues(issues);
-
     this.refreshPage();
   }
 
@@ -335,6 +328,7 @@ class Main extends React.Component {
             iFilter={this.iFilter}
             maxPageNum={this.state.maxPageNum}
             pageGo={this.pageGo}
+            setAlert={this.setAlert}
           />
           <Paginator
             actualPage={this.state.actualPage} 
@@ -345,6 +339,7 @@ class Main extends React.Component {
             setAlert={this.setAlert}
             alertMsg={this.state.alertMsg}
             alertShow={this.state.alertShow}
+            normalMsg={this.state.normalMsg}
           />
           <TableOfIssues
             issues={this.state.issues}

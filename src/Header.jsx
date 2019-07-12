@@ -14,8 +14,6 @@ import {
   OffCanvasBody
 }                     from 'react-offcanvas';
 import Add            from './Add.jsx';
-import AlertMsg       from './AlertMsg.jsx';
-
 
 
 class CustomToggle extends React.Component {
@@ -67,7 +65,7 @@ const Header = props => {
           <i className="fas fa-filter"></i>{' '}
           Filter
         </Button>
-        <Add refreshPage={props.refreshPage}/>
+        <Add refreshPage={props.refreshPage} setAlert={props.setAlert} />
         <Dropdown id="user-dropdown" navbar={true} drop="left">
           <Dropdown.Toggle as={CustomToggle}>
             <i className="fas fa-ellipsis-h"></i>
@@ -86,6 +84,7 @@ Header.propTypes = {
   canvasToggle: PropTypes.func.isRequired,
   refreshPage: PropTypes.func.isRequired,
   iFilter: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 

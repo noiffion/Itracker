@@ -8,12 +8,17 @@ const AlertMsg = props => {
   const setAlert = props.setAlert;
   const alertMsg = props.alertMsg;
   const alertShow = props.alertShow;
+  const normalMsg = props.normalMsg;
   
   return (
     <section id="alertSection">
-      <Toast id="alertToast" autohide
-        onClose={() => setAlert(false, ' ')} 
-        show={alertShow} delay={3000} 
+      <Toast  
+        id="alertToast" 
+        className={normalMsg ? 'successToast' : 'errorToast'}
+        onClose={() => setAlert(' ', true, false)} 
+        show={alertShow} 
+        delay={3000} 
+        autohide
       >
         <Toast.Body >
           {alertMsg}
@@ -28,6 +33,7 @@ AlertMsg.propTypes = {
   setAlert: PropTypes.func.isRequired,
   alertMsg: PropTypes.string.isRequired,
   alertShow: PropTypes.bool.isRequired,
+  normalMsg: PropTypes.bool.isRequired,
 }
 
 

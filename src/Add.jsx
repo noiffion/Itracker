@@ -13,20 +13,23 @@ import Modal               from 'react-bootstrap/Modal';
 const Add = props => {
   const [show, setShow] = useState(false);
 
-  //TODO: 
-  const showError = (error) => {
-    console.log(error);
-  }
-
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
+    const effort = Number(event.target.effortAdd.value);
+    if (effort < 1 || effort > 10) {
+      const effErr = new Error(`Invalid Effort value`);
+      props.setAlert(`${effErr.message}`, false);
+      throw effErr;
+    }
 
     const newIssue = {
-      owner: form.ownerInput.value,
-      description: form.descInput.value,
       state: 'New',
+      owner: form.ownerAdd.value,
       creation: new Date(),
+      effort: form.effortAdd.value, 
+      completion: null,
+      description: form.descAdd.value,
     };
   
     const postParams = {
@@ -45,10 +48,10 @@ const Add = props => {
           });
       } else {
           response.json()
-          .then(error => showError(`Failed to add issue: ${error.message}`));
+          .then(error => alertMsg(true, `Failed to add issue: ${error.message}`));
       }
     })
-    .catch(err => showError(`Error in sending data to server: ${err.message}`));
+    .catch(err => alertMsg(`Error in sending data to server: ${err.message}`));
   }
 
   return (
@@ -64,12 +67,16 @@ const Add = props => {
           <Modal.Body>
             <Form name="addForm" id="addForm" onSubmit={handleSubmit}>
               <Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control name="descInput" as="input" autoFocus />
+                <Form.Label>Owner</Form.Label>
+                <Form.Control name="ownerAdd" as="input"/>
               </Form.Group>
               <Form.Group>
-                <Form.Label>Owner</Form.Label>
-                <Form.Control name="ownerInput" as="input"/>
+                <Form.Label>Effort</Form.Label>
+                <Form.Control name="effortAdd" as="input"/>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Description</Form.Label>
+                <Form.Control name="descAdd" as="input" autoFocus />
               </Form.Group>
             </Form>
           </Modal.Body>
@@ -91,6 +98,7 @@ const Add = props => {
 
 Add.propTypes = {
   refreshPage: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 

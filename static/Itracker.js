@@ -201,21 +201,26 @@ var Add = function Add(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       show = _useState2[0],
-      setShow = _useState2[1]; //TODO: 
-
-
-  var showError = function showError(error) {
-    console.log(error);
-  };
+      setShow = _useState2[1];
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var form = event.target;
+    var effort = Number(event.target.effortAdd.value);
+
+    if (effort < 1 || effort > 10) {
+      var effErr = new Error("Invalid Effort value");
+      props.setAlert("".concat(effErr.message), false);
+      throw effErr;
+    }
+
     var newIssue = {
-      owner: form.ownerInput.value,
-      description: form.descInput.value,
       state: 'New',
-      creation: new Date()
+      owner: form.ownerAdd.value,
+      creation: new Date(),
+      effort: form.effortAdd.value,
+      completion: null,
+      description: form.descAdd.value
     };
     var postParams = {
       method: 'POST',
@@ -232,11 +237,11 @@ var Add = function Add(props) {
         });
       } else {
         response.json().then(function (error) {
-          return showError("Failed to add issue: ".concat(error.message));
+          return alertMsg(true, "Failed to add issue: ".concat(error.message));
         });
       }
     })["catch"](function (err) {
-      return showError("Error in sending data to server: ".concat(err.message));
+      return alertMsg("Error in sending data to server: ".concat(err.message));
     });
   };
 
@@ -259,13 +264,16 @@ var Add = function Add(props) {
     name: "addForm",
     id: "addForm",
     onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
-    name: "descInput",
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Owner"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
+    name: "ownerAdd",
+    as: "input"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Effort"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
+    name: "effortAdd",
+    as: "input"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
+    name: "descAdd",
     as: "input",
     autoFocus: true
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Owner"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
-    name: "ownerInput",
-    as: "input"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_7___default.a.Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_ButtonToolbar__WEBPACK_IMPORTED_MODULE_5___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     type: "submit",
     form: "addForm",
@@ -279,7 +287,8 @@ var Add = function Add(props) {
 };
 
 Add.propTypes = {
-  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Add);
 
@@ -311,23 +320,26 @@ var AlertMsg = function AlertMsg(props) {
   var setAlert = props.setAlert;
   var alertMsg = props.alertMsg;
   var alertShow = props.alertShow;
+  var normalMsg = props.normalMsg;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "alertSection"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default.a, {
     id: "alertToast",
-    autohide: true,
+    className: normalMsg ? 'successToast' : 'errorToast',
     onClose: function onClose() {
-      return setAlert(false, ' ');
+      return setAlert(' ', true, false);
     },
     show: alertShow,
-    delay: 3000
+    delay: 3000,
+    autohide: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default.a.Body, null, alertMsg)));
 };
 
 AlertMsg.propTypes = {
   setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   alertMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  alertShow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
+  alertShow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
+  normalMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (AlertMsg);
 
@@ -763,7 +775,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
 /* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _Add_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Add.jsx */ "./src/Add.jsx");
-/* harmony import */ var _AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AlertMsg.jsx */ "./src/AlertMsg.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -783,7 +794,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // Header.jsx
-
 
 
 
@@ -871,7 +881,8 @@ var Header = function Header(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-filter"
   }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    refreshPage: props.refreshPage
+    refreshPage: props.refreshPage,
+    setAlert: props.setAlert
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a, {
     id: "user-dropdown",
     navbar: true,
@@ -886,7 +897,8 @@ var Header = function Header(props) {
 Header.propTypes = {
   canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
@@ -969,7 +981,8 @@ function (_React$Component) {
       maxPageNum: 0,
       iPerPage: 20,
       alertShow: false,
-      alertMsg: ' '
+      alertMsg: ' ',
+      normalMsg: true
     };
     _this.canvasToggle = _this.canvasToggle.bind(_assertThisInitialized(_this));
     _this.setAlert = _this.setAlert.bind(_assertThisInitialized(_this));
@@ -1003,10 +1016,13 @@ function (_React$Component) {
     }
   }, {
     key: "setAlert",
-    value: function setAlert(bool, msg) {
+    value: function setAlert(msg) {
+      var normal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var show = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       this.setState({
-        alertShow: bool,
-        alertMsg: msg
+        alertMsg: msg,
+        normalMsg: normal,
+        alertShow: show
       });
     }
   }, {
@@ -1040,11 +1056,11 @@ function (_React$Component) {
           });
         } else {
           response.json().then(function (error) {
-            setAlert(true, "Failed to fetch issues: ".concat(error.message));
+            setAlert("Failed to fetch issues: ".concat(error.message), false);
           });
         }
       })["catch"](function (err) {
-        setAlert(true, 'Error in fetching data from server:', err);
+        setAlert("Error in fetching data from server: ".concat(err), false);
       });
     }
   }, {
@@ -1201,9 +1217,9 @@ function (_React$Component) {
         fetch("/api/issues/".concat(id), {
           method: 'DELETE'
         }).then(function (response) {
-          var success = [true, "Successfully deleted the issue"];
-          var failure = [true, "Failed to delete the issue!"];
-          response.ok ? setAlert.apply(void 0, success) : setAlert.apply(void 0, failure);
+          var success = "Successfully deleted the issue";
+          var failure = "Failed to delete the issue!";
+          response.ok ? setAlert(success) : setAlert(failure);
         })["catch"](function (error) {
           return console.log(error);
         });
@@ -1216,9 +1232,9 @@ function (_React$Component) {
           body: JSON.stringify(rowsToDelete)
         };
         fetch("/api/issues/deleteMany", delParams).then(function (response) {
-          var success = [true, "Successfully deleted the issues"];
-          var failure = [true, "Failed to delete the issues"];
-          response.ok ? setAlert.apply(void 0, success) : setAlert.apply(void 0, failure);
+          var success = "Successfully deleted the issues";
+          var failure = "Failed to delete the issues";
+          response.ok ? setAlert(success) : setAlert(failure);
         })["catch"](function (error) {
           return console.log(error);
         });
@@ -1241,9 +1257,9 @@ function (_React$Component) {
             return resp;
           });
           var plural = issueNumber > 1 ? 's' : '';
-          var success = [true, "Successfully updated the issue".concat(plural, ".")];
-          var failure = [true, "Failed to update the issue".concat(plural, "!")];
-          allRight ? setAlert.apply(void 0, success) : setAlert.apply(void 0, failure);
+          var success = "Successfully updated the issue".concat(plural, ".");
+          var failure = "Failed to update the issue".concat(plural, "!");
+          allRight ? setAlert(success) : setAlert(failure);
         }
       };
 
@@ -1261,16 +1277,14 @@ function (_React$Component) {
               date = new Date(date);
 
               if (date.toString() === 'Invalid Date') {
-                var dateErr = new Error("Invalid ".concat(property, " date! /").concat(row._id.substr(-4), "/"));
-                setAlert(true, "".concat(dateErr.message));
+                var dateErr = new Error("".concat(row._id.substr(-4), ": Invalid ").concat(property, " date!"));
+                setAlert("".concat(dateErr.message), false);
                 throw dateErr;
               }
 
-              console.log(date, new Date(issue.creation));
-
               if (property === 'completion' && date < new Date(issue.creation)) {
-                var seqErr = new Error("Completion date should come after creation date!");
-                setAlert(true, "".concat(seqErr.message));
+                var seqErr = new Error("Completion should be later than creation!");
+                setAlert("".concat(seqErr.message), false);
                 throw seqErr;
               }
 
@@ -1292,18 +1306,13 @@ function (_React$Component) {
         })["catch"](function (error) {
           currentIssue++;
           respOKs.push(false);
-          setAlert(true, "Error in sending data to server: ".concat(error.message));
+          setAlert("Error in sending data to server: ".concat(error.message), false);
         });
       });
     }
   }, {
     key: "submitChanges",
     value: function submitChanges(event) {
-      /*
-      if (Object.keys(this.state.invalidFields).length !== 0) {
-        return;
-      }
-      */
       var issues = this.state.issues;
       this.deleteIssues(issues);
       this.updateIssues(issues);
@@ -1323,7 +1332,8 @@ function (_React$Component) {
         canvasToggle: this.canvasToggle,
         iFilter: this.iFilter,
         maxPageNum: this.state.maxPageNum,
-        pageGo: this.pageGo
+        pageGo: this.pageGo,
+        setAlert: this.setAlert
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
         actualPage: this.state.actualPage,
         maxPageNum: this.state.maxPageNum,
@@ -1331,7 +1341,8 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], {
         setAlert: this.setAlert,
         alertMsg: this.state.alertMsg,
-        alertShow: this.state.alertShow
+        alertShow: this.state.alertShow,
+        normalMsg: this.state.normalMsg
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
         issues: this.state.issues,
         actualPage: this.state.actualPage,
@@ -1616,7 +1627,7 @@ var BeingEdited = function BeingEdited(props) {
     size: "sm",
     as: "select",
     placeholder: props.iss.state
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'owner',
