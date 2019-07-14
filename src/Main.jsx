@@ -1,13 +1,11 @@
 // Main.jsx
 
 import 'whatwg-fetch';
-import React, { Fragment } from 'react';
-import ReactDOM            from 'react-dom';
-import PropTypes           from 'prop-types';
-import Table               from 'react-bootstrap/Table';
-import Button              from 'react-bootstrap/Button';
-import OffCanvasBody       from './OffCanvasBody.jsx';
-import OffCanvasMenu       from './OffCanvasMenu.jsx';
+import React         from 'react';
+import ReactDOM      from 'react-dom';
+import PropTypes     from 'prop-types';
+import OffCanvasBody from './OffCanvasBody.jsx';
+import OffCanvasMenu from './OffCanvasMenu.jsx';
 
 
 class Main extends React.Component {

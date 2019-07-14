@@ -8,11 +8,6 @@ import Button         from 'react-bootstrap/Button';
 import Navbar         from 'react-bootstrap/Navbar';
 import Dropdown       from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { 
-  OffCanvas,
-  OffCanvasMenu,
-  OffCanvasBody
-}                     from 'react-offcanvas';
 import Add            from './Add.jsx';
 
 

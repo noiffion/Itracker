@@ -5,9 +5,6 @@ import PropTypes           from 'prop-types';
 import Row                 from 'react-bootstrap/Row';
 import Form                from 'react-bootstrap/Form';
 import Button              from 'react-bootstrap/Button';
-import InputGroup          from 'react-bootstrap/InputGroup';
-import Modal               from 'react-bootstrap/Modal';
-import InfiniteCalendar    from 'react-infinite-calendar';
 import DatePicker          from './DatePicker.jsx';
 
 

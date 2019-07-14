@@ -16,12 +16,6 @@ const Add = props => {
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
-    const effort = Number(event.target.effortAdd.value);
-    if (effort < 1 || effort > 10) {
-      const effErr = new Error(`Invalid Effort value`);
-      props.setAlert(`${effErr.message}`, false);
-      throw effErr;
-    }
 
     const newIssue = {
       state: 'New',
@@ -54,6 +48,18 @@ const Add = props => {
     .catch(err => alertMsg(`Error in sending data to server: ${err.message}`));
   }
 
+  const optionMaker = (unique) => {
+    const options = [];
+
+    const recOpt = (till, current) => {
+      if (current > till) return;
+      options.push(<option key={current+unique}> {current} </option>);
+      return recOpt(till, current+1);
+    }
+    recOpt(10, 1);
+    return options;
+  }
+
   return (
     <Nav.Item>
       <Button id="createIssueModal" variant="light" onClick={() => setShow(true)}>
@@ -72,7 +78,9 @@ const Add = props => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Effort</Form.Label>
-                <Form.Control name="effortAdd" as="input"/>
+                <Form.Control name="effortAdd" as="select">
+                  {optionMaker('effortAdd')}
+                </Form.Control>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Description</Form.Label>

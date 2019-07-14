@@ -1,7 +1,6 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
 import Toast     from 'react-bootstrap/Toast';
-import Button    from 'react-bootstrap/Button';
 
 
 const AlertMsg = props => {
