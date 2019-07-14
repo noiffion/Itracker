@@ -4,18 +4,10 @@ import 'whatwg-fetch';
 import React, { Fragment } from 'react';
 import ReactDOM            from 'react-dom';
 import PropTypes           from 'prop-types';
-import {
-  OffCanvas,
-  OffCanvasMenu,
-  OffCanvasBody
-}                          from 'react-offcanvas';
 import Table               from 'react-bootstrap/Table';
 import Button              from 'react-bootstrap/Button';
-import Header              from './Header.jsx';
-import Filter              from './Filter.jsx';
-import Paginator           from './Paginator.jsx';
-import TableOfIssues       from './TableOfIssues.jsx';
-import AlertMsg            from './AlertMsg.jsx';
+import OffCanvasBody       from './OffCanvasBody.jsx';
+import OffCanvasMenu       from './OffCanvasMenu.jsx';
 
 
 class Main extends React.Component {
@@ -317,65 +309,53 @@ class Main extends React.Component {
 
   render() {
     return (
-      <OffCanvas
-        width={160} transitionDuration={200} position={"left"}
-        effect={"push"} isMenuOpened={this.state.filterOn}
-      >
-        <OffCanvasBody>
-          <Header
-            refreshPage={this.refreshPage} 
-            canvasToggle={this.canvasToggle} 
-            iFilter={this.iFilter}
-            maxPageNum={this.state.maxPageNum}
-            pageGo={this.pageGo}
-            setAlert={this.setAlert}
-          />
-          <Paginator
-            actualPage={this.state.actualPage} 
-            maxPageNum={this.state.maxPageNum}
-            pageGo={this.pageGo}
-          />
-          <AlertMsg 
-            setAlert={this.setAlert}
-            alertMsg={this.state.alertMsg}
-            alertShow={this.state.alertShow}
-            normalMsg={this.state.normalMsg}
-          />
-          <TableOfIssues
-            issues={this.state.issues}
-            actualPage={this.state.actualPage}
-            iPerPage={this.state.iPerPage}
-            refreshPage={this.refreshPage}
-            submitChanges={this.submitChanges}
-            selectSingleRow={this.selectSingleRow}
-            cancelSingleRow={this.cancelSingleRow}
-            deleteSingleRow={this.deleteSingleRow}
-            selectAll={this.selectAll}
-            selectDelAll={this.selectDelAll}
-            unSelectDelAll={this.unSelectDelAll}
-            cancelAll={this.cancelAll}
-          />
-          <Paginator 
-            actualPage={this.state.actualPage} 
-            maxPageNum={this.state.maxPageNum}
-            pageGo={this.pageGo}
-          />
-          <footer>
-            <span> Source: </span>
-            <a href="https://github.com/noiffion/Itracker.git" target="_blank">
-               <i className="fab fa-github" style={{fontSize: '24px'}}></i>
-            </a>
-          </footer>
+      <React.Fragment>
+        <OffCanvasBody
+          width={160}
+          transitionDuration={200}
+          position={"left"}
+          effect={"push"}
+          isMenuOpened={this.state.filterOn}
+          refreshPage={this.refreshPage} 
+          canvasToggle={this.canvasToggle} 
+          iFilter={this.iFilter}
+          pageGo={this.pageGo}
+          setAlert={this.setAlert}
+          actualPage={this.state.actualPage} 
+          maxPageNum={this.state.maxPageNum}
+          alertMsg={this.state.alertMsg}
+          alertShow={this.state.alertShow}
+          normalMsg={this.state.normalMsg}
+          issues={this.state.issues}
+          iPerPage={this.state.iPerPage}
+          submitChanges={this.submitChanges}
+          selectSingleRow={this.selectSingleRow}
+          cancelSingleRow={this.cancelSingleRow}
+          deleteSingleRow={this.deleteSingleRow}
+          selectAll={this.selectAll}
+          selectDelAll={this.selectDelAll}
+          unSelectDelAll={this.unSelectDelAll}
+          cancelAll={this.cancelAll}
+        >
         </OffCanvasBody>
-        <OffCanvasMenu>
-          <Filter iFilter={this.iFilter} canvasToggle={this.canvasToggle} />
+        <OffCanvasMenu
+          width={160}
+          transitionDuration={200}
+          position={"left"}
+          effect={"push"}
+          isMenuOpened={this.state.filterOn}
+          iFilter={this.iFilter}
+          canvasToggle={this.canvasToggle}
+        >
         </OffCanvasMenu>
-      </OffCanvas>
+      </React.Fragment>
     );
   }
 }
 
+
 const mainNode = document.getElementById('main');
 ReactDOM.render(<Main />, mainNode);
+
 
 if (module.hot) module.hot.accept();
