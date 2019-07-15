@@ -206,14 +206,6 @@ var Add = function Add(props) {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var form = event.target;
-    var effort = Number(event.target.effortAdd.value);
-
-    if (effort < 1 || effort > 10) {
-      var effErr = new Error("Invalid Effort value");
-      props.setAlert("".concat(effErr.message), false);
-      throw effErr;
-    }
-
     var newIssue = {
       state: 'New',
       owner: form.ownerAdd.value,
@@ -245,6 +237,21 @@ var Add = function Add(props) {
     });
   };
 
+  var optionMaker = function optionMaker(unique) {
+    var options = [];
+
+    var recOpt = function recOpt(till, current) {
+      if (current > till) return;
+      options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: current + unique
+      }, " ", current, " "));
+      return recOpt(till, current + 1);
+    };
+
+    recOpt(10, 1);
+    return options;
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_3___default.a.Item, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     id: "createIssueModal",
     variant: "light",
@@ -269,8 +276,8 @@ var Add = function Add(props) {
     as: "input"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Effort"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
     name: "effortAdd",
-    as: "input"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
+    as: "select"
+  }, optionMaker('effortAdd'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Label, null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_6___default.a.Control, {
     name: "descAdd",
     as: "input",
     autoFocus: true
@@ -309,9 +316,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Toast */ "./node_modules/react-bootstrap/Toast.js");
 /* harmony import */ var react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__);
-
 
 
 
@@ -465,12 +469,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/InputGroup */ "./node_modules/react-bootstrap/InputGroup.js");
-/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/Modal.js");
-/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_infinite_calendar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-infinite-calendar */ "./node_modules/react-infinite-calendar/es/index.js");
-/* harmony import */ var _DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DatePicker.jsx */ "./src/DatePicker.jsx");
+/* harmony import */ var _DatePicker_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.jsx */ "./src/DatePicker.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -480,9 +479,6 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 // Filter.jsx
-
-
-
 
 
 
@@ -720,13 +716,13 @@ var Filter = function Filter(props) {
     onChange: onChangeDesc
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " From: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, " From: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     date: from,
     subType: "from",
     onChangeDate: onChangeDate
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
-  }, " Until: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, " Until: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     date: until,
     subType: "until",
     onChangeDate: onChangeDate
@@ -772,9 +768,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/DropdownButton */ "./node_modules/react-bootstrap/DropdownButton.js");
 /* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _Add_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Add.jsx */ "./src/Add.jsx");
+/* harmony import */ var _Add_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Add.jsx */ "./src/Add.jsx");
+/* harmony import */ var _Login_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Login.jsx */ "./src/Login.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -880,7 +875,7 @@ var Header = function Header(props) {
     variant: "light"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-filter"
-  }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     refreshPage: props.refreshPage,
     setAlert: props.setAlert
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -891,7 +886,9 @@ var Header = function Header(props) {
     as: CustomToggle
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ellipsis-h"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, null, "Logout")))));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
+    href: "login"
+  }, "Login")))));
 };
 
 Header.propTypes = {
@@ -901,6 +898,121 @@ Header.propTypes = {
   setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./src/Login.jsx":
+/*!***********************!*\
+  !*** ./src/Login.jsx ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// Login.jsx
+
+
+
+var Login = function Login(props) {
+  var toParams = function toParams(query) {
+    var q = query.replace(/^\??\//, '');
+    return q.split('&').reduce(function (values, param) {
+      var _param$split = param.split('='),
+          _param$split2 = _slicedToArray(_param$split, 2),
+          key = _param$split2[0],
+          value = _param$split2[1];
+
+      values[key] = value;
+      return values;
+    }, {});
+  };
+
+  var toQuery = function toQuery(params) {
+    var delimiter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '&';
+    var keys = Object.keys(params);
+    return keys.reduce(function (str, key, index) {
+      var query = "".concat(str).concat(key, "=").concat(params[key]);
+      if (index < keys.length - 1) query += delimiter;
+      return query;
+    }, '');
+  };
+
+  var onRequest = function onRequest() {
+    return props.onRequest();
+  };
+
+  var onSuccess = function onSuccess(data) {
+    if (!data.code) return onFailure(new Error('\'code\' not found'));
+    props.onSuccess(data);
+  };
+
+  var onFailure = function onFailure(error) {
+    return props.onFailure(error);
+  };
+
+  var onBtnClick = function onBtnClick() {
+    var clientId = props.clientId,
+        scope = props.scope,
+        redirectUri = props.redirectUri;
+    var search = toQuery({
+      client_id: clientId,
+      scope: scope,
+      redirect_uri: redirectUri
+    });
+    var popup = LoginPop.begin('github-oauth-authorize', "https://github.com/login/oauth/authorize?".concat(search), {
+      height: 1000,
+      width: 600
+    });
+    onRequest();
+    popup.then(function (data) {
+      return onSuccess(data);
+    }, function (error) {
+      return onFailure(error);
+    });
+  };
+
+  var className = props.className,
+      buttonText = props.buttonText,
+      children = props.children;
+  var attrs = {
+    onClick: onBtnClick
+  };
+  if (className) attrs.className = className;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", attrs, children || buttonText);
+};
+
+Login.propTypes = {
+  buttonText: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  clientId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  onRequest: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onSuccess: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onFailure: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  redirectUri: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  scope: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+Login.defaultProps = {
+  buttonText: 'Sign in with GitHub',
+  scope: 'user:email',
+  onRequest: function onRequest() {},
+  onSuccess: function onSuccess() {},
+  onFailure: function onFailure() {}
+};
+/* harmony default export */ __webpack_exports__["default"] = (Login);
 
 /***/ }),
 
@@ -920,17 +1032,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-offcanvas */ "./node_modules/react-offcanvas/lib/index.js");
-/* harmony import */ var react_offcanvas__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Table */ "./node_modules/react-bootstrap/Table.js");
-/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _Header_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Header.jsx */ "./src/Header.jsx");
-/* harmony import */ var _Filter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Filter.jsx */ "./src/Filter.jsx");
-/* harmony import */ var _Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Paginator.jsx */ "./src/Paginator.jsx");
-/* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
-/* harmony import */ var _AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AlertMsg.jsx */ "./src/AlertMsg.jsx");
+/* harmony import */ var _OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OffCanvasBody.jsx */ "./src/OffCanvasBody.jsx");
+/* harmony import */ var _OffCanvasMenu_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./OffCanvasMenu.jsx */ "./src/OffCanvasMenu.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -950,12 +1053,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // Main.jsx
-
-
-
-
-
-
 
 
 
@@ -1321,33 +1418,24 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvas"], {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         width: 160,
         transitionDuration: 200,
         position: "left",
         effect: "push",
-        isMenuOpened: this.state.filterOn
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvasBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        isMenuOpened: this.state.filterOn,
         refreshPage: this.refreshPage,
         canvasToggle: this.canvasToggle,
         iFilter: this.iFilter,
-        maxPageNum: this.state.maxPageNum,
         pageGo: this.pageGo,
-        setAlert: this.setAlert
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        setAlert: this.setAlert,
         actualPage: this.state.actualPage,
         maxPageNum: this.state.maxPageNum,
-        pageGo: this.pageGo
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        setAlert: this.setAlert,
         alertMsg: this.state.alertMsg,
         alertShow: this.state.alertShow,
-        normalMsg: this.state.normalMsg
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        normalMsg: this.state.normalMsg,
         issues: this.state.issues,
-        actualPage: this.state.actualPage,
         iPerPage: this.state.iPerPage,
-        refreshPage: this.refreshPage,
         submitChanges: this.submitChanges,
         selectSingleRow: this.selectSingleRow,
         cancelSingleRow: this.cancelSingleRow,
@@ -1356,22 +1444,15 @@ function (_React$Component) {
         selectDelAll: this.selectDelAll,
         unSelectDelAll: this.unSelectDelAll,
         cancelAll: this.cancelAll
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        actualPage: this.state.actualPage,
-        maxPageNum: this.state.maxPageNum,
-        pageGo: this.pageGo
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Source: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "https://github.com/noiffion/Itracker.git",
-        target: "_blank"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-        className: "fab fa-github",
-        style: {
-          fontSize: '24px'
-        }
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_offcanvas__WEBPACK_IMPORTED_MODULE_4__["OffCanvasMenu"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasMenu_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: 160,
+        transitionDuration: 200,
+        position: "left",
+        effect: "push",
+        isMenuOpened: this.state.filterOn,
         iFilter: this.iFilter,
         canvasToggle: this.canvasToggle
-      })));
+      }));
     }
   }]);
 
@@ -1381,6 +1462,215 @@ function (_React$Component) {
 var mainNode = document.getElementById('main');
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Main, null), mainNode);
 if (false) {}
+
+/***/ }),
+
+/***/ "./src/OffCanvasBody.jsx":
+/*!*******************************!*\
+  !*** ./src/OffCanvasBody.jsx ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Header_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Header.jsx */ "./src/Header.jsx");
+/* harmony import */ var _Paginator_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Paginator.jsx */ "./src/Paginator.jsx");
+/* harmony import */ var _TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableOfIssues.jsx */ "./src/TableOfIssues.jsx");
+/* harmony import */ var _AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AlertMsg.jsx */ "./src/AlertMsg.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// OffCanvasBody.jsx
+
+
+
+
+
+
+
+var OffCanvasBody = function OffCanvasBody(props) {
+  var width = props.width;
+  var transitionDuration = props.transitionDuration;
+  var isMenuOpened = props.isMenuOpened;
+  var position = props.position;
+  var effect = props.effect;
+  var translateX = position === "left" ? 0 : 0;
+  var closedStyle = {
+    transitionDuration: transitionDuration + "ms",
+    transform: "translate(" + translateX + "px, 0px)",
+    backfaceVisibility: "hidden"
+  }; // open state style
+
+  var translateOpenX = position === "left" ? width : -1 * width;
+  translateOpenX = effect === "parallax" ? translateOpenX / 2 : translateOpenX;
+  translateOpenX = effect === "overlay" ? 0 : translateOpenX;
+  var openStyle = {
+    transform: "translate(" + translateOpenX + "px, 0px)"
+  }; // create current state styles
+
+  var currStyle = Object.assign({}, closedStyle);
+
+  if (isMenuOpened) {
+    currStyle = Object.assign({}, currStyle, openStyle);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: _objectSpread({}, currStyle)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    refreshPage: props.refreshPage,
+    canvasToggle: props.canvasToggle,
+    iFilter: props.iFilter,
+    maxPageNum: props.maxPageNum,
+    pageGo: props.pageGo,
+    setAlert: props.setAlert
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    actualPage: props.actualPage,
+    maxPageNum: props.maxPageNum,
+    pageGo: props.pageGo
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    setAlert: props.setAlert,
+    alertMsg: props.alertMsg,
+    alertShow: props.alertShow,
+    normalMsg: props.normalMsg
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TableOfIssues_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    issues: props.issues,
+    actualPage: props.actualPage,
+    iPerPage: props.iPerPage,
+    refreshPage: props.refreshPage,
+    submitChanges: props.submitChanges,
+    selectSingleRow: props.selectSingleRow,
+    cancelSingleRow: props.cancelSingleRow,
+    deleteSingleRow: props.deleteSingleRow,
+    selectAll: props.selectAll,
+    selectDelAll: props.selectDelAll,
+    unSelectDelAll: props.unSelectDelAll,
+    cancelAll: props.cancelAll
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    actualPage: props.actualPage,
+    maxPageNum: props.maxPageNum,
+    pageGo: props.pageGo
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " Source: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://github.com/noiffion/Itracker.git",
+    target: "_blank"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fab fa-github",
+    style: {
+      fontSize: '24px'
+    }
+  }))));
+};
+
+OffCanvasBody.propTypes = {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  isMenuOpened: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  position: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["left", "right"]),
+  effect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["push", "parallax", "overlay"]),
+  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  pageGo: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  actualPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  maxPageNum: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  alertMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  alertShow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
+  normalMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
+  issues: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
+  iPerPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  submitChanges: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  cancelSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  deleteSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  selectAll: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  selectDelAll: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  unSelectDelAll: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  cancelAll: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (OffCanvasBody);
+
+/***/ }),
+
+/***/ "./src/OffCanvasMenu.jsx":
+/*!*******************************!*\
+  !*** ./src/OffCanvasMenu.jsx ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Filter_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Filter.jsx */ "./src/Filter.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// OffCanvasMenu.jsx
+
+
+
+
+var OffCanvasMenu = function OffCanvasMenu(props) {
+  var width = props.width;
+  var transitionDuration = props.transitionDuration;
+  var isMenuOpened = props.isMenuOpened;
+  var position = props.position;
+  var effect = props.effect;
+  var left = position === "left" ? -1 * width + "px" : "auto";
+  var right = position === "left" ? "auto" : -1 * width + "px";
+  var translateX = position === "left" ? -1 * width : 0;
+  var closedStyle = {
+    width: width + "px",
+    position: "fixed",
+    top: "0px",
+    left: left,
+    right: right,
+    transform: "translate(" + translateX + "px, 0px)",
+    transitionDuration: transitionDuration + "ms",
+    backfaceVisibility: "hidden"
+  }; // open state style
+
+  var translateOpenX = position === "left" ? width : -1 * width;
+  var openStyle = {
+    transform: "translate(" + translateOpenX + "px, 0px)"
+  }; // create current state styles
+
+  var currStyle = Object.assign({}, closedStyle);
+
+  if (isMenuOpened) {
+    currStyle = Object.assign({}, currStyle, openStyle);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: _objectSpread({}, currStyle)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    iFilter: props.iFilter,
+    canvasToggle: props.canvasToggle
+  }));
+};
+
+OffCanvasMenu.propTypes = {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  isMenuOpened: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  position: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["left", "right"]),
+  effect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["push", "parallax", "overlay"])
+};
+/* harmony default export */ __webpack_exports__["default"] = (OffCanvasMenu);
 
 /***/ }),
 
@@ -1397,11 +1687,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Form */ "./node_modules/react-bootstrap/Form.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/Pagination.js");
-/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3__);
-
+/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/Pagination.js");
+/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -1417,12 +1704,12 @@ var Paginator = function Paginator(props) {
     if (current === till) return;
 
     if (current === actPg) {
-      pagItems.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Item, {
+      pagItems.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
         key: current + 1,
         active: true
       }, current + 1));
     } else {
-      pagItems.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Item, {
+      pagItems.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
         key: current + 1,
         onClick: function onClick() {
           return pageGo(current);
@@ -1437,26 +1724,26 @@ var Paginator = function Paginator(props) {
     arrFill(max, 0);
     pagiDisplay = pagItems;
   } else {
-    pagiDisplay = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Item, {
+    pagiDisplay = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
       active: true
     }, actPg + 1);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "paginators"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Item, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
     onClick: function onClick() {
       return pageGo(0);
     }
-  }, " 1 "), "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Prev, {
+  }, " 1 "), "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Prev, {
     onClick: function onClick() {
       return actPg > 0 ? pageGo(actPg - 1) : pageGo(0);
     }
-  }), pagiDisplay, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Next, {
+  }), pagiDisplay, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Next, {
     onClick: function onClick() {
       return actPg < max - 1 ? pageGo(actPg + 1) : pageGo(max - 1);
     }
-  }), "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_3___default.a.Item, {
+  }), "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default.a.Item, {
     onClick: function onClick() {
       return pageGo(max - 1);
     }

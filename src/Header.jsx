@@ -9,6 +9,7 @@ import Navbar         from 'react-bootstrap/Navbar';
 import Dropdown       from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Add            from './Add.jsx';
+import Login          from './Login.jsx';
 
 
 class CustomToggle extends React.Component {
@@ -66,7 +67,9 @@ const Header = props => {
             <i className="fas fa-ellipsis-h"></i>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>Logout</Dropdown.Item>
+            <Dropdown.Item href="/login">
+              Login
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Nav>
