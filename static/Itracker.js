@@ -887,7 +887,7 @@ var Header = function Header(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ellipsis-h"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
-    href: "login"
+    href: "/login"
   }, "Login")))));
 };
 
@@ -1153,11 +1153,15 @@ function (_React$Component) {
           });
         } else {
           response.json().then(function (error) {
-            setAlert("Failed to fetch issues: ".concat(error.message), false);
+            _this2.setAlert("Failed to fetch issues", false);
+
+            console.log(error);
           });
         }
-      })["catch"](function (err) {
-        setAlert("Error in fetching data from server: ".concat(err), false);
+      })["catch"](function (error) {
+        _this2.setAlert("Error in fetching data from server", false);
+
+        console.log(error);
       });
     }
   }, {
@@ -1403,7 +1407,7 @@ function (_React$Component) {
         })["catch"](function (error) {
           currentIssue++;
           respOKs.push(false);
-          setAlert("Error in sending data to server: ".concat(error.message), false);
+          setAlert("Error in sending data to server", false);
         });
       });
     }

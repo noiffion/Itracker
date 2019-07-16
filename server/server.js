@@ -1,10 +1,12 @@
-// server.j
+// server.js
 
 const express                   = require('express');
 const session                   = require('express-session');
 const bodyParser                = require('body-parser');
 const cors                      = require('cors');
 const path                      = require('path');
+const partials                  = require('express-partials');
+const methodOverride            = require('method-override');
 const dotenv                    = require('dotenv');
 const { MongoClient, ObjectId } = require('mongodb');
 const fetch                     = require('node-fetch');
@@ -14,40 +16,35 @@ const GitHubStrategy            = require('passport-github2').Strategy;
 const Issue                     = require('./issue.js');
 
 
-const toQuery = (params, delimiter='&') => {
-  const keys = Object.keys(params);
-  return keys.reduce((str, key, index) => {
-    let query = `${str}${key}=${params[key]}`;
-    if (index < (keys.length - 1)) query += delimiter;
-    return query;
-  }, '');
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login')
 }
 
-const app = express();
-app.use(express.static('static'));
-app.use(bodyParser.json());
-
+let Itracker;
 const result = dotenv.config();
 if (result.error) throw result.error;
+const DB_CONNECTION  = process.env.DB;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const GH_ID          = process.env.GH_ID;
+const GH_SECRET      = process.env.GH_SECRET;
 
-let issueTracker;
-let unique;
-
-// mongodb-session
-const connection = process.env.DB;
+const app = express();
 const sessionStore = new MongoDBStore(
   {
-    uri: connection,
+    uri: DB_CONNECTION,
     databaseName: 'Itracker',
     collection: 'sessions'
   },
 );
-
 sessionStore.on('error', error => console.log(error));
 
+app.use(express.static('static'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session(
   {
-    secret: process.env.SESSION_SECRET,
+    secret: SESSION_SECRET,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
     },
@@ -57,84 +54,72 @@ app.use(session(
   })
 );
 
-passport.use(new GitHubStrategy({
-    clientID: process.env.GH_ID,
-    clientSecret: process.env.GH_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-  },
-  (accessToken, refreshToken, profile, cb) => {
-    User.findOrCreate({ githubId: profile.id }, (err, user) => cb(err, user));
-  }
-));
-
+app.use(partials());
+app.use(methodOverride());
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser((user, done) => {    
+  done(null, user);    
+});    
+    
+passport.deserializeUser((user, done) => {    
+  done(null, user);    
+}); 
 
-app.get('login', passport.authenticate('github'));
+passport.use(new GitHubStrategy({
+    clientID: GH_ID,
+    clientSecret: GH_SECRET,
+    callbackURL: "http://localhost:3000/auth/github/callback"
+  },
+  (accessToken, refreshToken, profile, done) => {
+   console.log(accessToken, profile);
+    console.log('Profile: ', profile, '\n');    
+    Itracker.collection('users').findOne({ gh_ID: profile.id })
+    .then(result => { 
+      // console.log(result);
+      if (!result) {
+          Itracker.collection('users').insertOne(
+            { 
+              gh_ID: profile.id,
+              fullName: profile.displayName,
+              userName: profile.username,   
+              profileUrl: profile.profileUrl,
+              emails: profile.emails,
+              avatar_url: profile._json.avatar_url
+            }                                           
+          )  
+          .then(result => {
+            // console.log(Object.keys(result));
+            const insC = result.insertedCount;  
+            const insId = result.insertedId;  
+            console.log(`Successfully inserted: ${insC} (with id of ${insId})`);
+          })
+          .catch(error => console.log(error));
+      }
+      return done(null, profile);
+    })
+    .catch((error) => {
+      console.log(error);
+    }); 
+  }     
+));
 
-app.get('auth/github/callback', 
-        passport.authenticate('github', { failureRedirect: '/login' }),
-        (req, res) => res.redirect('/')
+
+app.get('/login', passport.authenticate('github', { scope: ['user:email'] }));
+
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/' }),
+  (req, res) => { 
+    res.redirect('/');
+  }
 );
 
-
-/*
-app.get('/login', (req, res) => {
-
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789_~-!';
-  unique = chars.split('').map(c => chars[Math.floor(Math.random() * chars.length)]).join('');
-  const params = {
-    client_id: process.env.GH_ID,
-    redirect_uri: 'http://localhost:3000/github/callback',
-    scope: 'user:email',
-    state: unique,
-  }
-  const paramQuery = toQuery(params);
-  res.redirect(`https://github.com/login/oauth/authorize?${paramQuery}`)
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
-
-app.get('/github/callback', (req, res) => {
-  const { code, state } = req.query;
-  if (state !== unique) {
-    return res.redirect('https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)');
-  }
-
-  const params = {
-    grant_type: 'authorization_code',
-    client_id: process.env.GH_ID,
-    client_secret: process.env.GH_SECRET,
-    code: code,
-    state: unique,    
-  };
-  const paramQuery = toQuery(params);
-
-  const post = {
-    method: 'POST',
-    headers: { 
-      'content-type': 'application/json',
-      'accept': 'application/json',
-    },
-  };
-
-  fetch(`https://github.com/login/oauth/access_token?${paramQuery}`, post)
-  .then(resp => { 
-    if (resp) { 
-        console.log(resp);
-        console.log(resp.headers);
-        res.redirect('/');
-    } else {
-        throw new Error('Unauthorized access!');   
-    }
-  })
-  .catch(err => { 
-    console.log(err)
-    res.redirect('/');
-  });
-
-});
-*/
 
 app.get('/api/issues', (req, res) => {
   const filter = {};
@@ -144,7 +129,7 @@ app.get('/api/issues', (req, res) => {
   if (req.query.effort_lte) filter.effort.$lte = parseInt(req.query.effort_lte, 10);
   if (req.query.effort_gte) filter.effort.$gte = parseInt(req.query.effort_gte, 10);
 
-  issueTracker.collection('issues').find(filter).toArray()
+  Itracker.collection('issues').find(filter).toArray()
   .then((issues) => {
     const metadata = { total_count: issues.length };
     res.json({ _metadata: metadata, records: issues })})
@@ -164,7 +149,7 @@ app.delete('/api/issues/:id', (req, res) => {
       return;
   }
 
-  issueTracker.collection('issues').deleteOne({_id: issueId})
+  Itracker.collection('issues').deleteOne({_id: issueId})
   .then((feedback) => {
    const ok = { status: 'OK'};
    const notOk = { status: 'Warning: objects not found'};
@@ -186,13 +171,13 @@ app.post('/api/issues', (req, res) => {
     return;
   }
 
-  issueTracker.collection('issues').insertOne(Issue.cleanupIssue(newIssue))
-  .then(result => issueTracker.collection('issues').findOne({ _id: result.insertedId }))
+  Itracker.collection('issues').insertOne(Issue.cleanupIssue(newIssue))
+  .then(result => Itracker.collection('issues').findOne({ _id: result.insertedId }))
   .then(savedIssue => res.json(savedIssue))
   .catch((error) => {
     console.log(error);
     res.status(500).json({ message: `Internal Server Error: ${error}` });
-    });
+  });
 });
 
 
@@ -207,7 +192,7 @@ app.put('/api/issues/:id', (req, res) => {
       return;
   }
 
-  issueTracker.collection('issues').updateOne({_id: issueID}, 
+  Itracker.collection('issues').updateOne({_id: issueID}, 
     { $set: { 
         state: issue.state, 
         owner: issue.owner,
@@ -238,7 +223,7 @@ app.post('/api/issues/deleteMany', (req, res) => {
       return;
   }
 
-  issueTracker.collection('issues').deleteMany({_id: {$in: issueIDs}})
+  Itracker.collection('issues').deleteMany({_id: {$in: issueIDs}})
   .then((feedback) => {
    const issueNum = issueIDs.length;
    const ok = { status: 'OK'};
@@ -253,14 +238,15 @@ app.post('/api/issues/deleteMany', (req, res) => {
 
 
 app.get('*', (req, res) => {
+  console.log(req.user);
   res.sendFile(path.resolve('static/index.html'));
 });
 
 
 
-MongoClient.connect(connection, { useNewUrlParser: true })
+MongoClient.connect(DB_CONNECTION, { useNewUrlParser: true })
 .then((client) => {
-  issueTracker = client.db('Itracker');
+  Itracker = client.db('Itracker');
   app.listen(3000, () => console.log('App started on port 3000'))
 })
 .catch(error => console.log('ERROR:', error));

@@ -88,12 +88,14 @@ class Main extends React.Component {
         });
       } else {
         response.json().then((error) => {
-          setAlert(`Failed to fetch issues: ${error.message}`, false);
+          this.setAlert(`Failed to fetch issues`, false);
+          console.log(error);
         });
       }
     })
-    .catch((err) => {
-      setAlert(`Error in fetching data from server: ${err}`, false);
+    .catch((error) => {
+      this.setAlert(`Error in fetching data from server`, false);
+      console.log(error);
     });
   }
 
@@ -291,7 +293,7 @@ class Main extends React.Component {
       .catch(error => {
         currentIssue++;
         respOKs.push(false);
-        setAlert(`Error in sending data to server: ${error.message}`, false);
+        setAlert(`Error in sending data to server`, false);
       });
     }); 
   }
