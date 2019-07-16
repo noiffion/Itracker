@@ -67,8 +67,8 @@ const Header = props => {
             <i className="fas fa-ellipsis-h"></i>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="/login">
-              Login
+            <Dropdown.Item id="signIn" href="/auth/github/login">
+              <span>Sign in</span><i className="fab fa-github-square fa-2x"></i>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

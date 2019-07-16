@@ -14,6 +14,7 @@ class Main extends React.Component {
     this.state = {
       issues: [],
       filterOn: false,
+      filterClear: false,
       actualPage: 0,
       maxPageNum: 0,
       iPerPage: 20,
@@ -23,9 +24,9 @@ class Main extends React.Component {
     };
 
     this.canvasToggle = this.canvasToggle.bind(this);
-          
+
     this.setAlert = this.setAlert.bind(this);
-    
+
     this.pageGo = this.pageGo.bind(this);
 
     this.refreshPage = this.refreshPage.bind(this);
@@ -84,6 +85,7 @@ class Main extends React.Component {
           this.setState({ 
             issues: data.records,
             maxPageNum: Math.ceil(data.records.length / this.state.iPerPage),
+            filterClear: false,
           });
         });
       } else {
@@ -304,6 +306,8 @@ class Main extends React.Component {
 
     this.deleteIssues(issues);
     this.updateIssues(issues);
+    const clear = issues.every(issue => issue.filteredIn);
+    if (!clear) this.setState({ filterClear: true });
     this.refreshPage();
   }
 
@@ -344,6 +348,7 @@ class Main extends React.Component {
           position={"left"}
           effect={"push"}
           isMenuOpened={this.state.filterOn}
+          filterClear={this.state.filterClear}  
           iFilter={this.iFilter}
           canvasToggle={this.canvasToggle}
         >

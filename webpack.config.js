@@ -33,12 +33,10 @@ module.exports = {
     contentBase: 'static',
     hot: true,
     inline: true,
-    historyApiFallback: true,
-    proxy: {
-      '/api/*': {
-        target: 'http://localhost:3000',
-      },
-    },
+    proxy: [{
+      context: ['/auth/github', '/api'],
+      target: 'http://localhost:3000',
+    }] 
   },
   devtool: 'source-map',
 };

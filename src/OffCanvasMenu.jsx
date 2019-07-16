@@ -40,7 +40,11 @@ const OffCanvasMenu = props => {
 
   return (
     <div style={{ ...currStyle }} >
-      <Filter iFilter={props.iFilter} canvasToggle={props.canvasToggle} />
+      <Filter
+        iFilter={props.iFilter}
+        canvasToggle={props.canvasToggle}
+        filterClear={props.filterClear}
+      />
     </div>
   );
 }
@@ -50,6 +54,7 @@ OffCanvasMenu.propTypes = {
   width: PropTypes.number,
   transitionDuration: PropTypes.number,
   isMenuOpened: PropTypes.bool,
+  filterClear: PropTypes.bool,
   position: PropTypes.oneOf(["left", "right"]),
   effect: PropTypes.oneOf(["push", "parallax", "overlay"]),
 };

@@ -8,19 +8,25 @@ import Form      from 'react-bootstrap/Form';
 
 export const BeingEdited = props => {
 
+  const stateOptions = () => {
+    const states = ['New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
+    const options = states.map((state, i) => (<option key={state+i}> {state} </option>));
+    return options; 
+  }
+
   const optionMaker = (unique) => {
     const options = [];
 
     const recOpt = (till, current) => {
       if (current > till) return;
-      options.push(<option key={current+unique}> {current} </option>);
+      options.push(<option key={current+unique}> {current} </option>);     
       return recOpt(till, current+1);
     }
     recOpt(10, 1);
     return options;
   }
-        
-  return(
+
+  return (
     <tr>
 
       <td id="issueId" title={props.iss._id}>
@@ -28,31 +34,26 @@ export const BeingEdited = props => {
       </td>
 
       <td id="issueState">
-          <Form.Control name={props.iss._id+'state'} size="sm" as="select" placeholder={props.iss.state} >
-            <option>New</option>
-            <option>Open</option>
-            <option>Assigned</option>
-            <option>Fixed</option>
-            <option>Verified</option>
-            <option>Closed</option>
+          <Form.Control name={props.iss._id+'state'} size="sm" as="select" defaultValue={props.iss.state}>
+            {stateOptions()}
           </Form.Control>
       </td>
 
       <td id="issueOwner">
           <Form.Control name={props.iss._id+'owner'} size="sm" as="input" placeholder={props.iss.owner} />
       </td>
-          
+
       <td id="issueCreation">
-          <Form.Control name={props.iss._id+'creation'} size="sm" as="input"
+          <Form.Control name={props.iss._id+'creation'} size="sm" as="input" 
                         placeholder={props.iss.creation.toDateString()} />
       </td>
-          
+
       <td id="issueEffort">
-          <Form.Control name={props.iss._id+'effort'} size="sm" as="select" placeholder={props.iss.effort} >
+          <Form.Control name={props.iss._id+'effort'} size="sm" as="select" defaultValue={props.iss.effort}>
             {optionMaker('effort')}
           </Form.Control>
       </td>
-          
+
       <td id="issueCompletion">
           <Form.Control name={props.iss._id+'completion'} size="sm" as="input"
             placeholder={props.iss.completion ? props.iss.completion.toDateString() : ''} />

@@ -24,10 +24,11 @@ function ensureAuthenticated(req, res, next) {
 let Itracker;
 const result = dotenv.config();
 if (result.error) throw result.error;
-const DB_CONNECTION  = process.env.DB;
-const SESSION_SECRET = process.env.SESSION_SECRET;
 const GH_ID          = process.env.GH_ID;
 const GH_SECRET      = process.env.GH_SECRET;
+const DB_CONNECTION  = process.env.DB;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
 
 const app = express();
 const sessionStore = new MongoDBStore(
@@ -70,14 +71,12 @@ passport.deserializeUser((user, done) => {
 passport.use(new GitHubStrategy({
     clientID: GH_ID,
     clientSecret: GH_SECRET,
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    callbackURL: "http://localhost:8000/auth/github/callback"
   },
   (accessToken, refreshToken, profile, done) => {
-   console.log(accessToken, profile);
-    console.log('Profile: ', profile, '\n');    
+    // console.log('Profile: ', profile, '\n');    
     Itracker.collection('users').findOne({ gh_ID: profile.id })
     .then(result => { 
-      // console.log(result);
       if (!result) {
           Itracker.collection('users').insertOne(
             { 
@@ -90,7 +89,6 @@ passport.use(new GitHubStrategy({
             }                                           
           )  
           .then(result => {
-            // console.log(Object.keys(result));
             const insC = result.insertedCount;  
             const insId = result.insertedId;  
             console.log(`Successfully inserted: ${insC} (with id of ${insId})`);
@@ -106,17 +104,19 @@ passport.use(new GitHubStrategy({
 ));
 
 
-app.get('/login', passport.authenticate('github', { scope: ['user:email'] }));
+app.get('/auth/github/login', passport.authenticate('github', { scope: ['user:email'] }));
 
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => { 
+    console.log('Logged in');
     res.redirect('/');
   }
 );
 
-app.get('/logout', function(req, res){
+app.get('/auth/github/logout', (req, res) => {
   req.logout();
+  console.log('Logged out');
   res.redirect('/');
 });
 
@@ -237,11 +237,10 @@ app.post('/api/issues/deleteMany', (req, res) => {
 });
 
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   console.log(req.user);
   res.sendFile(path.resolve('static/index.html'));
 });
-
 
 
 MongoClient.connect(DB_CONNECTION, { useNewUrlParser: true })

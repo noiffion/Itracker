@@ -619,7 +619,7 @@ var Filter = function Filter(props) {
   };
 
   var clearFilter = function clearFilter() {
-    filter = filterMaker();
+    var filter = filterMaker();
     Object.keys(filter).forEach(function (key) {
       return filter[key] = 'All';
     });
@@ -648,6 +648,9 @@ var Filter = function Filter(props) {
     return options;
   };
 
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (props.filterClear) clearFilter();
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "sideFilter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -737,7 +740,8 @@ var Filter = function Filter(props) {
 
 Filter.propTypes = {
   iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  filterClear: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 /* harmony default export */ __webpack_exports__["default"] = (Filter);
 
@@ -887,8 +891,11 @@ var Header = function Header(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ellipsis-h"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
-    href: "/login"
-  }, "Login")))));
+    id: "signIn",
+    href: "/auth/github/login"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Sign in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fab fa-github-square fa-2x"
+  }))))));
 };
 
 Header.propTypes = {
@@ -1074,6 +1081,7 @@ function (_React$Component) {
     _this.state = {
       issues: [],
       filterOn: false,
+      filterClear: false,
       actualPage: 0,
       maxPageNum: 0,
       iPerPage: 20,
@@ -1148,7 +1156,8 @@ function (_React$Component) {
 
             _this2.setState({
               issues: data.records,
-              maxPageNum: Math.ceil(data.records.length / _this2.state.iPerPage)
+              maxPageNum: Math.ceil(data.records.length / _this2.state.iPerPage),
+              filterClear: false
             });
           });
         } else {
@@ -1417,6 +1426,12 @@ function (_React$Component) {
       var issues = this.state.issues;
       this.deleteIssues(issues);
       this.updateIssues(issues);
+      var clear = issues.every(function (issue) {
+        return issue.filteredIn;
+      });
+      if (!clear) this.setState({
+        filterClear: true
+      });
       this.refreshPage();
     }
   }, {
@@ -1454,6 +1469,7 @@ function (_React$Component) {
         position: "left",
         effect: "push",
         isMenuOpened: this.state.filterOn,
+        filterClear: this.state.filterClear,
         iFilter: this.iFilter,
         canvasToggle: this.canvasToggle
       }));
@@ -1663,7 +1679,8 @@ var OffCanvasMenu = function OffCanvasMenu(props) {
     style: _objectSpread({}, currStyle)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     iFilter: props.iFilter,
-    canvasToggle: props.canvasToggle
+    canvasToggle: props.canvasToggle,
+    filterClear: props.filterClear
   }));
 };
 
@@ -1671,6 +1688,7 @@ OffCanvasMenu.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   isMenuOpened: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  filterClear: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   position: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["left", "right"]),
   effect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["push", "parallax", "overlay"])
 };
@@ -1893,6 +1911,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var BeingEdited = function BeingEdited(props) {
+  var stateOptions = function stateOptions() {
+    var states = ['New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
+    var options = states.map(function (state, i) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: state + i
+      }, " ", state, " ");
+    });
+    return options;
+  };
+
   var optionMaker = function optionMaker(unique) {
     var options = [];
 
@@ -1917,8 +1945,8 @@ var BeingEdited = function BeingEdited(props) {
     name: props.iss._id + 'state',
     size: "sm",
     as: "select",
-    placeholder: props.iss.state
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    defaultValue: props.iss.state
+  }, stateOptions())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     name: props.iss._id + 'owner',
@@ -1938,7 +1966,7 @@ var BeingEdited = function BeingEdited(props) {
     name: props.iss._id + 'effort',
     size: "sm",
     as: "select",
-    placeholder: props.iss.effort
+    defaultValue: props.iss.effort
   }, optionMaker('effort'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCompletion"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {

@@ -1,11 +1,11 @@
 // Filter.jsx
 
-import React, { useState } from 'react';
-import PropTypes           from 'prop-types';
-import Row                 from 'react-bootstrap/Row';
-import Form                from 'react-bootstrap/Form';
-import Button              from 'react-bootstrap/Button';
-import DatePicker          from './DatePicker.jsx';
+import React, { useState, useEffect } from 'react';
+import PropTypes                      from 'prop-types';
+import Row                            from 'react-bootstrap/Row';
+import Form                           from 'react-bootstrap/Form';
+import Button                         from 'react-bootstrap/Button';
+import DatePicker                     from './DatePicker.jsx';
 
 
 const Filter = props => {
@@ -19,7 +19,6 @@ const Filter = props => {
   const [until, setUntil] = useState('All');
 
   const iFilter = props.iFilter;
-
 
   const filterMaker = () => {
     return {
@@ -101,7 +100,7 @@ const Filter = props => {
   }
 
   const clearFilter = () => {
-    filter = filterMaker();
+    const filter = filterMaker();
     Object.keys(filter).forEach(key => filter[key] = 'All');
 
     setState('All');
@@ -126,6 +125,10 @@ const Filter = props => {
     recOpt(10, 1);
     return options;
   }
+
+  useEffect(() => {
+    if (props.filterClear) clearFilter();
+  })
 
   return (
     <section id="sideFilter">
@@ -215,7 +218,8 @@ const Filter = props => {
 
 Filter.propTypes = {
   iFilter: PropTypes.func.isRequired,
-  canvasToggle: PropTypes.func.isRequired,
+  canvasToggle: PropTypes.func.isRequired, 
+  filterClear: PropTypes.bool,
 };
 
 

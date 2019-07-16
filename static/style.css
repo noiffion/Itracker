@@ -25,6 +25,12 @@ body {
   text-align: 'center';
 }
 
+#signIn {
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
+}
+
 #sideFilter {
   background-color: snow;
   height: 100vh;
