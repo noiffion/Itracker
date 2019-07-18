@@ -10,7 +10,7 @@ import Form                from 'react-bootstrap/Form';
 import Modal               from 'react-bootstrap/Modal';
 
 
-const Add = props => {
+function Add(props) {
   const [show, setShow] = useState(false);
 
   const handleSubmit = event => {
@@ -106,7 +106,6 @@ const Add = props => {
 
 Add.propTypes = {
   refreshPage: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
 };
 
 

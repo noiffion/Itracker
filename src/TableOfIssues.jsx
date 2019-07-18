@@ -8,10 +8,10 @@ import Row          from './Row.jsx';
 import tableButtons from './tableButtons.jsx';
 
 
-const TableOfIssues = props => {
+function TableOfIssues(props) {
   const p = props;
-  const actual = props.actualPage;
-  const iPerPage = props.iPerPage;
+  const actual = p.actualPage;
+  const iPerPage = p.iPerPage;
   const issueRows = [];
   let ind = -1;
   let anyEdit = false;
@@ -25,9 +25,9 @@ const TableOfIssues = props => {
            <Row
              key={issue._id}
              issue={issue}
-             selectSingleRow={props.selectSingleRow}
-             cancelSingleRow={props.cancelSingleRow}
-             deleteSingleRow={props.deleteSingleRow}
+             selectSingleRow={p.selectSingleRow}
+             cancelSingleRow={p.cancelSingleRow}
+             deleteSingleRow={p.deleteSingleRow}
            />
        );
       } else {

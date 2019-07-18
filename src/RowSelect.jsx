@@ -5,12 +5,12 @@ import PropTypes                     from 'prop-types';
 import { BeingEdited, BeingDeleted } from './RowSelEdDel.jsx';
 
 
-const RowSelect = props => {
+function RowSelect(props) {
   const del = props.issue.selected === 'delete';
 
   const beingEdited = (
     <BeingEdited
-      iss={props.issue}
+      issue={props.issue}
       deleteSingleRow={props.deleteSingleRow}
       cancelSingleRow={props.cancelSingleRow}
     />
@@ -18,7 +18,7 @@ const RowSelect = props => {
 
   const beingDeleted = (
     <BeingDeleted 
-      iss={props.issue}
+      issue={props.issue}
       cancelDelete={props.selectSingleRow}
       cancelSingleRow={props.cancelSingleRow}
     />

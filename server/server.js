@@ -18,7 +18,7 @@ const Issue                     = require('./issue.js');
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
-  res.redirect('/login')
+  res.redirect('/')
 }
 
 let Itracker;
@@ -109,14 +109,12 @@ app.get('/auth/github/login', passport.authenticate('github', { scope: ['user:em
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => { 
-    console.log('Logged in');
     res.redirect('/');
   }
 );
 
 app.get('/auth/github/logout', (req, res) => {
   req.logout();
-  console.log('Logged out');
   res.redirect('/');
 });
 
@@ -131,8 +129,13 @@ app.get('/api/issues', (req, res) => {
 
   Itracker.collection('issues').find(filter).toArray()
   .then((issues) => {
-    const metadata = { total_count: issues.length };
-    res.json({ _metadata: metadata, records: issues })})
+    const metadata = { total_count: issues.length, auth: false };
+    if (req.isAuthenticated()) { 
+      metadata.auth = true;
+      metadata.username = req.user.username;
+      metadata.avatar = req.user._json.avatar_url;
+    }
+    res.json({ metadata: metadata, records: issues })})
   .catch((error) => {
     console.log(error);
     res.status(500).json({ message: `Internal Server Error: ${error}` });
@@ -194,7 +197,7 @@ app.put('/api/issues/:id', (req, res) => {
 
   Itracker.collection('issues').updateOne({_id: issueID}, 
     { $set: { 
-        state: issue.state, 
+        issueState: issue.issueState, 
         owner: issue.owner,
         effort: parseInt(issue.effort, 10), 
         creation: issue.creation,

@@ -8,10 +8,10 @@ import TableOfIssues  from './TableOfIssues.jsx';
 import AlertMsg       from './AlertMsg.jsx';
 
 
-const OffCanvasBody = props => {
+function OffCanvasBody(props) {
   const width = props.width;
   const transitionDuration = props.transitionDuration;
-  const isMenuOpened = props.isMenuOpened;
+  const filterBar = props.filterBar;
   const position = props.position;
   const effect = props.effect;
 
@@ -33,7 +33,7 @@ const OffCanvasBody = props => {
 
   // create current state styles
   let currStyle = Object.assign({}, closedStyle);
-  if (isMenuOpened) {
+  if (filterBar) {
     currStyle = Object.assign({}, currStyle, openStyle);
   }
 
@@ -45,7 +45,8 @@ const OffCanvasBody = props => {
         iFilter={props.iFilter}
         maxPageNum={props.maxPageNum}
         pageGo={props.pageGo}
-        setAlert={props.setAlert}
+        displayAlert={props.displayAlert}
+        signIn={props.signIn}
       />
       <Paginator
         actualPage={props.actualPage}
@@ -53,7 +54,7 @@ const OffCanvasBody = props => {
         pageGo={props.pageGo}
       />
       <AlertMsg
-        setAlert={props.setAlert}
+        displayAlert={props.displayAlert}
         alertMsg={props.alertMsg}
         alertShow={props.alertShow}
         normalMsg={props.normalMsg}
@@ -91,14 +92,15 @@ const OffCanvasBody = props => {
 OffCanvasBody.propTypes = {
   width: PropTypes.number,
   transitionDuration: PropTypes.number,
-  isMenuOpened: PropTypes.bool,
+  filterBar: PropTypes.bool,
   position: PropTypes.oneOf(["left", "right"]),
   effect: PropTypes.oneOf(["push", "parallax", "overlay"]),
+  signIn: PropTypes.object.isRequired,
   refreshPage: PropTypes.func.isRequired,
   canvasToggle: PropTypes.func.isRequired,
   iFilter: PropTypes.func.isRequired,
   pageGo: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
+  displayAlert: PropTypes.func.isRequired,
   actualPage: PropTypes.number.isRequired,
   maxPageNum: PropTypes.number.isRequired,
   alertMsg: PropTypes.string,

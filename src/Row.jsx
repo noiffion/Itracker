@@ -3,10 +3,10 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
 import RowNormal from './RowNormal.jsx';
-import RowSelect   from './RowSelect.jsx';
+import RowSelect from './RowSelect.jsx';
 
 
-const Row = props => {
+function Row(props) {
   const selected = props.issue.selected;
 
   const rowNormal = (

@@ -8,127 +8,22 @@ import Button                         from 'react-bootstrap/Button';
 import DatePicker                     from './DatePicker.jsx';
 
 
-const Filter = props => {
-  const [modal, setModal] = useState(false);
-  const [state, setState] = useState('All');
-  const [owner, setOwner] = useState('');
-  const [description, setDesc] = useState('');
-  const [effortGte, setEffGte] = useState(1);
-  const [effortLte, setEffLte] = useState(10);
-  const [from, setFrom] = useState('All');
-  const [until, setUntil] = useState('All');
+function Filter(props) {
 
-  const iFilter = props.iFilter;
+  const f = props.filter;
+  // console.log(f);
 
-  const filterMaker = () => {
-    return {
-      state: state,
-      owner: owner || 'All',
-      description: description || 'All',
-      effort: (effortGte === 1 && effortLte === 10) ? 'All' : [effortGte, effortLte],
-      creation: (from === 'All' && until === 'All') ? 'All' : [from, until],
-    };
-  }
-
-  const onChangeState = (event) => {
-    const filter = filterMaker();
-    const tValue = event.target.value;
-    filter.state = tValue;
-    iFilter(filter);
-    setState(tValue);
-  }
-
-  const onChangeOwner = (event) => {
-    const filter = filterMaker();
-    const tValue = event.target.value.toLowerCase();
-    (tValue === '') ? filter.owner = 'All' : filter.owner = tValue;
-    iFilter(filter);
-    setOwner(tValue);
-  }
-
-  const onChangeDate = (date, subType) => {
-    const filter = filterMaker();
-    if (subType === 'from') {
-      setFrom(date);
-      if (date === 'All') {
-        until === 'All' ? filter.creation = 'All' : filter.creation = [new Date(1), until];
-      } else {
-        until === 'All' ? filter.creation = [date, new Date(2100, 0, 1)] : filter.creation = [date, until];
-      } 
-    } else if (subType === 'until') {
-      setUntil(date);
-      if (date === 'All') {
-        from === 'All' ? filter.creation = 'All' : filter.creation = [from, new Date(2100, 0, 1)];
-      } else {
-        from === 'All' ? filter.creation = [new Date(1), date] : filter.creation = [from, date];
-      }
-    }
-    iFilter(filter);
-  }
-
-  const onChangeEffort = (event, subType) => {
-    const filter = filterMaker();
-    const tValue = Number(event.target.value);
-    if (tValue > 0 && tValue < 11) {
-      if (subType === 'gte' && tValue <= effortLte) {
-          setEffGte(tValue);
-          if (tValue === 1 && effortLte === 10) {
-            filter.effort = 'All';
-            iFilter(filter);
-            return;
-          }
-          filter.effort = [tValue, effortLte];
-      } else if (subType === 'lte' && tValue >= effortGte){
-          setEffLte(tValue);
-          if (effortGte === 1 && tValue === 10) {
-            filter.effort = 'All';
-            iFilter(filter);
-            return;
-          }
-          filter.effort = [effortGte, tValue];
-      }
-      iFilter(filter);
-    }
-  }
-
-  const onChangeDesc = (event) => {
-    const filter = filterMaker();
-    const tValue = event.target.value.toLowerCase();
-    (tValue === '') ? filter.description = 'All' : filter.description = tValue;
-    iFilter(filter);
-    setDesc(tValue);
-  }
-
-  const clearFilter = () => {
-    const filter = filterMaker();
-    Object.keys(filter).forEach(key => filter[key] = 'All');
-
-    setState('All');
-    setOwner('');
-    setDesc('');
-    setEffGte(1);
-    setEffLte(10);
-    setFrom('All');
-    setUntil('All');
-
-    iFilter(filter);
-  }
-
-  const optionMaker = (unique) => {
-    const options = [];
-
-    const recOpt = (till, current) => {
-      if (current > till) return;
-      options.push(<option key={current+unique}> {current} </option>);
-      return recOpt(till, current+1);
-    }
-    recOpt(10, 1);
+  const stateOptions = () => {
+    const states = ['All', 'New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
+    const options = states.map((state, i) => (<option key={state+i}> {state} </option>));
     return options;
   }
 
-  useEffect(() => {
-    if (props.filterClear) clearFilter();
-  })
+  const optionMaker = (current, till, unique, options=[]) => { 
+    if (current > till) return options;
+    options.push(<option key={current+unique}> {current} </option>);
+    return optionMaker(current+1, till, unique, options);
+  }
 
   return (
     <section id="sideFilter">
@@ -143,68 +38,64 @@ const Filter = props => {
 
         <Form.Text sm={2}> State: </Form.Text>
         <Form.Group as={Row} id="stateFilter">
-          <Form.Control as="select" value={state}
-            onChange={onChangeState} size="sm"
+          <Form.Control as="select" value={f.issueState}
+            onChange={(event) => props.iFilter(event, 'issueState')} size="sm"
           >
-            <option>All</option>
-            <option>New</option>
-            <option>Open</option>
-            <option>Assigned</option>
-            <option>Fixed</option>
-            <option>Verified</option>
-            <option>Closed</option>
+            {stateOptions()}
           </Form.Control>
         </Form.Group>
 
         <Form.Text sm={2}> Owner: </Form.Text>
         <Form.Group id="ownerFilter" type="text">
-          <Form.Control type="text" size="sm" placeholder="Name" value={owner}
-            onChange={onChangeOwner} 
+          <Form.Control type="text" size="sm" placeholder="Name" value={f.owner}
+            onChange={(event) => props.iFilter(event, 'owner')} 
           />
         </Form.Group>
          
         <Form.Text sm={2}> Effort: </Form.Text>
         <Form.Row id="effortFilter"> 
           <Form.Group id="effortGte">
-            <Form.Control as="select" value={effortGte}
-              onChange={(event) => onChangeEffort(event, 'gte')} size="sm"
+            <Form.Control as="select" value={f.effortGte}
+              onChange={(event) => props.iFilter(event, 'effortGte')} size="sm"
             >
-            {optionMaker('effortGte')}
+            {optionMaker(1, 10, 'effortGte')}
             </Form.Control>
           </Form.Group>
           <Form.Text>&nbsp;―&nbsp;</Form.Text>
           <Form.Group id="effortLte">
-            <Form.Control as="select" value={effortLte}
-              onChange={(event) => onChangeEffort(event, 'lte')} size="sm"
+            <Form.Control as="select" value={f.effortLte}
+              onChange={(event) => props.iFilter(event, 'effortLte')} size="sm"
             >
-            {optionMaker('effortLte')}
+            {optionMaker(1, 10, 'effortLte')}
             </Form.Control>
           </Form.Group>
         </Form.Row>
 
         <Form.Text sm={2}> Description </Form.Text>
         <Form.Group id="descFilter" type="text">
-          <Form.Control type="text" size="sm" placeholder="Description" value={description}
-            onChange={onChangeDesc}
+          <Form.Control type="text" size="sm" placeholder="Description" value={f.description}
+            onChange={(event) => props.iFilter(event, 'description')}
           />
         </Form.Group>
 
         <Form.Text sm={2}> From: </Form.Text>
         <DatePicker 
-          date={from}
-          subType="from"
-          onChangeDate={onChangeDate}
+          date={f.from}
+          type="from"
+          iFilter={props.iFilter}
         />
 
         <Form.Text sm={2}> Until: </Form.Text>
         <DatePicker 
-          date={until}
-          subType="until"
-          onChangeDate={onChangeDate} 
+          date={f.until}
+          type="until"
+          iFilter={props.iFilter}
         />
 
         <Form.Group>
-          <Button id="clearFilter" variant="success" onClick={clearFilter}>
+          <Button id="clearFilter" variant="success" 
+                  onClick={(event) => props.iFilter(event, 'clearFilter')}
+          >
             <i className="fas fa-undo-alt"></i>&nbsp;Clear
           </Button>
         </Form.Group>
@@ -218,8 +109,8 @@ const Filter = props => {
 
 Filter.propTypes = {
   iFilter: PropTypes.func.isRequired,
-  canvasToggle: PropTypes.func.isRequired, 
-  filterClear: PropTypes.bool,
+  filter: PropTypes.object.isRequired,
+  canvasToggle: PropTypes.func.isRequired,
 };
 
 

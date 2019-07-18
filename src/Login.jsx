@@ -4,7 +4,7 @@ import React                 from 'react';
 import PropTypes             from 'prop-types';
 
 
-const Login = props => {
+function Login(props) {
 
   const toParams = (query) => {
     const q = query.replace(/^\??\//, '');

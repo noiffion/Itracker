@@ -8,7 +8,7 @@ const validIssueStatus = {
 };
 
 const issueFieldType = {
-  state: 'required',
+  issueState: 'required',
   owner: 'required',
   effort: 'optional',
   creation: 'required',
@@ -41,7 +41,7 @@ function validateIssue(issue) {
     }
   });
 
-  if (!validIssueStatus[issue.state]) errors.push(`${issue.state} is not a valid status.`);
+  if (!validIssueStatus[issue.issueState]) errors.push(`${issue.issueState} is not a valid status.`);
 
   return (errors.length ? errors.join('; ') : null);
 }

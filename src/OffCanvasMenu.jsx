@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import Filter    from './Filter.jsx';
 
 
-const OffCanvasMenu = props => {
+function OffCanvasMenu(props) {
   const width = props.width;
   const transitionDuration = props.transitionDuration;
-  const isMenuOpened = props.isMenuOpened;
+  const filterBar = props.filterBar;
   const position = props.position;
   const effect = props.effect;
 
@@ -34,7 +34,7 @@ const OffCanvasMenu = props => {
 
   // create current state styles
   let currStyle = Object.assign({}, closedStyle);
-  if (isMenuOpened) {
+  if (filterBar) {
     currStyle = Object.assign({}, currStyle, openStyle);
   }
 
@@ -43,7 +43,7 @@ const OffCanvasMenu = props => {
       <Filter
         iFilter={props.iFilter}
         canvasToggle={props.canvasToggle}
-        filterClear={props.filterClear}
+        filter={props.filter}
       />
     </div>
   );
@@ -53,8 +53,9 @@ const OffCanvasMenu = props => {
 OffCanvasMenu.propTypes = {
   width: PropTypes.number,
   transitionDuration: PropTypes.number,
-  isMenuOpened: PropTypes.bool,
-  filterClear: PropTypes.bool,
+  filter: PropTypes.object.isRequired,
+  filterBar: PropTypes.bool,
+  iFilter: PropTypes.func.isRequired,
   position: PropTypes.oneOf(["left", "right"]),
   effect: PropTypes.oneOf(["push", "parallax", "overlay"]),
 };

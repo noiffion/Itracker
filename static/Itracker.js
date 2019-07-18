@@ -197,7 +197,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Add = function Add(props) {
+function Add(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       show = _useState2[0],
@@ -291,11 +291,10 @@ var Add = function Add(props) {
       return setShow(false);
     }
   }, "Cancel")))));
-};
+}
 
 Add.propTypes = {
-  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Add);
 
@@ -320,8 +319,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var AlertMsg = function AlertMsg(props) {
-  var setAlert = props.setAlert;
+function AlertMsg(props) {
+  var displayAlert = props.displayAlert;
   var alertMsg = props.alertMsg;
   var alertShow = props.alertShow;
   var normalMsg = props.normalMsg;
@@ -331,16 +330,16 @@ var AlertMsg = function AlertMsg(props) {
     id: "alertToast",
     className: normalMsg ? 'successToast' : 'errorToast',
     onClose: function onClose() {
-      return setAlert(' ', true, false);
+      return displayAlert(' ', true, false);
     },
     show: alertShow,
     delay: 3000,
     autohide: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default.a.Body, null, alertMsg)));
-};
+}
 
 AlertMsg.propTypes = {
-  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  displayAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   alertMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   alertShow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
   normalMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
@@ -382,7 +381,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var DatePicker = function DatePicker(props) {
+function DatePicker(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       modal = _useState2[0],
@@ -400,14 +399,14 @@ var DatePicker = function DatePicker(props) {
     onClick: function onClick() {
       return setModal(true);
     }
-  }, props.date === 'All' ? 'All' : props.date.toLocaleDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  }, props.date === 'All' ? 'All' : new Date(props.date).toLocaleDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a, {
     show: modal,
     onHide: function onHide() {
       return setModal(false);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Header, {
     closeButton: true
-  }, props.subType === 'from' ? 'From' : 'Until'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Body, {
+  }, props.type === 'from' ? 'From' : 'Until'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Body, {
     style: {
       display: 'flex',
       justifyContent: 'center'
@@ -434,17 +433,18 @@ var DatePicker = function DatePicker(props) {
     }
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_3___default.a.Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     variant: "primary",
-    onClick: function onClick() {
-      props.onChangeDate(selectedDate, props.subType);
+    onClick: function onClick(event) {
+      event.target.value = selectedDate;
+      props.iFilter(event, props.type);
       setDate('All');
       setModal(false);
     }
   }, "Pick date"))));
-};
+}
 
 DatePicker.propTypes = {
-  onChangeDate: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  subType: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (DatePicker);
 
@@ -470,14 +470,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _DatePicker_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.jsx */ "./src/DatePicker.jsx");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 // Filter.jsx
 
 
@@ -486,171 +478,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Filter = function Filter(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      modal = _useState2[0],
-      setModal = _useState2[1];
+function Filter(props) {
+  var f = props.filter; // console.log(f);
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
-      _useState4 = _slicedToArray(_useState3, 2),
-      state = _useState4[0],
-      setState = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      owner = _useState6[0],
-      setOwner = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState8 = _slicedToArray(_useState7, 2),
-      description = _useState8[0],
-      setDesc = _useState8[1];
-
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
-      _useState10 = _slicedToArray(_useState9, 2),
-      effortGte = _useState10[0],
-      setEffGte = _useState10[1];
-
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
-      _useState12 = _slicedToArray(_useState11, 2),
-      effortLte = _useState12[0],
-      setEffLte = _useState12[1];
-
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
-      _useState14 = _slicedToArray(_useState13, 2),
-      from = _useState14[0],
-      setFrom = _useState14[1];
-
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('All'),
-      _useState16 = _slicedToArray(_useState15, 2),
-      until = _useState16[0],
-      setUntil = _useState16[1];
-
-  var iFilter = props.iFilter;
-
-  var filterMaker = function filterMaker() {
-    return {
-      state: state,
-      owner: owner || 'All',
-      description: description || 'All',
-      effort: effortGte === 1 && effortLte === 10 ? 'All' : [effortGte, effortLte],
-      creation: from === 'All' && until === 'All' ? 'All' : [from, until]
-    };
-  };
-
-  var onChangeState = function onChangeState(event) {
-    var filter = filterMaker();
-    var tValue = event.target.value;
-    filter.state = tValue;
-    iFilter(filter);
-    setState(tValue);
-  };
-
-  var onChangeOwner = function onChangeOwner(event) {
-    var filter = filterMaker();
-    var tValue = event.target.value.toLowerCase();
-    tValue === '' ? filter.owner = 'All' : filter.owner = tValue;
-    iFilter(filter);
-    setOwner(tValue);
-  };
-
-  var onChangeDate = function onChangeDate(date, subType) {
-    var filter = filterMaker();
-
-    if (subType === 'from') {
-      setFrom(date);
-
-      if (date === 'All') {
-        until === 'All' ? filter.creation = 'All' : filter.creation = [new Date(1), until];
-      } else {
-        until === 'All' ? filter.creation = [date, new Date(2100, 0, 1)] : filter.creation = [date, until];
-      }
-    } else if (subType === 'until') {
-      setUntil(date);
-
-      if (date === 'All') {
-        from === 'All' ? filter.creation = 'All' : filter.creation = [from, new Date(2100, 0, 1)];
-      } else {
-        from === 'All' ? filter.creation = [new Date(1), date] : filter.creation = [from, date];
-      }
-    }
-
-    iFilter(filter);
-  };
-
-  var onChangeEffort = function onChangeEffort(event, subType) {
-    var filter = filterMaker();
-    var tValue = Number(event.target.value);
-
-    if (tValue > 0 && tValue < 11) {
-      if (subType === 'gte' && tValue <= effortLte) {
-        setEffGte(tValue);
-
-        if (tValue === 1 && effortLte === 10) {
-          filter.effort = 'All';
-          iFilter(filter);
-          return;
-        }
-
-        filter.effort = [tValue, effortLte];
-      } else if (subType === 'lte' && tValue >= effortGte) {
-        setEffLte(tValue);
-
-        if (effortGte === 1 && tValue === 10) {
-          filter.effort = 'All';
-          iFilter(filter);
-          return;
-        }
-
-        filter.effort = [effortGte, tValue];
-      }
-
-      iFilter(filter);
-    }
-  };
-
-  var onChangeDesc = function onChangeDesc(event) {
-    var filter = filterMaker();
-    var tValue = event.target.value.toLowerCase();
-    tValue === '' ? filter.description = 'All' : filter.description = tValue;
-    iFilter(filter);
-    setDesc(tValue);
-  };
-
-  var clearFilter = function clearFilter() {
-    var filter = filterMaker();
-    Object.keys(filter).forEach(function (key) {
-      return filter[key] = 'All';
+  var stateOptions = function stateOptions() {
+    var states = ['All', 'New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
+    var options = states.map(function (state, i) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: state + i
+      }, " ", state, " ");
     });
-    setState('All');
-    setOwner('');
-    setDesc('');
-    setEffGte(1);
-    setEffLte(10);
-    setFrom('All');
-    setUntil('All');
-    iFilter(filter);
-  };
-
-  var optionMaker = function optionMaker(unique) {
-    var options = [];
-
-    var recOpt = function recOpt(till, current) {
-      if (current > till) return;
-      options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: current + unique
-      }, " ", current, " "));
-      return recOpt(till, current + 1);
-    };
-
-    recOpt(10, 1);
     return options;
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (props.filterClear) clearFilter();
-  });
+  var optionMaker = function optionMaker(current, till, unique) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+    if (current > till) return options;
+    options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      key: current + unique
+    }, " ", current, " "));
+    return optionMaker(current + 1, till, unique, options);
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "sideFilter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -670,10 +519,12 @@ var Filter = function Filter(props) {
     id: "stateFilter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     as: "select",
-    value: state,
-    onChange: onChangeState,
+    value: f.issueState,
+    onChange: function onChange(event) {
+      return props.iFilter(event, 'issueState');
+    },
     size: "sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Open"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Assigned"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fixed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Closed"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+  }, stateOptions())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " Owner: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
     id: "ownerFilter",
@@ -682,8 +533,10 @@ var Filter = function Filter(props) {
     type: "text",
     size: "sm",
     placeholder: "Name",
-    value: owner,
-    onChange: onChangeOwner
+    value: f.owner,
+    onChange: function onChange(event) {
+      return props.iFilter(event, 'owner');
+    }
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " Effort: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Row, {
@@ -692,21 +545,21 @@ var Filter = function Filter(props) {
     id: "effortGte"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     as: "select",
-    value: effortGte,
+    value: f.effortGte,
     onChange: function onChange(event) {
-      return onChangeEffort(event, 'gte');
+      return props.iFilter(event, 'effortGte');
     },
     size: "sm"
-  }, optionMaker('effortGte'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, null, "\xA0\u2015\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
+  }, optionMaker(1, 10, 'effortGte'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, null, "\xA0\u2015\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
     id: "effortLte"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     as: "select",
-    value: effortLte,
+    value: f.effortLte,
     onChange: function onChange(event) {
-      return onChangeEffort(event, 'lte');
+      return props.iFilter(event, 'effortLte');
     },
     size: "sm"
-  }, optionMaker('effortLte')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
+  }, optionMaker(1, 10, 'effortLte')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " Description "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, {
     id: "descFilter",
@@ -715,33 +568,37 @@ var Filter = function Filter(props) {
     type: "text",
     size: "sm",
     placeholder: "Description",
-    value: description,
-    onChange: onChangeDesc
+    value: f.description,
+    onChange: function onChange(event) {
+      return props.iFilter(event, 'description');
+    }
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " From: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    date: from,
-    subType: "from",
-    onChangeDate: onChangeDate
+    date: f.from,
+    type: "from",
+    iFilter: props.iFilter
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Text, {
     sm: 2
   }, " Until: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DatePicker_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    date: until,
-    subType: "until",
-    onChangeDate: onChangeDate
+    date: f.until,
+    type: "until",
+    iFilter: props.iFilter
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Group, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     id: "clearFilter",
     variant: "success",
-    onClick: clearFilter
+    onClick: function onClick(event) {
+      return props.iFilter(event, 'clearFilter');
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-undo-alt"
   }), "\xA0Clear"))));
-};
+}
 
 Filter.propTypes = {
   iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  filterClear: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+  filter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Filter);
 
@@ -838,7 +695,25 @@ function (_React$Component) {
   return CustomToggle;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-var Header = function Header(props) {
+function Header(props) {
+  var logIn = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
+    className: "userInfos"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "You are not signed in ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
+    id: "signIn",
+    href: "/auth/github/login"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Sign in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fab fa-github-square fa-2x"
+  })));
+  var logOut = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
+    className: "userInfos"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.signIn.username, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: props.signIn.avatar,
+    height: "20",
+    width: "20"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
+    id: "loggedIn",
+    href: "/auth/github/logout"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Sign out")));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5___default.a, {
     id: "navbar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5___default.a.Brand, null, "Issue Tracker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -881,7 +756,7 @@ var Header = function Header(props) {
     className: "fas fa-filter"
   }), ' ', "Filter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     refreshPage: props.refreshPage,
-    setAlert: props.setAlert
+    displayAlert: props.displayAlert
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a, {
     id: "user-dropdown",
     navbar: true,
@@ -890,19 +765,15 @@ var Header = function Header(props) {
     as: CustomToggle
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ellipsis-h"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Item, {
-    id: "signIn",
-    href: "/auth/github/login"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Sign in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fab fa-github-square fa-2x"
-  }))))));
-};
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_6___default.a.Menu, null, props.signIn.loggedIn ? logOut : logIn))));
+}
 
 Header.propTypes = {
+  signIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  displayAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
@@ -933,7 +804,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Login = function Login(props) {
+function Login(props) {
   var toParams = function toParams(query) {
     var q = query.replace(/^\??\//, '');
     return q.split('&').reduce(function (values, param) {
@@ -999,7 +870,7 @@ var Login = function Login(props) {
   };
   if (className) attrs.className = className;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", attrs, children || buttonText);
-};
+}
 
 Login.propTypes = {
   buttonText: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -1037,10 +908,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OffCanvasBody.jsx */ "./src/OffCanvasBody.jsx");
-/* harmony import */ var _OffCanvasMenu_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./OffCanvasMenu.jsx */ "./src/OffCanvasMenu.jsx");
+/* harmony import */ var _OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OffCanvasBody.jsx */ "./src/OffCanvasBody.jsx");
+/* harmony import */ var _OffCanvasMenu_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OffCanvasMenu.jsx */ "./src/OffCanvasMenu.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1066,7 +935,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Main =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1079,9 +947,22 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
     _this.state = {
+      signIn: {
+        loggedIn: false,
+        username: null,
+        avatar: null
+      },
       issues: [],
-      filterOn: false,
-      filterClear: false,
+      filter: {
+        issueState: 'All',
+        owner: '',
+        from: 'All',
+        until: 'All',
+        effortGte: 1,
+        effortLte: 10,
+        description: ''
+      },
+      filterBar: false,
       actualPage: 0,
       maxPageNum: 0,
       iPerPage: 20,
@@ -1090,10 +971,13 @@ function (_React$Component) {
       normalMsg: true
     };
     _this.canvasToggle = _this.canvasToggle.bind(_assertThisInitialized(_this));
-    _this.setAlert = _this.setAlert.bind(_assertThisInitialized(_this));
+    _this.displayAlert = _this.displayAlert.bind(_assertThisInitialized(_this));
     _this.pageGo = _this.pageGo.bind(_assertThisInitialized(_this));
+    _this.issuesFillWith = _this.issuesFillWith.bind(_assertThisInitialized(_this));
     _this.refreshPage = _this.refreshPage.bind(_assertThisInitialized(_this));
+    _this.inOut = _this.inOut.bind(_assertThisInitialized(_this));
     _this.iFilter = _this.iFilter.bind(_assertThisInitialized(_this));
+    _this.clearFilter = _this.clearFilter.bind(_assertThisInitialized(_this));
     _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
     _this.selectDelAll = _this.selectDelAll.bind(_assertThisInitialized(_this));
     _this.unSelectDelAll = _this.unSelectDelAll.bind(_assertThisInitialized(_this));
@@ -1101,7 +985,12 @@ function (_React$Component) {
     _this.selectSingleRow = _this.selectSingleRow.bind(_assertThisInitialized(_this));
     _this.deleteSingleRow = _this.deleteSingleRow.bind(_assertThisInitialized(_this));
     _this.cancelSingleRow = _this.cancelSingleRow.bind(_assertThisInitialized(_this));
+    _this.singleRowDel = _this.singleRowDel.bind(_assertThisInitialized(_this));
+    _this.multiRowDel = _this.multiRowDel.bind(_assertThisInitialized(_this));
     _this.deleteIssues = _this.deleteIssues.bind(_assertThisInitialized(_this));
+    _this.feedbackAlert = _this.feedbackAlert.bind(_assertThisInitialized(_this));
+    _this.propertyUpdate = _this.propertyUpdate.bind(_assertThisInitialized(_this));
+    _this.updateFetch = _this.updateFetch.bind(_assertThisInitialized(_this));
     _this.updateIssues = _this.updateIssues.bind(_assertThisInitialized(_this));
     _this.submitChanges = _this.submitChanges.bind(_assertThisInitialized(_this));
     return _this;
@@ -1110,18 +999,18 @@ function (_React$Component) {
   _createClass(Main, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.loadData();
+      this.refreshPage();
     }
   }, {
     key: "canvasToggle",
     value: function canvasToggle() {
       this.setState({
-        filterOn: !this.state.filterOn
+        filterBar: !this.state.filterBar
       });
     }
   }, {
-    key: "setAlert",
-    value: function setAlert(msg) {
+    key: "displayAlert",
+    value: function displayAlert(msg) {
       var normal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var show = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       this.setState({
@@ -1131,111 +1020,186 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "loadData",
-    value: function loadData() {
-      var _this2 = this;
-
-      fetch("/api/issues").then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            // console.log('Total count of records:', data._metadata.total_count);
-            data.records.forEach(function (issue) {
-              if (issue.completion) issue.completion = new Date(issue.completion);
-              issue.creation = new Date(issue.creation);
-              issue.onScreen = false;
-              issue.selected = '';
-              issue.filters = {
-                state: true,
-                owner: true,
-                creation: true,
-                effort: true,
-                description: true
-              };
-              issue.filteredIn = true;
-            });
-
-            _this2.setState({
-              issues: data.records,
-              maxPageNum: Math.ceil(data.records.length / _this2.state.iPerPage),
-              filterClear: false
-            });
-          });
-        } else {
-          response.json().then(function (error) {
-            _this2.setAlert("Failed to fetch issues", false);
-
-            console.log(error);
-          });
-        }
-      })["catch"](function (error) {
-        _this2.setAlert("Error in fetching data from server", false);
-
-        console.log(error);
-      });
-    }
-  }, {
-    key: "refreshPage",
-    value: function refreshPage() {
-      this.loadData();
-    }
-  }, {
     key: "pageGo",
     value: function pageGo(pageNum) {
       this.setState({
         actualPage: pageNum
       });
     }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                 Fetch from DB */
+
+  }, {
+    key: "issuesFillWith",
+    value: function issuesFillWith(data) {
+      data.records.forEach(function (issue) {
+        if (issue.completion) issue.completion = new Date(issue.completion);
+        issue.creation = new Date(issue.creation);
+        issue.onScreen = false;
+        issue.selected = '';
+        issue.filters = {
+          issueState: true,
+          owner: true,
+          from: true,
+          until: true,
+          effortGte: true,
+          effortLte: true,
+          description: true
+        };
+        issue.filteredIn = true;
+      });
+      var filter = {
+        issueState: 'All',
+        owner: '',
+        from: 'All',
+        until: 'All',
+        effortGte: 1,
+        effortLte: 10,
+        description: ''
+      };
+      var signIn = {
+        loggedIn: data.metadata.auth,
+        username: data.metadata.username,
+        avatar: data.metadata.avatar
+      };
+      this.setState({
+        signIn: signIn,
+        issues: data.records,
+        filter: filter,
+        maxPageNum: Math.ceil(data.records.length / this.state.iPerPage)
+      });
+    }
+  }, {
+    key: "refreshPage",
+    value: function refreshPage() {
+      var _this2 = this;
+
+      fetch("/api/issues").then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            // console.log('Total count of records:', data._metadata.total_count);
+            _this2.issuesFillWith(data);
+          });
+        } else {
+          response.json().then(function (error) {
+            _this2.displayAlert("Failed to fetch issues", false);
+
+            console.log(error);
+          });
+        }
+      })["catch"](function (error) {
+        _this2.displayAlert("Error in fetching data from server", false);
+
+        console.log(error);
+      });
+    }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                     Filtering */
+
+  }, {
+    key: "clearFilter",
+    value: function clearFilter() {
+      var issues = this.state.issues;
+      issues.forEach(function (issue) {
+        Object.keys(issue.filters).forEach(function (filter) {
+          return issue.filters.filter = true;
+        });
+        issue.filteredIn = true;
+      });
+      var filter = {
+        issueState: 'All',
+        owner: '',
+        from: 'All',
+        until: 'All',
+        effortGte: 1,
+        effortLte: 10,
+        description: ''
+      };
+      this.setState({
+        issues: issues,
+        filter: filter,
+        maxPageNum: Math.ceil(issues.length / this.state.iPerPage) || 1,
+        actualPage: 0
+      });
+    }
+  }, {
+    key: "inOut",
+    value: function inOut(issue, filter, tValue, type, filtIn) {
+      switch (type) {
+        case 'issueState':
+          filtIn = tValue === 'All' || issue.issueState === tValue;
+          filter[type] = tValue;
+          break;
+
+        case 'owner':
+          filtIn = tValue === '' || issue.owner.toLowerCase().includes(tValue.toLowerCase());
+          filter[type] = tValue;
+          break;
+
+        case 'from':
+          filtIn = tValue === 'All' || new Date(tValue) <= issue.creation;
+          filter[type] = tValue;
+          break;
+
+        case 'until':
+          filtIn = tValue === 'All' || new Date(tValue) >= issue.creation;
+          filter[type] = tValue;
+          break;
+
+        case 'effortGte':
+          filtIn = tValue <= issue.effort;
+          filter[type] = tValue;
+          break;
+
+        case 'effortLte':
+          filtIn = tValue >= issue.effort;
+          filter[type] = tValue;
+          break;
+
+        case 'description':
+          filtIn = tValue === '' || issue.description.toLowerCase().includes(tValue.toLowerCase());
+          filter[type] = tValue;
+          break;
+      }
+
+      return filtIn;
+    }
   }, {
     key: "iFilter",
-    value: function iFilter(filter) {
+    value: function iFilter(event, type) {
+      var _this3 = this;
+
+      if (type === 'clearFilter') {
+        this.clearFilter();
+        return;
+      }
+
+      var filter = this.state.filter;
+      var tValue = event.target.value;
       var issues = this.state.issues;
-      var types = Object.keys(filter);
       var count = -1;
       issues.forEach(function (issue) {
-        types.forEach(function (type) {
-          if (filter[type] === 'All') {
-            issue.filters[type] = true;
-          } else if (type === 'state') {
-            if (issue[type] !== filter[type]) {
-              issue.filters[type] = false;
-            } else {
-              issue.filters[type] = true;
-            }
-          } else if (type === 'owner' || type === 'description') {
-            if (!issue[type].toLowerCase().includes(filter[type])) {
-              issue.filters[type] = false;
-            } else {
-              issue.filters[type] = true;
-            }
-          } else if (type === 'effort') {
-            if (issue[type] < filter[type][0] || issue[type] > filter[type][1]) {
-              issue.filters[type] = false;
-            } else {
-              issue.filters[type] = true;
-            }
-          } else if (type === 'creation') {
-            var issueDate = issue[type].valueOf();
-            var from = filter[type][0].valueOf();
-            var until = filter[type][1].valueOf();
-
-            if (issueDate < from || issueDate > until) {
-              issue.filters[type] = false;
-            } else {
-              issue.filters[type] = true;
-            }
-          }
-        });
-        issue.filteredIn = Object.values(issue.filters).every(function (filter) {
-          return filter;
+        var filtIn;
+        filtIn = _this3.inOut(issue, filter, tValue, type, filtIn);
+        issue.filters[type] = filtIn;
+        issue.filteredIn = Object.values(issue.filters).every(function (filtIn) {
+          return filtIn;
         });
         if (issue.filteredIn) count++;
       });
       this.setState({
         issues: issues,
+        filter: filter,
         maxPageNum: Math.ceil(count / this.state.iPerPage) || 1,
         actualPage: 0
       });
     }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                     Selection */
+
   }, {
     key: "selectAll",
     value: function selectAll() {
@@ -1313,141 +1277,178 @@ function (_React$Component) {
         issues: issues
       });
     }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                      Deleting */
+
+  }, {
+    key: "singleRowDel",
+    value: function singleRowDel(id, displayAlert) {
+      fetch("/api/issues/".concat(id), {
+        method: 'DELETE'
+      }).then(function (response) {
+        var success = "Successfully deleted the issue";
+        var failure = "Failed to delete the issue!";
+        response.ok ? displayAlert(success) : displayAlert(failure);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }, {
+    key: "multiRowDel",
+    value: function multiRowDel(rowsToDelete, displayAlert) {
+      var delParams = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(rowsToDelete)
+      };
+      fetch("/api/issues/deleteMany", delParams).then(function (response) {
+        var success = "Successfully deleted the issues";
+        var failure = "Failed to delete the issues";
+        response.ok ? displayAlert(success) : displayAlert(failure);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
   }, {
     key: "deleteIssues",
     value: function deleteIssues(issues) {
-      var setAlert = this.setAlert;
+      var displayAlert = this.displayAlert;
       var rowsToDelete = [];
       issues.forEach(function (issue) {
         if (issue.selected === 'delete') rowsToDelete.push(issue._id);
       });
 
       if (rowsToDelete.length === 1) {
-        var id = rowsToDelete[0];
-        fetch("/api/issues/".concat(id), {
-          method: 'DELETE'
-        }).then(function (response) {
-          var success = "Successfully deleted the issue";
-          var failure = "Failed to delete the issue!";
-          response.ok ? setAlert(success) : setAlert(failure);
-        })["catch"](function (error) {
-          return console.log(error);
-        });
+        this.singleRowDel(rowsToDelete[0], displayAlert);
       } else if (rowsToDelete.length > 1) {
-        var delParams = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(rowsToDelete)
-        };
-        fetch("/api/issues/deleteMany", delParams).then(function (response) {
-          var success = "Successfully deleted the issues";
-          var failure = "Failed to delete the issues";
-          response.ok ? setAlert(success) : setAlert(failure);
-        })["catch"](function (error) {
-          return console.log(error);
-        });
+        this.multiRowDel(rowsToDelete, displayAlert);
       }
+    }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                      Updating */
+
+  }, {
+    key: "feedbackAlert",
+    value: function feedbackAlert(respOKs, issueNumber, displayAlert) {
+      if (respOKs.length === issueNumber) {
+        var allRight = respOKs.every(function (resp) {
+          return resp;
+        });
+        var plural = issueNumber > 1 ? 's' : '';
+        var success = "Successfully updated the issue".concat(plural, ".");
+        var failure = "Failed to update the issue".concat(plural, "!");
+        allRight ? displayAlert(success) : displayAlert(failure);
+      }
+    }
+  }, {
+    key: "propertyUpdate",
+    value: function propertyUpdate(row, issue, property, displayAlert) {
+      var input = document.forms.tableForm["".concat(row._id + property)];
+      input.value ? issue[property] = input.value : issue[property] = input.placeholder;
+      if (property === 'issueState') console.log(input.value, issue[property], input.placeholder);
+
+      if (property === 'creation' || property === 'completion') {
+        if (issue[property]) {
+          var date;
+          date = Date.parse(issue[property]);
+          date = new Date(date);
+
+          if (date.toString() === 'Invalid Date') {
+            var dateErr = new Error("".concat(row._id.substr(-4), ": Invalid ").concat(property, " date!"));
+            displayAlert("".concat(dateErr.message), false);
+            throw dateErr;
+          }
+
+          if (property === 'completion' && date < new Date(issue.creation)) {
+            var seqErr = new Error("Completion should be later than creation!");
+            displayAlert("".concat(seqErr.message), false);
+            throw seqErr;
+          }
+
+          issue[property] = date.toISOString();
+        }
+      }
+    }
+  }, {
+    key: "updateFetch",
+    value: function updateFetch(row, issue, respOKs, issueNumber, displayAlert) {
+      var _this4 = this;
+
+      console.log(issue);
+      var putParams = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(issue)
+      };
+      fetch("/api/issues/".concat(row._id), putParams).then(function (response) {
+        respOKs.push(response.ok ? true : false);
+
+        _this4.feedbackAlert(respOKs, issueNumber, displayAlert);
+      })["catch"](function (error) {
+        console.log(error);
+        respOKs.push(false);
+        displayAlert("Error in sending data to server", false);
+      });
     }
   }, {
     key: "updateIssues",
     value: function updateIssues(issues) {
-      var setAlert = this.setAlert;
+      var _this5 = this;
+
+      var displayAlert = this.displayAlert;
       var rowsToUpdate = issues.filter(function (issue) {
         return issue.selected === 'edit';
       });
       var issueNumber = rowsToUpdate.length;
-      var currentIssue = 0;
       var respOKs = [];
-
-      var feedbackAlert = function feedbackAlert(current) {
-        if (current === issueNumber) {
-          var allRight = respOKs.every(function (resp) {
-            return resp;
-          });
-          var plural = issueNumber > 1 ? 's' : '';
-          var success = "Successfully updated the issue".concat(plural, ".");
-          var failure = "Failed to update the issue".concat(plural, "!");
-          allRight ? setAlert(success) : setAlert(failure);
-        }
-      };
-
       rowsToUpdate.forEach(function (row) {
         var issue = {};
-        var properties = ['state', 'owner', 'creation', 'effort', 'completion', 'description'];
+        var properties = ['issueState', 'owner', 'creation', 'effort', 'completion', 'description'];
         properties.forEach(function (property) {
-          var input = document.forms.tableForm["".concat(row._id + property)];
-          input.value ? issue[property] = input.value : issue[property] = input.placeholder;
-
-          if (property === 'creation' || property === 'completion') {
-            if (issue[property]) {
-              var date;
-              date = Date.parse(issue[property]);
-              date = new Date(date);
-
-              if (date.toString() === 'Invalid Date') {
-                var dateErr = new Error("".concat(row._id.substr(-4), ": Invalid ").concat(property, " date!"));
-                setAlert("".concat(dateErr.message), false);
-                throw dateErr;
-              }
-
-              if (property === 'completion' && date < new Date(issue.creation)) {
-                var seqErr = new Error("Completion should be later than creation!");
-                setAlert("".concat(seqErr.message), false);
-                throw seqErr;
-              }
-
-              issue[property] = date.toISOString();
-            }
-          }
+          _this5.propertyUpdate(row, issue, property, displayAlert);
         });
-        var putParams = {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(issue)
-        };
-        fetch("/api/issues/".concat(row._id), putParams).then(function (response) {
-          currentIssue++;
-          respOKs.push(response.ok ? true : false);
-          feedbackAlert(currentIssue);
-        })["catch"](function (error) {
-          currentIssue++;
-          respOKs.push(false);
-          setAlert("Error in sending data to server", false);
-        });
+
+        _this5.updateFetch(row, issue, respOKs, issueNumber, displayAlert);
       });
     }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                    Submitting */
+
   }, {
     key: "submitChanges",
     value: function submitChanges(event) {
       var issues = this.state.issues;
       this.deleteIssues(issues);
       this.updateIssues(issues);
-      var clear = issues.every(function (issue) {
-        return issue.filteredIn;
-      });
-      if (!clear) this.setState({
-        filterClear: true
-      });
       this.refreshPage();
     }
+    /* ---------------------------------------------------------------------------------------------- */
+
+    /*                                                                                           JSX */
+
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      console.log(this.state.signIn);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         width: 160,
         transitionDuration: 200,
         position: "left",
         effect: "push",
-        isMenuOpened: this.state.filterOn,
+        signIn: this.state.signIn,
+        filterBar: this.state.filterBar,
         refreshPage: this.refreshPage,
         canvasToggle: this.canvasToggle,
         iFilter: this.iFilter,
         pageGo: this.pageGo,
-        setAlert: this.setAlert,
+        displayAlert: this.displayAlert,
         actualPage: this.state.actualPage,
         maxPageNum: this.state.maxPageNum,
         alertMsg: this.state.alertMsg,
@@ -1463,13 +1464,13 @@ function (_React$Component) {
         selectDelAll: this.selectDelAll,
         unSelectDelAll: this.unSelectDelAll,
         cancelAll: this.cancelAll
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasMenu_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasMenu_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         width: 160,
         transitionDuration: 200,
         position: "left",
         effect: "push",
-        isMenuOpened: this.state.filterOn,
-        filterClear: this.state.filterClear,
+        filter: this.state.filter,
+        filterBar: this.state.filterBar,
         iFilter: this.iFilter,
         canvasToggle: this.canvasToggle
       }));
@@ -1516,10 +1517,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var OffCanvasBody = function OffCanvasBody(props) {
+function OffCanvasBody(props) {
   var width = props.width;
   var transitionDuration = props.transitionDuration;
-  var isMenuOpened = props.isMenuOpened;
+  var filterBar = props.filterBar;
   var position = props.position;
   var effect = props.effect;
   var translateX = position === "left" ? 0 : 0;
@@ -1538,7 +1539,7 @@ var OffCanvasBody = function OffCanvasBody(props) {
 
   var currStyle = Object.assign({}, closedStyle);
 
-  if (isMenuOpened) {
+  if (filterBar) {
     currStyle = Object.assign({}, currStyle, openStyle);
   }
 
@@ -1550,13 +1551,14 @@ var OffCanvasBody = function OffCanvasBody(props) {
     iFilter: props.iFilter,
     maxPageNum: props.maxPageNum,
     pageGo: props.pageGo,
-    setAlert: props.setAlert
+    displayAlert: props.displayAlert,
+    signIn: props.signIn
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     actualPage: props.actualPage,
     maxPageNum: props.maxPageNum,
     pageGo: props.pageGo
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AlertMsg_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    setAlert: props.setAlert,
+    displayAlert: props.displayAlert,
     alertMsg: props.alertMsg,
     alertShow: props.alertShow,
     normalMsg: props.normalMsg
@@ -1586,19 +1588,20 @@ var OffCanvasBody = function OffCanvasBody(props) {
       fontSize: '24px'
     }
   }))));
-};
+}
 
 OffCanvasBody.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  isMenuOpened: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  filterBar: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   position: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["left", "right"]),
   effect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["push", "parallax", "overlay"]),
+  signIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   canvasToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   pageGo: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  setAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  displayAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   actualPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
   maxPageNum: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
   alertMsg: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -1644,10 +1647,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var OffCanvasMenu = function OffCanvasMenu(props) {
+function OffCanvasMenu(props) {
   var width = props.width;
   var transitionDuration = props.transitionDuration;
-  var isMenuOpened = props.isMenuOpened;
+  var filterBar = props.filterBar;
   var position = props.position;
   var effect = props.effect;
   var left = position === "left" ? -1 * width + "px" : "auto";
@@ -1671,7 +1674,7 @@ var OffCanvasMenu = function OffCanvasMenu(props) {
 
   var currStyle = Object.assign({}, closedStyle);
 
-  if (isMenuOpened) {
+  if (filterBar) {
     currStyle = Object.assign({}, currStyle, openStyle);
   }
 
@@ -1680,15 +1683,16 @@ var OffCanvasMenu = function OffCanvasMenu(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     iFilter: props.iFilter,
     canvasToggle: props.canvasToggle,
-    filterClear: props.filterClear
+    filter: props.filter
   }));
-};
+}
 
 OffCanvasMenu.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  isMenuOpened: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  filterClear: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  filter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  filterBar: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  iFilter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   position: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["left", "right"]),
   effect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["push", "parallax", "overlay"])
 };
@@ -1715,7 +1719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Paginator = function Paginator(props) {
+function Paginator(props) {
   var pageGo = props.pageGo;
   var actPg = props.actualPage;
   var max = props.maxPageNum;
@@ -1770,7 +1774,7 @@ var Paginator = function Paginator(props) {
       return pageGo(max - 1);
     }
   }, " ", max, " "));
-};
+}
 
 Paginator.propTypes = {
   pageGo: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
@@ -1802,7 +1806,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Row = function Row(props) {
+function Row(props) {
   var selected = props.issue.selected;
   var rowNormal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowNormal_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     issue: props.issue,
@@ -1815,8 +1819,9 @@ var Row = function Row(props) {
     selectSingleRow: props.selectSingleRow
   });
   return selected ? rowSelect : rowNormal;
-};
+}
 
+;
 Row.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
@@ -1847,37 +1852,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var RowNormal = function RowNormal(props) {
-  var iss = props.issue;
+function RowNormal(props) {
+  var is = props.issue;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueId",
-    title: iss._id
-  }, iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    title: is._id
+  }, is._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueState"
-  }, iss.state), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, is.issueState), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
-  }, iss.owner), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, is.owner), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCreation"
-  }, iss.creation.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, is.creation.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueEffort"
-  }, iss.effort), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, is.effort), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCompletion"
-  }, iss.completion ? iss.completion.toDateString() : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, is.completion ? is.completion.toDateString() : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueDescription"
-  }, iss.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, is.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "buttonCell"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
     title: "Edit row",
     variant: "warning",
     size: "sm",
     onClick: function onClick() {
-      return props.selectSingleRow(iss._id);
+      return props.selectSingleRow(is._id);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-edit"
   }))));
-};
+}
 
+;
 RowNormal.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
@@ -1911,6 +1917,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var BeingEdited = function BeingEdited(props) {
+  var is = props.issue;
+
   var stateOptions = function stateOptions() {
     var states = ['New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
     var options = states.map(function (state, i) {
@@ -1921,66 +1929,60 @@ var BeingEdited = function BeingEdited(props) {
     return options;
   };
 
-  var optionMaker = function optionMaker(unique) {
-    var options = [];
-
-    var recOpt = function recOpt(till, current) {
-      if (current > till) return;
-      options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: current + unique
-      }, " ", current, " "));
-      return recOpt(till, current + 1);
-    };
-
-    recOpt(10, 1);
-    return options;
+  var optionMaker = function optionMaker(till, current, unique) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+    if (current > till) return options;
+    options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      key: current + unique
+    }, " ", current, " "));
+    return optionMaker(till, current + 1, unique, options);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueId",
-    title: props.iss._id
-  }, props.iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    title: is._id
+  }, is._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueState"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    name: props.iss._id + 'state',
+    name: is._id + 'issueState',
     size: "sm",
     as: "select",
-    defaultValue: props.iss.state
+    defaultValue: is.issueState
   }, stateOptions())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueOwner"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    name: props.iss._id + 'owner',
+    name: is._id + 'owner',
     size: "sm",
     as: "input",
-    placeholder: props.iss.owner
+    placeholder: is.owner
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCreation"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    name: props.iss._id + 'creation',
+    name: is._id + 'creation',
     size: "sm",
     as: "input",
-    placeholder: props.iss.creation.toDateString()
+    placeholder: is.creation.toDateString()
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueEffort"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    name: props.iss._id + 'effort',
+    name: is._id + 'effort',
     size: "sm",
     as: "select",
-    defaultValue: props.iss.effort
-  }, optionMaker('effort'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    defaultValue: is.effort
+  }, optionMaker(10, 1, 'effort'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueCompletion"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    name: props.iss._id + 'completion',
+    name: is._id + 'completion',
     size: "sm",
     as: "input",
-    placeholder: props.iss.completion ? props.iss.completion.toDateString() : ''
+    placeholder: is.completion ? is.completion.toDateString() : ''
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueDescription"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
-    name: props.iss._id + 'description',
+    name: is._id + 'description',
     size: "sm",
     as: "input",
-    placeholder: props.iss.description
+    placeholder: is.description
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "buttonCell"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -1988,7 +1990,7 @@ var BeingEdited = function BeingEdited(props) {
     variant: "light",
     size: "sm",
     onClick: function onClick() {
-      return props.deleteSingleRow(props.iss._id);
+      return props.deleteSingleRow(is._id);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
@@ -1997,20 +1999,21 @@ var BeingEdited = function BeingEdited(props) {
     variant: "secondary",
     size: "sm",
     onClick: function onClick() {
-      return props.cancelSingleRow(props.iss._id);
+      return props.cancelSingleRow(is._id);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ban"
   }))));
 };
 BeingEdited.propTypes = {
-  iss: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+  issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 var BeingDeleted = function BeingDeleted(props) {
+  var is = props.issue;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "deletedIssueId",
-    title: props.iss._id
-  }, props.iss._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    title: is._id
+  }, is._id.substr(-4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     id: "issueState"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a.Control, {
     disabled: true,
@@ -2059,7 +2062,7 @@ var BeingDeleted = function BeingDeleted(props) {
     variant: "danger",
     size: "sm",
     onClick: function onClick() {
-      return props.cancelDelete(props.iss._id);
+      return props.cancelDelete(is._id);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "far fa-trash-alt"
@@ -2068,14 +2071,14 @@ var BeingDeleted = function BeingDeleted(props) {
     variant: "secondary",
     size: "sm",
     onClick: function onClick() {
-      return props.cancelSingleRow(props.iss._id);
+      return props.cancelSingleRow(is._id);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-ban"
   }))));
 };
 BeingDeleted.propTypes = {
-  iss: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+  issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 
 /***/ }),
@@ -2099,20 +2102,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var RowSelect = function RowSelect(props) {
+function RowSelect(props) {
   var del = props.issue.selected === 'delete';
   var beingEdited = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowSelEdDel_jsx__WEBPACK_IMPORTED_MODULE_2__["BeingEdited"], {
-    iss: props.issue,
+    issue: props.issue,
     deleteSingleRow: props.deleteSingleRow,
     cancelSingleRow: props.cancelSingleRow
   });
   var beingDeleted = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowSelEdDel_jsx__WEBPACK_IMPORTED_MODULE_2__["BeingDeleted"], {
-    iss: props.issue,
+    issue: props.issue,
     cancelDelete: props.selectSingleRow,
     cancelSingleRow: props.cancelSingleRow
   });
   return del ? beingDeleted : beingEdited;
-};
+}
 
 RowSelect.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
@@ -2150,10 +2153,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var TableOfIssues = function TableOfIssues(props) {
+function TableOfIssues(props) {
   var p = props;
-  var actual = props.actualPage;
-  var iPerPage = props.iPerPage;
+  var actual = p.actualPage;
+  var iPerPage = p.iPerPage;
   var issueRows = [];
   var ind = -1;
   var anyEdit = false;
@@ -2166,9 +2169,9 @@ var TableOfIssues = function TableOfIssues(props) {
         issueRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
           key: issue._id,
           issue: issue,
-          selectSingleRow: props.selectSingleRow,
-          cancelSingleRow: props.cancelSingleRow,
-          deleteSingleRow: props.deleteSingleRow
+          selectSingleRow: p.selectSingleRow,
+          cancelSingleRow: p.cancelSingleRow,
+          deleteSingleRow: p.deleteSingleRow
         }));
       } else {
         issue.onScreen = false;
@@ -2194,7 +2197,7 @@ var TableOfIssues = function TableOfIssues(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Owner"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Created\xA0on"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Effort"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Completed\xA0on"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "buttonCell"
   }, anyEdit ? tB.editTable : tB.displayTable))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, issueRows)));
-};
+}
 
 TableOfIssues.propTypes = {
   issues: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,

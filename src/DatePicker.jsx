@@ -7,7 +7,7 @@ import Modal               from 'react-bootstrap/Modal';
 import InfiniteCalendar    from 'react-infinite-calendar';
 
 
-const DatePicker = props => {
+function DatePicker(props) {
   const [modal, setModal] = useState(false);
   const [selectedDate, setDate] = useState('All');
 
@@ -18,12 +18,12 @@ const DatePicker = props => {
         className="datePickerBtns" title="Select a date"
         variant="info" onClick={() => setModal(true)}
       >
-          {props.date === 'All' ? 'All' : props.date.toLocaleDateString()}
+          {props.date === 'All' ? 'All' : new Date(props.date).toLocaleDateString()}
       </Button>
 
       <Modal show={modal} onHide={() => setModal(false)}>
           <Modal.Header closeButton>
-            {props.subType === 'from' ? 'From' : 'Until'}
+            {props.type === 'from' ? 'From' : 'Until'}
           </Modal.Header>
           <Modal.Body style={{display: 'flex', justifyContent: 'center'}}>
           <InfiniteCalendar
@@ -49,8 +49,9 @@ const DatePicker = props => {
           <Modal.Footer>
             <Button 
               variant="primary" 
-              onClick={() => { 
-                props.onChangeDate(selectedDate, props.subType);
+              onClick={(event) => {
+                event.target.value = selectedDate;
+                props.iFilter(event, props.type);
                 setDate('All');
                 setModal(false);
               }}
@@ -66,8 +67,8 @@ const DatePicker = props => {
 
 
 DatePicker.propTypes = {
-  onChangeDate: PropTypes.func.isRequired,
-  subType: PropTypes.string.isRequired
+  iFilter: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 

@@ -3,7 +3,7 @@ import PropTypes  from 'prop-types';
 import Pagination from 'react-bootstrap/Pagination';
 
 
-const Paginator = props => {
+function Paginator(props) {
   const pageGo = props.pageGo;
   const actPg = props.actualPage;
   const max = props.maxPageNum;
