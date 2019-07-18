@@ -65,7 +65,7 @@ function Add(props) {
       <Button id="createIssueModal" variant="light" onClick={() => setShow(true)}>
         <i className="fas fa-plus"></i>{' '}
         Create Issue
-      </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </Button>
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Create Issue</Modal.Title>

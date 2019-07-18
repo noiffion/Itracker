@@ -37,62 +37,73 @@ class CustomToggle extends React.Component {
 function Header(props) {
 
   const logIn = (
-   <React.Fragment>
-    <Dropdown.Item className="userInfos">
-      <span>You are not signed in </span>
-    </Dropdown.Item>
-    <Dropdown.Item id="signIn" href="/auth/github/login">
-      <span>Sign in</span><i className="fab fa-github-square fa-2x"></i>
-    </Dropdown.Item>
-   </React.Fragment>
+    <Dropdown navbar={true} drop="left">
+      <Dropdown.Toggle as={CustomToggle}>
+        <i className="fas fa-ellipsis-h"></i>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item id="signIn" href="/auth/github/login">
+          <span>Sign in</span><i className="fab fa-github-square fa-2x"></i>
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 
   const logOut = (
-   <React.Fragment>
-    <Dropdown.Item className="userInfos">
-      <span>{props.signIn.username} </span><img src={props.signIn.avatar} height="20" width="20"/>
-    </Dropdown.Item>
-    <Dropdown.Item id="loggedIn" href="/auth/github/logout">
-      <span>Sign out</span>
-    </Dropdown.Item> 
-   </React.Fragment>
-  ); 
+    <Dropdown navbar={true} drop="left">
+      <Dropdown.Toggle as={CustomToggle}>
+        <img src={props.signIn.avatar} height="30" width="30"/>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item href="/auth/github/logout">
+          <span>Sign out</span>
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+        
+  const userName = (
+    <Nav.Item>
+      <div style={{fontStyle: 'italic'}}>{props.signIn.username}</div>
+    </Nav.Item>
+  )
+                
 
   return (
     <Navbar id="navbar">
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
       <Nav id="navItems">
-        <Form onSubmit={() => event.preventDefault()}>
-          <Form.Control
-            id="goToPage" title="Number + Enter to go to page"
-            style={{width: '50px', fontSize: '12px', textAlign: 'center'}}
-            size="sm" as="input" placeholder={'Go to'}
-            onFocus={() => event.target.placeholder=''}
-            onBlur={() => event.target.placeholder='Go to'}
-            onKeyPress={() => {
-              if (event.key === 'Enter') {
-                const page = Number(event.target.value);
-                if (page >= 1 && page <= props.maxPageNum) {
-                  event.target.value = '';
-                  props.pageGo(page-1);
+        <Nav.Item>
+          <Form onSubmit={() => event.preventDefault()}>
+            <Form.Control
+              id="goToPage" title="Number + Enter to go to page"
+              style={{width: '50px', fontSize: '12px', textAlign: 'center'}}
+              size="sm" as="input" placeholder={'Go to'}
+              onFocus={() => event.target.placeholder=''}
+              onBlur={() => event.target.placeholder='Go to'}
+              onKeyPress={() => {
+                if (event.key === 'Enter') {
+                  const page = Number(event.target.value);
+                  if (page >= 1 && page <= props.maxPageNum) {
+                    event.target.value = '';
+                    props.pageGo(page-1);
+                  }
                 }
-              }
-            }}
-          />
-        </Form>&nbsp;
-        <Button onClick={props.canvasToggle} variant="light">
-          <i className="fas fa-filter"></i>{' '}
-          Filter
-        </Button>
-        <Add refreshPage={props.refreshPage} displayAlert={props.displayAlert} />
-        <Dropdown id="user-dropdown" navbar={true} drop="left">
-          <Dropdown.Toggle as={CustomToggle}>
-            <i className="fas fa-ellipsis-h"></i>
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            {props.signIn.loggedIn ? logOut : logIn}
-          </Dropdown.Menu>
-        </Dropdown>
+              }}
+            />
+          </Form>
+        </Nav.Item>&nbsp;
+        <Nav.Item>
+          <Button onClick={props.canvasToggle} variant="light">
+            <i className="fas fa-filter"></i>{' '}
+            Filter
+          </Button>
+        </Nav.Item>
+        <Add refreshPage={props.refreshPage} displayAlert={props.displayAlert} />&nbsp;&nbsp;
+          {props.signIn.loggedIn ? userName : null}&nbsp;
+        <Nav.Item>
+          {props.signIn.loggedIn ? logOut : logIn}
+        </Nav.Item>
       </Nav>
     </Navbar>
   );
