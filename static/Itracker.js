@@ -1578,7 +1578,8 @@ function OffCanvasBody(props) {
     selectAll: props.selectAll,
     selectDelAll: props.selectDelAll,
     unSelectDelAll: props.unSelectDelAll,
-    cancelAll: props.cancelAll
+    cancelAll: props.cancelAll,
+    signIn: props.signIn
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paginator_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     actualPage: props.actualPage,
     maxPageNum: props.maxPageNum,
@@ -1814,6 +1815,7 @@ function Row(props) {
   var selected = props.issue.selected;
   var rowNormal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowNormal_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     issue: props.issue,
+    signIn: props.signIn,
     selectSingleRow: props.selectSingleRow
   });
   var rowSelect = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RowSelect_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1828,6 +1830,7 @@ function Row(props) {
 ;
 Row.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  signIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   cancelSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   deleteSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
@@ -1879,6 +1882,7 @@ function RowNormal(props) {
     title: "Edit row",
     variant: "warning",
     size: "sm",
+    disabled: !props.signIn.loggedIn,
     onClick: function onClick() {
       return props.selectSingleRow(is._id);
     }
@@ -1890,6 +1894,7 @@ function RowNormal(props) {
 ;
 RowNormal.propTypes = {
   issue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  signIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   selectSingleRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (RowNormal);
@@ -2173,6 +2178,7 @@ function TableOfIssues(props) {
         issueRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
           key: issue._id,
           issue: issue,
+          signIn: p.signIn,
           selectSingleRow: p.selectSingleRow,
           cancelSingleRow: p.cancelSingleRow,
           deleteSingleRow: p.deleteSingleRow
@@ -2185,7 +2191,7 @@ function TableOfIssues(props) {
 
     if (issue.selected) anyEdit = true;
   });
-  var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll, p.submitChanges);
+  var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll, p.submitChanges, p.signIn);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3___default.a, {
     name: "tableForm",
     onSubmit: function onSubmit(event) {
@@ -2227,9 +2233,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll, submitChanges) {
+function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll, submitChanges, signIn) {
   var displayTable = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
     title: "Edit all rows",
+    disabled: !signIn.loggedIn,
     onClick: selectAll,
     variant: "success",
     size: "sm"

@@ -72,6 +72,7 @@ function OffCanvasBody(props) {
         selectDelAll={props.selectDelAll}
         unSelectDelAll={props.unSelectDelAll}
         cancelAll={props.cancelAll}
+        signIn={props.signIn}
       />
       <Paginator 
         actualPage={props.actualPage} 

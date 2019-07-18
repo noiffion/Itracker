@@ -12,6 +12,7 @@ function Row(props) {
   const rowNormal = (
     <RowNormal 
       issue={props.issue} 
+      signIn={props.signIn}
       selectSingleRow={props.selectSingleRow} 
     /> 
   );
@@ -33,6 +34,7 @@ function Row(props) {
 
 Row.propTypes = {
   issue: PropTypes.object.isRequired,
+  signIn: PropTypes.object.isRequired,
   selectSingleRow: PropTypes.func.isRequired,
   cancelSingleRow: PropTypes.func.isRequired,
   deleteSingleRow: PropTypes.func.isRequired,

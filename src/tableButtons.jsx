@@ -3,14 +3,14 @@ import Button from 'react-bootstrap/Button';
 
 
 export default function tableButtons(issues, selectAll, 
-  selectDelAll, unSelectDelAll, cancelAll, submitChanges) {
+  selectDelAll, unSelectDelAll, cancelAll, submitChanges, signIn) {
   const displayTable = (
-    <Button title="Edit all rows" onClick={selectAll}
+    <Button title="Edit all rows" disabled={!signIn.loggedIn} onClick={selectAll}
             variant="success" size="sm">
       <i className="far fa-check-square"></i>
     </Button>
   );
-  
+
   const selectDel = (
     <Button title="Mark selected for deletion" onClick={selectDelAll}
             variant="light" size="sm">

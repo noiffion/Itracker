@@ -85,7 +85,8 @@ passport.use(new GitHubStrategy({
               userName: profile.username,   
               profileUrl: profile.profileUrl,
               emails: profile.emails,
-              avatar_url: profile._json.avatar_url
+              avatar_url: profile._json.avatar_url,
+              admin: false
             }                                           
           )  
           .then(result => {
@@ -143,7 +144,7 @@ app.get('/api/issues', (req, res) => {
 });
 
 
-app.delete('/api/issues/:id', (req, res) => {
+app.delete('/api/issues/:id', ensureAuthenticated, (req, res) => {
   let issueId;
   try {
       issueId = new ObjectId(req.params.id);
@@ -165,7 +166,7 @@ app.delete('/api/issues/:id', (req, res) => {
 });
 
 
-app.post('/api/issues', (req, res) => {
+app.post('/api/issues', ensureAuthenticated, (req, res) => {
   const newIssue = req.body;
 
   const err = Issue.validateIssue(newIssue);
@@ -184,7 +185,7 @@ app.post('/api/issues', (req, res) => {
 });
 
 
-app.put('/api/issues/:id', (req, res) => {
+app.put('/api/issues/:id', ensureAuthenticated, (req, res) => {
   const issue = req.body;
   let issueID = req.params.id;
 
@@ -216,7 +217,7 @@ app.put('/api/issues/:id', (req, res) => {
 });
 
 
-app.post('/api/issues/deleteMany', (req, res) => {
+app.post('/api/issues/deleteMany', ensureAuthenticated, (req, res) => {
   const issueIDs = [];
 
   try {

@@ -21,6 +21,7 @@ function RowNormal(props) {
       <td className="buttonCell"> 
         <Button
           title="Edit row" variant="warning" size="sm" 
+          disabled={!props.signIn.loggedIn}
           onClick={() => props.selectSingleRow(is._id)}>
           <i className="far fa-edit"></i>
         </Button>
@@ -31,6 +32,7 @@ function RowNormal(props) {
 
 RowNormal.propTypes = { 
   issue: PropTypes.object.isRequired,
+  signIn: PropTypes.object.isRequired,
   selectSingleRow: PropTypes.func.isRequired,
 };
 

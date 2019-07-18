@@ -25,6 +25,7 @@ function TableOfIssues(props) {
            <Row
              key={issue._id}
              issue={issue}
+             signIn={p.signIn}
              selectSingleRow={p.selectSingleRow}
              cancelSingleRow={p.cancelSingleRow}
              deleteSingleRow={p.deleteSingleRow}
@@ -39,7 +40,7 @@ function TableOfIssues(props) {
   });
 
   const tB = tableButtons(p.issues, p.selectAll, p.selectDelAll, 
-    p.unSelectDelAll, p.cancelAll, p.submitChanges);
+    p.unSelectDelAll, p.cancelAll, p.submitChanges, p.signIn);
  
   return (
     <Form name="tableForm" onSubmit={(event) => event.preventDefault()}>
