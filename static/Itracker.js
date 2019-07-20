@@ -2078,7 +2078,6 @@ function TableOfIssues(props) {
       }
     }
 
-    issue.onScreen = false;
     if (issue.selected) anyEdit = true;
   });
   var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll, p.submitChanges, p.signIn);
