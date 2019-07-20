@@ -1,3 +1,5 @@
+// Paginator.jsx
+
 import React      from 'react';
 import PropTypes  from 'prop-types';
 import Pagination from 'react-bootstrap/Pagination';

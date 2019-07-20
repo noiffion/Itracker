@@ -62,7 +62,11 @@ function Add(props) {
 
   return (
     <Nav.Item>
-      <Button id="createIssueModal" variant="light" onClick={() => setShow(true)}>
+      <Button 
+        id="createIssueModal" 
+        variant="light" 
+        disabled={props.signIn.loggedIn}
+        onClick={() => setShow(true)}>
         <i className="fas fa-plus"></i>{' '}
         Create Issue
       </Button>
@@ -106,6 +110,7 @@ function Add(props) {
 
 Add.propTypes = {
   refreshPage: PropTypes.func.isRequired,
+  signIn: PropTypes.object.isRequired,
 };
 
 

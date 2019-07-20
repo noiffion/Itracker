@@ -99,7 +99,11 @@ function Header(props) {
             Filter
           </Button>
         </Nav.Item>
-        <Add refreshPage={props.refreshPage} displayAlert={props.displayAlert} />&nbsp;&nbsp;
+        <Add 
+          refreshPage={props.refreshPage}
+          displayAlert={props.displayAlert}
+          signin={props.signIn.loggedIn}
+        />&nbsp;&nbsp;
           {props.signIn.loggedIn ? userName : null}&nbsp;
         <Nav.Item>
           {props.signIn.loggedIn ? logOut : logIn}
