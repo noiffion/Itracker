@@ -42,10 +42,10 @@ function Add(props) {
           });
       } else {
           response.json()
-          .then(error => alertMsg(true, `Failed to add issue: ${error.message}`));
+          .then(error => console.log(`Failed to add issue: ${error.message}`));
       }
     })
-    .catch(err => alertMsg(`Error in sending data to server: ${err.message}`));
+    .catch(err => console.log(`Error in sending data to server: ${err.message}`));
   }
 
   const optionMaker = (unique) => {
