@@ -1,10 +1,5 @@
 # Itracker
-Issue tracker app
 
+Issue tracker app with React, MongoDB, Express, Node
 
-
-Github-login from:
-https://github.com/donmorton/github-login
-
-Off-canvas menu from:
-https://github.com/vutran/react-offcanvas
+Needs GitHub account to be able to sign in and modify (update or delete) the issues.
