@@ -207,7 +207,7 @@ function Add(props) {
     event.preventDefault();
     var form = event.target;
     var newIssue = {
-      state: 'New',
+      issueState: 'New',
       owner: form.ownerAdd.value,
       creation: new Date(),
       effort: form.effortAdd.value,
@@ -224,16 +224,18 @@ function Add(props) {
     fetch('/api/issues', postParams).then(function (response) {
       if (response.ok) {
         response.json().then(function () {
+          props.displayAlert('Successfully added a new issue.');
           setShow(false);
           props.refreshPage();
         });
       } else {
         response.json().then(function (error) {
-          return alertMsg(true, "Failed to add issue: ".concat(error.message));
+          props.displayAlert('Failed to add new issue!', false);
+          console.log("Failed to add issue: ".concat(error.message));
         });
       }
     })["catch"](function (err) {
-      return alertMsg("Error in sending data to server: ".concat(err.message));
+      return console.log("Error in sending data to server: ".concat(err.message));
     });
   };
 
@@ -255,6 +257,7 @@ function Add(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_3___default.a.Item, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
     id: "createIssueModal",
     variant: "light",
+    disabled: !props.signIn.loggedIn,
     onClick: function onClick() {
       return setShow(true);
     }
@@ -294,7 +297,8 @@ function Add(props) {
 }
 
 Add.propTypes = {
-  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  refreshPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  signIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Add);
 
@@ -315,6 +319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Toast */ "./node_modules/react-bootstrap/Toast.js");
 /* harmony import */ var react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Toast__WEBPACK_IMPORTED_MODULE_2__);
+// AlertMsg.jsx
 
 
 
@@ -479,7 +484,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Filter(props) {
-  var f = props.filter; // console.log(f);
+  var f = props.filter;
 
   var stateOptions = function stateOptions() {
     var states = ['All', 'New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
@@ -630,7 +635,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/DropdownButton */ "./node_modules/react-bootstrap/DropdownButton.js");
 /* harmony import */ var react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _Add_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Add.jsx */ "./src/Add.jsx");
-/* harmony import */ var _Login_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Login.jsx */ "./src/Login.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -650,7 +654,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // Header.jsx
-
 
 
 
@@ -768,7 +771,8 @@ function Header(props) {
     className: "fas fa-filter"
   }), ' ', "Filter")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Add_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     refreshPage: props.refreshPage,
-    displayAlert: props.displayAlert
+    displayAlert: props.displayAlert,
+    signIn: props.signIn
   }), "\xA0\xA0", props.signIn.loggedIn ? userName : null, "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_2___default.a.Item, null, props.signIn.loggedIn ? logOut : logIn)));
 }
 
@@ -780,121 +784,6 @@ Header.propTypes = {
   displayAlert: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
-
-/***/ }),
-
-/***/ "./src/Login.jsx":
-/*!***********************!*\
-  !*** ./src/Login.jsx ***!
-  \***********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-// Login.jsx
-
-
-
-function Login(props) {
-  var toParams = function toParams(query) {
-    var q = query.replace(/^\??\//, '');
-    return q.split('&').reduce(function (values, param) {
-      var _param$split = param.split('='),
-          _param$split2 = _slicedToArray(_param$split, 2),
-          key = _param$split2[0],
-          value = _param$split2[1];
-
-      values[key] = value;
-      return values;
-    }, {});
-  };
-
-  var toQuery = function toQuery(params) {
-    var delimiter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '&';
-    var keys = Object.keys(params);
-    return keys.reduce(function (str, key, index) {
-      var query = "".concat(str).concat(key, "=").concat(params[key]);
-      if (index < keys.length - 1) query += delimiter;
-      return query;
-    }, '');
-  };
-
-  var onRequest = function onRequest() {
-    return props.onRequest();
-  };
-
-  var onSuccess = function onSuccess(data) {
-    if (!data.code) return onFailure(new Error('\'code\' not found'));
-    props.onSuccess(data);
-  };
-
-  var onFailure = function onFailure(error) {
-    return props.onFailure(error);
-  };
-
-  var onBtnClick = function onBtnClick() {
-    var clientId = props.clientId,
-        scope = props.scope,
-        redirectUri = props.redirectUri;
-    var search = toQuery({
-      client_id: clientId,
-      scope: scope,
-      redirect_uri: redirectUri
-    });
-    var popup = LoginPop.begin('github-oauth-authorize', "https://github.com/login/oauth/authorize?".concat(search), {
-      height: 1000,
-      width: 600
-    });
-    onRequest();
-    popup.then(function (data) {
-      return onSuccess(data);
-    }, function (error) {
-      return onFailure(error);
-    });
-  };
-
-  var className = props.className,
-      buttonText = props.buttonText,
-      children = props.children;
-  var attrs = {
-    onClick: onBtnClick
-  };
-  if (className) attrs.className = className;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", attrs, children || buttonText);
-}
-
-Login.propTypes = {
-  buttonText: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  clientId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  onRequest: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onSuccess: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onFailure: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  redirectUri: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  scope: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
-};
-Login.defaultProps = {
-  buttonText: 'Sign in with GitHub',
-  scope: 'user:email',
-  onRequest: function onRequest() {},
-  onSuccess: function onSuccess() {},
-  onFailure: function onFailure() {}
-};
-/* harmony default export */ __webpack_exports__["default"] = (Login);
 
 /***/ }),
 
@@ -1108,7 +997,7 @@ function (_React$Component) {
       var issues = this.state.issues;
       issues.forEach(function (issue) {
         Object.keys(issue.filters).forEach(function (filter) {
-          return issue.filters.filter = true;
+          return issue.filters[filter] = true;
         });
         issue.filteredIn = true;
       });
@@ -1353,7 +1242,6 @@ function (_React$Component) {
     value: function propertyUpdate(row, issue, property, displayAlert) {
       var input = document.forms.tableForm["".concat(row._id + property)];
       input.value ? issue[property] = input.value : issue[property] = input.placeholder;
-      if (property === 'issueState') console.log(input.value, issue[property], input.placeholder);
 
       if (property === 'creation' || property === 'completion') {
         if (issue[property]) {
@@ -1382,7 +1270,7 @@ function (_React$Component) {
     value: function updateFetch(row, issue, respOKs, issueNumber, displayAlert) {
       var _this4 = this;
 
-      console.log(issue);
+      // console.log(issue);
       var putParams = {
         method: 'PUT',
         headers: {
@@ -1440,7 +1328,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.state.signIn);
+      // console.log(this.state.signIn);
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_OffCanvasBody_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         width: 160,
         transitionDuration: 200,
@@ -1720,6 +1608,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/Pagination.js");
 /* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__);
+// Paginator.jsx
 
 
 
@@ -2189,6 +2078,7 @@ function TableOfIssues(props) {
       }
     }
 
+    issue.onScreen = false;
     if (issue.selected) anyEdit = true;
   });
   var tB = Object(_tableButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(p.issues, p.selectAll, p.selectDelAll, p.unSelectDelAll, p.cancelAll, p.submitChanges, p.signIn);
@@ -2231,6 +2121,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_1__);
+// tableButtons.jsx
 
 
 function tableButtons(issues, selectAll, selectDelAll, unSelectDelAll, cancelAll, submitChanges, signIn) {

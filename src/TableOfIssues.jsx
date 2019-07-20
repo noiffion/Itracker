@@ -36,6 +36,7 @@ function TableOfIssues(props) {
           issue.selected = '';
       }
     }
+    issue.onScreen = false;
     if (issue.selected) anyEdit = true;
   });
 

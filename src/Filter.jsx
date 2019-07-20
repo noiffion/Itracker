@@ -11,7 +11,6 @@ import DatePicker                     from './DatePicker.jsx';
 function Filter(props) {
 
   const f = props.filter;
-  // console.log(f);
 
   const stateOptions = () => {
     const states = ['All', 'New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];

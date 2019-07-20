@@ -9,7 +9,6 @@ import Navbar         from 'react-bootstrap/Navbar';
 import Dropdown       from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Add            from './Add.jsx';
-import Login          from './Login.jsx';
 
 
 class CustomToggle extends React.Component {
@@ -102,7 +101,7 @@ function Header(props) {
         <Add 
           refreshPage={props.refreshPage}
           displayAlert={props.displayAlert}
-          signin={props.signIn.loggedIn}
+          signIn={props.signIn}
         />&nbsp;&nbsp;
           {props.signIn.loggedIn ? userName : null}&nbsp;
         <Nav.Item>

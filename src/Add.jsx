@@ -18,7 +18,7 @@ function Add(props) {
     const form = event.target;
 
     const newIssue = {
-      state: 'New',
+      issueState: 'New',
       owner: form.ownerAdd.value,
       creation: new Date(),
       effort: form.effortAdd.value, 
@@ -37,12 +37,16 @@ function Add(props) {
       if (response.ok) {
           response.json()
           .then(() => {
+            props.displayAlert('Successfully added a new issue.');
             setShow(false);
             props.refreshPage();
           });
       } else {
           response.json()
-          .then(error => console.log(`Failed to add issue: ${error.message}`));
+          .then(error => { 
+            props.displayAlert('Failed to add new issue!', false)
+            console.log(`Failed to add issue: ${error.message}`)
+          });
       }
     })
     .catch(err => console.log(`Error in sending data to server: ${err.message}`));
@@ -65,7 +69,7 @@ function Add(props) {
       <Button 
         id="createIssueModal" 
         variant="light" 
-        disabled={props.signIn.loggedIn}
+        disabled={!props.signIn.loggedIn}
         onClick={() => setShow(true)}>
         <i className="fas fa-plus"></i>{' '}
         Create Issue

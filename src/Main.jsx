@@ -151,7 +151,7 @@ class Main extends React.Component {
   clearFilter() {
    const issues = this.state.issues
    issues.forEach(issue => {
-     Object.keys(issue.filters).forEach(filter => issue.filters.filter = true);
+     Object.keys(issue.filters).forEach(filter => issue.filters[filter] = true);
      issue.filteredIn = true;
    });
 
@@ -329,7 +329,6 @@ class Main extends React.Component {
   propertyUpdate(row, issue, property, displayAlert) {
     const input = document.forms.tableForm[`${row._id+property}`];
     input.value ? (issue[property] = input.value) : (issue[property] = input.placeholder);
-    if (property === 'issueState') console.log(input.value, issue[property], input.placeholder);
     if (property === 'creation' || property === 'completion') {
       if (issue[property]) {
         let date;
@@ -351,7 +350,7 @@ class Main extends React.Component {
   }
 
   updateFetch(row, issue, respOKs, issueNumber, displayAlert) {
-    console.log(issue);
+    // console.log(issue);
     const putParams = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -405,7 +404,7 @@ class Main extends React.Component {
 
   render() {
 
-    console.log(this.state.signIn);
+    // console.log(this.state.signIn);
     return (
       <React.Fragment>
         <OffCanvasBody
